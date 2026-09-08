@@ -1,6 +1,22 @@
 import { ThemeProvider } from "@/providers/ThemeProvider";
+import { Montserrat } from "next/font/google";
+import localFont from "next/font/local";
 import "@/styles/tokens.css";
 import "@/styles/global.css";
+
+// Font for text
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  variable: "--font-montserrat",
+  display: "swap",
+});
+
+// Font for titles
+const ardelaEdge = localFont({
+  src: "../../public/fonts/ARDELA_EDGE_X01_Variable.ttf",
+  variable: "--font-ardela",
+  display: "swap",
+});
 
 export const metadata = {
   title: "Create Next App",
@@ -9,7 +25,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${montserrat.variable} ${ardelaEdge.variable}`}
+    >
       <body>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
