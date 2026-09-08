@@ -17,9 +17,18 @@ Font Size System (px)
     border-color: var(--surface-border);
   }
 
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+  }
+
   body {
     background-color: var(--bg);
     color: var(--text);
-    font-family: var(--font-montserrat), sans-serif;
+    font-family: var(--font-sans);
   }
 }
