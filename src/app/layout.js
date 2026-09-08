@@ -1,5 +1,6 @@
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import "@/styles/tokens.css";
+import "@/styles/global.css";
 
 export const metadata = {
   title: "Create Next App",

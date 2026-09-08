@@ -68,16 +68,3 @@
   --primary-hover: #d90f00;
   --accent: #ff600b;
 }
-
-/*Base Styles */
-@layer base {
-  * {
-    border-color: var(--surface-border);
-  }
-
-  body {
-    background-color: var(--bg);
-    color: var(--text);
-    font-family: var(--font-montserrat), sans-serif;
-  }
-}
