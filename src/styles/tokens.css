@@ -9,7 +9,7 @@
   --color-foreground: var(--text);
   --color-card: var(--surface);
   --color-card-foreground: var(--text);
-  --color-button: var(--buttons);
+  --color-button-gradient: var(--buttons);
   --color-button-foreground: var(--text);
   --color-popover: var(--surface);
   --color-popover-foreground: var(--text);
@@ -42,6 +42,10 @@
   --radius-lg: var(--radius);
 }
 
+.bg-button-gradient {
+  background-image: var(--color-button-gradient);
+}
+
 /* Scalezone Design Tokens & Theme Modes */
 :root,
 .dark {
@@ -55,7 +59,7 @@
   --surface-border: #4a3b3b;
   --buttons: linear-gradient(to right, #ff1301, #ff600b);
   --primary-hover: #e01000;
-  --radius: 0.5rem;
+  --radius: 0;
 }
 
 .light {
