@@ -1,0 +1,18 @@
+@layer base {
+  /* Dark Theme (Default experience) */
+  :root,
+  .dark {
+    --bg: #000000;
+  }
+
+  /* Light Theme (Toggle) */
+  .light {
+    --bg: #f3f3f3;
+  }
+}
+
+body {
+  background-color: var(--bg);
+  /* color: var(--text); */
+  /* font-family: var(--font-montserrat), sans-serif; */
+}
