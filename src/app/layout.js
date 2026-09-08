@@ -1,13 +1,14 @@
 import { ThemeProvider } from "@/providers/ThemeProvider";
-import { Montserrat } from "next/font/google";
+import { Poppins } from "next/font/google";
 import localFont from "next/font/local";
 import "@/styles/tokens.css";
 import "@/styles/global.css";
 
 // Font for text
-const montserrat = Montserrat({
+const poppins = Poppins({
   subsets: ["latin"],
-  variable: "--font-montserrat",
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-poppins",
   display: "swap",
 });
 
@@ -28,7 +29,7 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${montserrat.variable} ${ardelaEdge.variable}`}
+      className={`${poppins.variable} ${ardelaEdge.variable}`}
     >
       <body>
         <ThemeProvider>{children}</ThemeProvider>

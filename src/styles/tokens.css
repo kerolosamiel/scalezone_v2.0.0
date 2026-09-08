@@ -34,7 +34,7 @@
   --color-brand-black: #000000;
 
   --font-heading: var(--font-ardela), sans-serif;
-  --font-sans: var(--font-montserrat), sans-serif;
+  --font-sans: var(--font-poppins), sans-serif;
   --font-arabic: var(--font-alexandria), sans-serif;
 
   --radius-sm: calc(var(--radius) * 0.6);
