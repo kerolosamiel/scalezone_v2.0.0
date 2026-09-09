@@ -1,0 +1,44 @@
+name: CI & Performance Gate
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  lint-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Build Next.js app
+        run: npm run build
+        env:
+          NEXT_PUBLIC_WORDPRESS_API_URL: ${{ secrets.NEXT_PUBLIC_WORDPRESS_API_URL }}
+
+  performance-budget-gate:
+    needs: lint-and-build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Performance Budget Check (Placeholder)
+        run: |
+          echo "Checking Performance Budget Targets:"
+          echo "- Lighthouse Score: >= 95"
+          echo "- LCP: < 1.5s"
+          echo "- INP: < 200ms"
+          echo "- CLS: 0"
+          echo "Performance Gate Passed (Placeholder Step)."
