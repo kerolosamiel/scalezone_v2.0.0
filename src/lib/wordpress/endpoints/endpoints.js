@@ -43,6 +43,8 @@ export const endpoints = {
   podcatById: (id) => `/podcats/${id}`,
   testimonialById: (id) => `/testimonial/${id}`,
   videoById: (id) => `/video/${id}`,
+  mediaByParentId: (id) => `/media?parent=${id}`,
+  mediaById: (id) => `/media/${id}`,
 
   // Global Site Data
   headerFooterBySlug: '/pages?slug=header-and-footer',
