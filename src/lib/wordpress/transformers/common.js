@@ -42,3 +42,16 @@ export function metaTransform(pageData) {
 
   return meta;
 }
+
+export function trustStatsTransform(statsData) {
+  if (!statsData) return null;
+
+  const trustStats = {
+    accountManaged: statsData.account_managed || '',
+    positiveFeedback: statsData.positive_feedback || '',
+    teamMembers: statsData.team_members || '',
+    yearsExperience: statsData.years_experience || '',
+  };
+
+  return trustStats;
+}

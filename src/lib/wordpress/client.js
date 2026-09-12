@@ -14,7 +14,6 @@ export async function wpFetch(endpoint, options = {}) {
   // Build Query String from params object if present
   const queryString = new URLSearchParams(params).toString();
   const url = `${WORDPRESS_API_URL}${endpoint}${queryString ? `?${queryString}` : ''}`;
-  console.log(url);
 
   const defaultHeaders = {
     'Content-Type': 'application/json',
