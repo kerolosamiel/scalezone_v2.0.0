@@ -1,5 +1,4 @@
 'use client';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { Separator } from '@/components/ui/separator';
@@ -10,6 +9,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { MoveRight } from 'lucide-react';
+import FeatureCard from '@/components/ui/FeatureCard';
 
 export default function ZoneCard({ zone }) {
   const [openItem, setOpenItem] = useState(false);
@@ -19,30 +19,16 @@ export default function ZoneCard({ zone }) {
   };
 
   const altTextValue =
-    zone.iconAlt === typeof String
-      ? zone.iconAlt.length > 0
-        ? altText
-        : 'Zone Icon'
-      : 'Zone Icon';
+    typeof zone?.iconAlt === 'string' && zone.iconAlt.trim() !== '' ? altText : 'service Icon';
 
   return (
-    <article
-      className={`px-[2.4rem] py-[3.2rem] w-[calc(100%/3)] bg-card gap-[3.2rem] flex flex-col ${openItem ? 'border border-accent' : 'border'}`}
+    <FeatureCard
+      icon={zone.iconSrc}
+      alt={altTextValue}
+      name={zone.zoneName}
+      description={zone.zoneDescription}
+      openItem={openItem}
     >
-      <div className="content flex flex-col gap-[2.4rem]">
-        <Image
-          src={zone.iconSrc}
-          alt={altTextValue}
-          width={40}
-          height={40}
-          className="object-contain border-0"
-        />
-
-        <h3 className="text-[2rem] tracking-[1%] font-medium">{zone.zoneName}</h3>
-
-        <p className="text-[1.6rem] text-muted-foreground">{zone.zoneDescription}</p>
-      </div>
-
       <Separator className="h-px bg-foreground" />
 
       <div className="cta">
@@ -90,6 +76,6 @@ export default function ZoneCard({ zone }) {
           <MoveRight />
         </Link>
       </div>
-    </article>
+    </FeatureCard>
   );
 }
