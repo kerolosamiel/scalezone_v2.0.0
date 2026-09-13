@@ -1,7 +1,11 @@
 import { promise } from 'zod';
 import { wpFetch } from '../client';
 import { endpoints } from '../endpoints/endpoints';
-import { homePageTransform } from '../transformers/pageTransformer';
+import {
+  aboutPageTransform,
+  basePageTransform,
+  homePageTransform,
+} from '../transformers/pageTransformer';
 
 /**
  * Fetches trust statistics from the home page
@@ -187,5 +191,54 @@ export async function getHomePage() {
     'home'
   );
 
+  return result;
+}
+
+/**
+ * Fetches and prepares the about page data model for the front end.
+ *
+ * @returns {Promise<Object|null>} Transformed about page data or null when the about page
+ * is unavailable or the required sections are missing.
+ */
+export async function getAboutPage() {
+  const data = await wpFetch(endpoints.pageBySlug('about'));
+
+  if (!data) return null;
+
+  const pageData = Array.isArray(data) ? data[0] : data;
+
+  if (!pageData) return null;
+
+  const teamData = pageData.acf_all_fields?.about_page_v2?.team_section;
+  const eventsData = pageData.acf_all_fields?.about_page_v2?.events_section;
+
+  // Fetch all trust stats, team members, event gallery data in parallel
+  const [trustStats, teamMembers, eventGallery] = await Promise.all([
+    getTrustStats(),
+    getMultipleCPTs(teamData?.team_members, endpoints.teamMemberById),
+    getMultipleCPTs(eventsData?.events_gallery, endpoints.eventById),
+  ]);
+
+  // Convert each image ID into a media lookup payload.
+  const allTeamImageIds = (teamMembers || []).map((m) => m?.acf?.member_image);
+  const allEventImageIds = (eventGallery || []).map((m) => m?.acf?.event_image);
+
+  // Fetch all images.
+  const uniqueImageObjects = Array.from(new Set([...allTeamImageIds, ...allEventImageIds]))
+    .filter(Boolean)
+    .map((id) => ({ ID: id }));
+
+  const rawImages = await getMultipleCPTs(uniqueImageObjects, endpoints.mediaById);
+
+  const imagesMap = new Map((rawImages || []).map((img) => [img.id, img]));
+
+  const result = aboutPageTransform(
+    data,
+    trustStats,
+    teamMembers,
+    eventGallery,
+    imagesMap,
+    'about'
+  );
   return result;
 }

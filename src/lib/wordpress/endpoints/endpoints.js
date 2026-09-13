@@ -42,6 +42,7 @@ export const endpoints = {
   partnerById: (id) => `/partner/${id}`,
   podcatById: (id) => `/podcats/${id}`,
   testimonialById: (id) => `/testimonial/${id}`,
+  teamMemberById: (id) => `/team-member/${id}`,
   videoById: (id) => `/video/${id}`,
   mediaByParentId: (id) => `/media?parent=${id}`,
   mediaById: (id) => `/media/${id}`,

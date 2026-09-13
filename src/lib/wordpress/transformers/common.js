@@ -154,3 +154,48 @@ export function testimonialTransform(testimonial, imageMap) {
 
   return data;
 }
+
+/**
+ * Normalizes a WordPress team member object into a frontend-friendly payload.
+ *
+ * @param {Object|null} teamMember - Team member post data from WordPress.
+ * @param {Map} teamImages - Map of media IDs to WordPress media objects.
+ * @returns {Object|null} Standardized team member object or null when invalid.
+ */
+export function teamMemberTransform(teamMember, teamImages) {
+  if (!teamMember) return null;
+
+  // Resolve the member's image from the media map using the image ID.
+  const memberImage = teamImages.get(teamMember.member_image);
+
+  // Build a normalized team member object for the frontend.
+  const member = {
+    memberName: teamMember.member_name || '',
+    memberPosition: teamMember.member_position || '',
+    image: mediaImageTransform(memberImage),
+  };
+
+  return member;
+}
+
+/**
+ * Transforms a WordPress event gallery object into a normalized frontend payload.
+ *
+ * @param {Object|null} eventGallery - Event gallery post data from WordPress.
+ * @param {Map} eventImages - Map of media IDs to WordPress media objects.
+ * @returns {Object|null} Standardized event gallery object or null when invalid.
+ */
+export function eventGalleryTransform(eventGallery, eventImages) {
+  if (!eventGallery) return null;
+
+  // Resolve the event image from the media map using the image ID.
+  const eventImage = eventImages.get(eventGallery.event_image);
+
+  // Build a normalized event gallery object for the frontend.
+  const event = {
+    location: eventGallery.event_location || '',
+    image: mediaImageTransform(eventImage),
+  };
+
+  return event;
+}
