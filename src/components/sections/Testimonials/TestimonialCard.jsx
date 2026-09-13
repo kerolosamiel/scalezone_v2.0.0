@@ -23,7 +23,9 @@ export default function TestimonialCard({ testimonial }) {
         </div>
       </div>
 
-      <p className="text-[1.6rem]">"{testimonial?.feedback?.trim() || 'No feedback available.'}"</p>
+      <p className="text-[1.6rem]">
+        &#34;{testimonial?.feedback?.trim() || 'No feedback available.'}&#34;
+      </p>
 
       <div className="stars flex gap-8">
         {Array.from({ length: 5 }, (_, index) => {
