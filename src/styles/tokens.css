@@ -46,6 +46,13 @@
   background-image: var(--color-button-gradient);
 }
 
+button.bg-background {
+  background: var(--bg);
+}
+
+.hover\:bg-button-gradient:hover {
+  background: var(--buttons);
+}
 /* Scalezone Design Tokens & Theme Modes */
 :root,
 .dark {
@@ -58,6 +65,7 @@
   --surface: #131313;
   --surface-border: #4a3b3b;
   --buttons: linear-gradient(to right, #ff1301, #ff600b);
+  --buttons-hover: linear-gradient(to left, #ff1301, #ff600b);
   --primary-hover: #e01000;
   --radius: 0;
 }
