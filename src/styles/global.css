@@ -9,7 +9,7 @@ Font Size System (px)
 /*Base Styles */
 @layer base {
   html {
-    font-size: 10px;
+    font-size: 62.5%;
     scroll-behavior: smooth;
   }
 

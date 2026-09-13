@@ -17,7 +17,7 @@ export default function ServiceCard({ service }) {
     >
       <Link
         href="/about"
-        className="inline-flex items-center text-primary gap-[1.6rem] transition-all text-[1.6rem] font-bold hover:gap-[2.4rem]!"
+        className="inline-flex items-center text-primary gap-16 transition-all text-[1.6rem] font-bold hover:gap-[2.4rem]!"
       >
         Learn More
         <MoveRight />

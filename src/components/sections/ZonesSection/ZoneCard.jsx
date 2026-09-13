@@ -48,7 +48,7 @@ export default function ZoneCard({ zone }) {
                   {zone.services.map((service, index) => (
                     <li
                       key={`${service.name}-${index}`}
-                      className={index !== zone.services.length - 1 ? 'mb-[3.2rem]' : ''}
+                      className={index !== zone.services.length - 1 ? 'mb-32' : ''}
                     >
                       <Link href={service.href} className="no-underline!">
                         <h3 className="mb-2 text-[1.6rem] text-foreground! tracking-[6%]">
@@ -70,7 +70,7 @@ export default function ZoneCard({ zone }) {
 
         <Link
           href="/about"
-          className="inline-flex items-center gap-[1.6rem] transition-all text-[1.6rem] font-bold hover:gap-[2.4rem]!"
+          className="inline-flex items-center gap-16 transition-all text-[1.6rem] font-bold hover:gap-[2.4rem]!"
         >
           Explore Amazon Services
           <MoveRight />
