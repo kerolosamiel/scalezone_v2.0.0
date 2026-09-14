@@ -1,3 +1,5 @@
+import { basePageTransform } from './pageTransformer';
+
 /**
  * Transforms an image object into a standardized format
  * @param {string|Object} imageObject - The image data (string URL or object with url/alt properties)
@@ -59,13 +61,45 @@ export function metaTransform(pageData) {
   if (!pageData.acf_all_fields) return null;
 
   // Validate meta details object exists
-  if (!pageData.acf_all_fields.meta_details) return null;
+  if (!pageData.acf_all_fields.meta_details || pageData.acf.meta_details) return null;
 
-  const metaDetails = pageData.acf_all_fields.meta_details;
+  const metaDetails = pageData.acf_all_fields.meta_details || pageData.acf.meta_details;
 
   // Extract title with fallback chain: meta_title > pageData.title > rendered title
   // And description from meta details
-  const title = metaDetails.meta_title || pageData.title || pageData.title?.rendered || '';
+  const rawTitle = typeof pageData.title === 'string' ? pageData.title : pageData.title?.rendered;
+  const title = metaDetails.meta_title || rawTitle || '';
+  const description = metaDetails.meta_description || '';
+
+  // Build standardized meta object with fallback values
+  const meta = {
+    title,
+    description,
+    keywords: metaDetails.meta_keywords || 'Scalezone, Amazon, Sellers',
+    ogImage: metaDetails.og_image || '',
+    ogTitle: metaDetails.og_title || title,
+    ogDescription: metaDetails.og_description || description,
+  };
+
+  return meta;
+}
+
+export function zoneMetaTransform(pageData) {
+  // Validate page data exists
+  if (!pageData) return null;
+
+  // Validate ACF fields exist
+  if (!pageData.acf) return null;
+
+  // Validate meta details object exists
+  if (!pageData.acf.meta_details) return null;
+
+  const metaDetails = pageData.acf.meta_details;
+
+  // Extract title with fallback chain: meta_title > pageData.title > rendered title
+  // And description from meta details
+  const rawTitle = typeof pageData.title === 'string' ? pageData.title : pageData.title?.rendered;
+  const title = metaDetails.meta_title || rawTitle || '';
   const description = metaDetails.meta_description || '';
 
   // Build standardized meta object with fallback values
@@ -123,6 +157,18 @@ export function zoneCardTransform(zone) {
   };
 
   return card;
+}
+
+export function faqTransform(faq) {
+  if (!faq) return null;
+
+  const data = {
+    id: faq.id || 0,
+    question: typeof faq.title == 'string' ? faq.title : faq.title?.rendered || '',
+    answer: faq.acf?.answer,
+  };
+
+  return data;
 }
 
 /**
@@ -198,4 +244,63 @@ export function eventGalleryTransform(eventGallery, eventImages) {
   };
 
   return event;
+}
+
+export function zoneTransform(zoneData, faqs, services) {
+  if (!zoneData) return null;
+
+  const base = basePageTransform(zoneData);
+
+  if (!base) return null;
+
+  const zoneSections = base.acf?.zone_sections;
+  const zoneServices = base.acf?.zone_services;
+
+  delete base.acf;
+  const zone = {
+    ...base,
+    hero: zoneSections?.hero_section,
+    services: {
+      title: zoneSections?.services_section?.title ?? '',
+      subtitle: zoneSections?.services_section?.subtitle ?? '',
+      items: [],
+    },
+    whyZone: {
+      title: zoneSections?.why_zone_section?.title ?? '',
+      subtitle: zoneSections?.why_zone_section?.subtitle ?? '',
+      firstReason: zoneSections?.why_zone_section?.first_reason ?? '',
+      secondReason: zoneSections?.why_zone_section?.second_reason ?? '',
+      thirdReason: zoneSections?.why_zone_section?.third_reason ?? '',
+    },
+    calculator: {
+      title: zoneSections?.growth_calc_section?.growth_title || '',
+      description: zoneSections?.growth_calc_section?.growth_description || '',
+      button: zoneSections?.growth_calc_section?.growth_button?.button_text || '',
+    },
+    result: {
+      title: zoneSections?.result_section?.title ?? '',
+      subtitle: zoneSections?.result_section?.subtitle ?? '',
+      card: {
+        clientTag: zoneSections?.result_section?.result_card?.client_tag ?? '',
+        quote: zoneSections?.result_section?.result_card?.quote ?? '',
+        authorName: zoneSections?.result_section?.result_card?.author_name ?? '',
+        authorRole: zoneSections?.result_section?.result_card?.author_role ?? '',
+      },
+    },
+    cta: {
+      title: zoneSections?.cta_section?.cta_title || '',
+      description: zoneSections?.cta_section?.cta_description || '',
+      cardTitle: zoneSections?.cta_section?.cta_second_title || '',
+      button: zoneSections?.cta_section?.cta_button?.button_text || '',
+    },
+    faqs: {
+      title: zoneSections?.faqs_section?.title || '',
+      subtitle: zoneSections?.faqs_section?.subtitle || '',
+      questions: (zoneSections?.faqs_section?.questions || [])
+        .map((q) => faqTransform(faqs.get(q)))
+        .filter(Boolean),
+    },
+  };
+
+  return zone;
 }

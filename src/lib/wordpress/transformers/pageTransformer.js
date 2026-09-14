@@ -7,6 +7,8 @@ import {
   testimonialTransform,
   trustStatsTransform,
   zoneCardTransform,
+  zoneMetaTransform,
+  zoneTransform,
 } from './common';
 
 /**
@@ -27,8 +29,8 @@ export function basePageTransform(rowData, customSlug = '') {
   const base = {
     id: pageData.id || 0,
     slug: customSlug || pageData.slug || '',
-    seo: metaTransform(pageData),
-    acf: pageData.acf_all_fields,
+    seo: rowData.type === 'services-zone' ? zoneMetaTransform(pageData) : metaTransform(pageData),
+    acf: rowData.type === 'services-zone' ? pageData.acf : pageData.acf_all_fields,
   };
 
   return base;
@@ -96,12 +98,12 @@ export function homePageTransform(
       // Global market testimonials
       global: {
         market: homeData.testimonials_section?.testimonials_first_row?.market_name || '',
-        testimonials: gTestimonials?.map((t) => testimonialTransform(t, imageMap)),
+        testimonials: gTestimonials?.map((t) => testimonialTransform(t, imageMap)).filter(Boolean),
       },
       // Arabic market testimonials
       arabic: {
         market: homeData.testimonials_section?.testimonials_second_row?.market_name || '',
-        testimonials: aTestimonials?.map((t) => testimonialTransform(t, imageMap)),
+        testimonials: aTestimonials?.map((t) => testimonialTransform(t, imageMap)).filter(Boolean),
       },
     },
     trust: trustStatsTransform(homeData.trust_bar_section),
@@ -170,7 +172,7 @@ export function aboutPageTransform(
       title: aboutData.team_section?.title || '',
       subtitle: aboutData.team_section?.subtitle || '',
       description: aboutData.team_section?.description || '',
-      team: teamMembers.map((m) => teamMemberTransform(m?.acf, images)),
+      team: teamMembers.map((m) => teamMemberTransform(m?.acf, images)).filter(Boolean),
     },
     ownerPhilosophy: {
       owenrSide: {
@@ -213,7 +215,7 @@ export function aboutPageTransform(
     events: {
       title: aboutData.events_section?.title || '',
       subtitle: aboutData.events_section?.subtitle || '',
-      gallery: gallery.map((g) => eventGalleryTransform(g?.acf, images)),
+      gallery: gallery.map((g) => eventGalleryTransform(g?.acf, images)).filter(Boolean),
     },
     cta: {
       title: aboutData.cta_section?.cta_title || '',
@@ -224,4 +226,12 @@ export function aboutPageTransform(
   };
 
   return about;
+}
+
+export function zonesTransform(rowData, faqs, services) {
+  if (!rowData) return null;
+
+  const zones = rowData.map((z) => zoneTransform(z, faqs, services));
+
+  return zones;
 }

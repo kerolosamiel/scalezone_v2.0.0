@@ -5,6 +5,7 @@ import {
   aboutPageTransform,
   basePageTransform,
   homePageTransform,
+  zonesTransform,
 } from '../transformers/pageTransformer';
 
 /**
@@ -240,5 +241,42 @@ export async function getAboutPage() {
     imagesMap,
     'about'
   );
+  return result;
+}
+
+export async function getZonePage() {
+  const data = await wpFetch(endpoints.pageBySlug('zones-template'));
+
+  if (!data) return null;
+
+  const pageData = Array.isArray(data) ? data[0] : data;
+
+  if (!pageData) return null;
+
+  const zones = await getMultipleCPTs(pageData.acf_all_fields?.zones, endpoints.zoneById);
+
+  const allServicesIds = (zones || [])
+    .map((z) => z?.acf?.zone_services)
+    .flat(Infinity)
+    .filter(Boolean);
+
+  const allFaqsIds = (zones || [])
+    .map((z) => z?.acf?.zone_sections?.faqs_section?.questions)
+    .flat(Infinity)
+    .filter(Boolean);
+
+  const faqsObjects = allFaqsIds.map((id) => ({ ID: id }));
+  const servicesObjects = allServicesIds.map((id) => ({ ID: id }));
+
+  const [rawFaqs, rawServices] = await Promise.all([
+    getMultipleCPTs(faqsObjects, endpoints.faqById),
+    getMultipleCPTs(servicesObjects, endpoints.serviceById),
+  ]);
+
+  const faqsMap = new Map((rawFaqs || []).map((faq) => [faq.id, faq]));
+  const servicesMap = new Map((rawServices || []).map((service) => [service.id, service]));
+
+  const result = zonesTransform(zones, faqsMap, servicesMap);
+
   return result;
 }
