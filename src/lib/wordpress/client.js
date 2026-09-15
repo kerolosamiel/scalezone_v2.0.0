@@ -17,6 +17,7 @@ export async function wpFetch(endpoint, options = {}) {
 
   const defaultHeaders = {
     'Content-Type': 'application/json',
+    Accept: 'application/json',
     ...headers,
   };
 

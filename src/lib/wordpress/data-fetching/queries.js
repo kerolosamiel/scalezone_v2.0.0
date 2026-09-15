@@ -1,9 +1,7 @@
-import { promise } from 'zod';
 import { wpFetch } from '../client';
 import { endpoints } from '../endpoints/endpoints';
 import {
   aboutPageTransform,
-  basePageTransform,
   homePageTransform,
   zonesTransform,
 } from '../transformers/pageTransformer';
