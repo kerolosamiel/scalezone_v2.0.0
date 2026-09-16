@@ -61,9 +61,9 @@ export function metaTransform(pageData) {
   if (!pageData.acf_all_fields) return null;
 
   // Validate meta details object exists
-  if (!pageData.acf_all_fields.meta_details || pageData.acf.meta_details) return null;
+  if (!pageData.acf_all_fields.meta_details) return null;
 
-  const metaDetails = pageData.acf_all_fields.meta_details || pageData.acf.meta_details;
+  const metaDetails = pageData.acf_all_fields.meta_details;
 
   // Extract title with fallback chain: meta_title > pageData.title > rendered title
   // And description from meta details
