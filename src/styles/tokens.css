@@ -11,6 +11,7 @@
   --color-card-foreground: var(--text);
   --color-card-gradient: var(--card-gradient);
   --color-button-gradient: var(--buttons);
+  --color-button-hover-gradient: var(--buttons-hover);
   --color-button-foreground: var(--text);
   --color-popover: var(--surface);
   --color-popover-foreground: var(--text);
@@ -44,21 +45,18 @@
   --spacing: 0.1rem;
 }
 
-.bg-button-gradient {
-  background-image: var(--color-button-gradient);
+@property --gradient-start {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #ff1301;
 }
 
-.bg-card-gradient {
-  background-image: var(--color-card-gradient);
+@property --gradient-end {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #ff600b;
 }
 
-button.bg-background {
-  background: var(--bg);
-}
-
-.hover\:bg-button-gradient:hover {
-  background: var(--buttons);
-}
 /* Scalezone Design Tokens & Theme Modes */
 :root,
 .dark {
@@ -70,7 +68,7 @@ button.bg-background {
   --text-muted: #b2b2b2;
   --surface: #131313;
   --surface-border: #4a3b3b;
-  --buttons: linear-gradient(to right, #ff1301, #ff600b);
+  --buttons: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
   --buttons-hover: linear-gradient(to left, #ff1301, #ff600b);
   --card-gradient: linear-gradient(to right, #000000, #340808e3);
   --primary-hover: #e01000;

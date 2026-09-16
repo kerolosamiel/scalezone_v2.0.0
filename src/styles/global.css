@@ -37,3 +37,23 @@ Font Size System (px)
     cursor: pointer;
   }
 }
+
+.bg-button-gradient {
+  background-image: var(--color-button-gradient);
+}
+
+.hover\:bg-button-hover-gradient:hover {
+  background-image: var(--color-button-hover-gradient);
+}
+
+.bg-card-gradient {
+  background-image: var(--color-card-gradient);
+}
+
+button.bg-background {
+  background: var(--bg);
+}
+
+.hover\:bg-button-gradient:hover {
+  background: var(--buttons);
+}
