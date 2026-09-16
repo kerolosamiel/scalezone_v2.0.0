@@ -13,7 +13,9 @@ import {
 export async function getTrustStats() {
   try {
     // Fetch home page data from WordPress
-    const data = await wpFetch(endpoints.pageBySlug('home'));
+    const data = await wpFetch(endpoints.pageBySlug('home'), {
+      next: { tags: ['wordpress-data'] },
+    });
     if (!data) return null;
 
     // Handle both array and object responses
@@ -43,7 +45,9 @@ async function getImageByParentId(id) {
     if (!Number.isInteger(id)) return null;
 
     // Request media records associated with the parent ID.
-    const data = await wpFetch(endpoints.mediaByParentId(id));
+    const data = await wpFetch(endpoints.mediaByParentId(id), {
+      next: { tags: ['wordpress-data'] },
+    });
     if (!data) return null;
 
     // WordPress may return a single object or an array; normalize to the first item.
@@ -88,7 +92,9 @@ async function getCPTById(id, endpoint) {
 
   try {
     // Fetch CPT data from the provided endpoint.
-    const data = await wpFetch(endpoint);
+    const data = await wpFetch(endpoint, {
+      next: { tags: ['wordpress-data'] },
+    });
     if (!data) return null;
 
     // WordPress may return a single object or an array; normalize to the first item.
@@ -134,7 +140,9 @@ async function getMultipleCPTs(cptObjects, endpoint) {
  */
 export async function getHomePage() {
   // Fetch the homepage entry from WordPress so we can access all ACF sections.
-  const data = await wpFetch(endpoints.pageBySlug('home'));
+  const data = await wpFetch(endpoints.pageBySlug('home'), {
+    next: { tags: ['wordpress-data'] },
+  });
 
   if (!data) return null;
 
@@ -200,7 +208,9 @@ export async function getHomePage() {
  * is unavailable or the required sections are missing.
  */
 export async function getAboutPage() {
-  const data = await wpFetch(endpoints.pageBySlug('about'));
+  const data = await wpFetch(endpoints.pageBySlug('about'), {
+    next: { tags: ['wordpress-data'] },
+  });
 
   if (!data) return null;
 
@@ -243,7 +253,9 @@ export async function getAboutPage() {
 }
 
 export async function getZonePage() {
-  const data = await wpFetch(endpoints.pageBySlug('zones-template'));
+  const data = await wpFetch(endpoints.pageBySlug('zones-template'), {
+    next: { tags: ['wordpress-data'] },
+  });
 
   if (!data) return null;
 
