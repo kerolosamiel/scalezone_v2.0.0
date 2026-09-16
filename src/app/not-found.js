@@ -21,7 +21,7 @@ export default function NotFound() {
 
         <div>
           <p className="text-[1.6rem] max-sm:text-[1.4rem] max-w-650 mb-24 text-muted-foreground">
-            Sorry, the page you are looking for doesn't exist or has been moved.
+            Sorry&#x2c; the page you are looking for doesn't exist or has been moved.
           </p>
           <Button
             asChild
