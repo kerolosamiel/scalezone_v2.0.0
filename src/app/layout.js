@@ -3,6 +3,7 @@ import { Poppins } from 'next/font/google';
 import localFont from 'next/font/local';
 import '@/styles/tokens.css';
 import '@/styles/global.css';
+import QueryProvider from '@/providers/QueryProvider';
 
 // Font for text
 const poppins = Poppins({
@@ -32,7 +33,9 @@ export default function RootLayout({ children }) {
       className={`${poppins.variable} ${ardelaEdge.variable}`}
     >
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <QueryProvider>
+          <ThemeProvider>{children}</ThemeProvider>
+        </QueryProvider>
       </body>
     </html>
   );
