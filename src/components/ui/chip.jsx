@@ -1,6 +1,6 @@
 import { cn } from 'cn';
 
-export default function FormChip({ className, children }) {
+export default function Chip({ className, children }) {
   return (
     <div
       className={cn(
