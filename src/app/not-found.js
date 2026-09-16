@@ -23,10 +23,7 @@ export default function NotFound() {
           <p className="text-[1.6rem] max-sm:text-[1.4rem] max-w-650 mb-24 text-muted-foreground">
             Sorry, the page you are looking for doesn&#39;t exist or has been moved.
           </p>
-          <Button
-            asChild
-            className="text-[1.6rem] h-fit w-fit py-16 px-30 hover:bg-button-hover-gradient hover:scale-[1.1] transition-all duration-500"
-          >
+          <Button asChild className="text-[1.6rem] h-fit w-fit py-16 px-30" variant="secondary">
             <Link href="/">Back To Home</Link>
           </Button>
         </div>
