@@ -12,7 +12,6 @@ export async function POST(request) {
 
     const { tag } = await request.json();
 
-    console.log('🔄 Revalidated Tag successfully:', tag);
     if (tag) {
       revalidateTag(tag);
       return NextResponse.json({
