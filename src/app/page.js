@@ -1,3 +1,4 @@
+import { Skeleton } from '@/components/ui/skeleton';
 import { getHomePage } from '@/lib/wordpress/data-fetching/queries';
 import { notFound } from 'next/navigation';
 
@@ -35,6 +36,7 @@ export default async function Home() {
   return (
     <main>
       <h1>Home</h1>
+      <Skeleton className="mb-2 h-4 w-24 rounded" />
     </main>
   );
 }
