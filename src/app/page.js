@@ -1,4 +1,4 @@
-import RelatedCardSkeleton from '@/components/ui/skeletons/RelatedCardSkeleton';
+import EmptyState from '@/components/ui/EmptyState';
 import { getHomePage } from '@/lib/wordpress/data-fetching/queries';
 import { notFound } from 'next/navigation';
 
@@ -36,7 +36,7 @@ export default async function Home() {
   return (
     <main>
       <h1>Home</h1>
-      <RelatedCardSkeleton />
+      <EmptyState />
     </main>
   );
 }
