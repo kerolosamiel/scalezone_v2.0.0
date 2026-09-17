@@ -1,4 +1,4 @@
-import PricingCardSkeleton from '@/components/ui/skeletons/PricingCardSkeleton';
+import RelatedCardSkeleton from '@/components/ui/skeletons/RelatedCardSkeleton';
 import { getHomePage } from '@/lib/wordpress/data-fetching/queries';
 import { notFound } from 'next/navigation';
 
@@ -36,7 +36,7 @@ export default async function Home() {
   return (
     <main>
       <h1>Home</h1>
-      <PricingCardSkeleton />
+      <RelatedCardSkeleton />
     </main>
   );
 }
