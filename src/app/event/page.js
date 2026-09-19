@@ -1,3 +1,4 @@
+import FormSection from '@/components/forms/EventForm/FormSection';
 import HeroSection from '@/components/forms/EventForm/HeroSection';
 
 export async function generateMetadata() {
@@ -15,6 +16,8 @@ export default function page() {
   return (
     <main>
       <HeroSection />
+
+      <FormSection />
     </main>
   );
 }

@@ -19,7 +19,9 @@ export default function BaseFormHero({ hero, className, children }) {
       <h1 className="text-[6.2rem]">
         {titleWords.map((word, index) =>
           index === titleWords.length - 1 ? (
-            <span className="text-primary">{word}</span>
+            <span className="text-primary" key={index}>
+              {word}
+            </span>
           ) : (
             `${word} `
           )
