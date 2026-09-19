@@ -168,7 +168,7 @@ export default function FormSide() {
       </Button>
 
       <p className="text-[1.4rem] text-muted-foreground">
-        By submitting, you agree to be contacted by Scalezone about your inquiry. We don't share
+        By submitting, you agree to be contacted by Scalezone about your inquiry. We don&#39;t share
         your info with third parties.
       </p>
     </form>
