@@ -150,7 +150,7 @@ function FieldSeparator({ children, className, ...props }) {
   );
 }
 
-export function FieldError({ className, children, errors, ...props }) {
+function FieldError({ className, children, errors, ...props }) {
   if (children) {
     return (
       <div
