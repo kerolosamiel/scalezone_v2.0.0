@@ -1,6 +1,6 @@
 import { Separator } from '@/components/ui/separator';
 
-export default function InformationBlock({ title, children }) {
+export default function InformationBlock({ title, sep = true, children }) {
   return (
     <>
       <div>
@@ -8,7 +8,7 @@ export default function InformationBlock({ title, children }) {
 
         {children}
       </div>
-      <Separator className="h-1" />
+      {sep ? <Separator className="h-1" /> : ''}
     </>
   );
 }

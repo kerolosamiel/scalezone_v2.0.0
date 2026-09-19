@@ -150,30 +150,29 @@ function FieldSeparator({ children, className, ...props }) {
   );
 }
 
-function FieldError({ className, children, errors, ...props }) {
-  const content = useMemo(() => {
-    if (children) {
-      return children;
-    }
-
-    if (!errors?.length) {
-      return null;
-    }
-
-    const uniqueErrors = [...new Map(errors.map((error) => [error?.message, error])).values()];
-
-    if (uniqueErrors?.length == 1) {
-      return uniqueErrors[0]?.message;
-    }
-
+export function FieldError({ className, children, errors, ...props }) {
+  if (children) {
     return (
-      <ul className="ml-4 flex list-disc flex-col gap-1">
-        {uniqueErrors.map((error, index) => error?.message && <li key={index}>{error.message}</li>)}
-      </ul>
+      <div
+        role="alert"
+        data-slot="field-error"
+        className={cn('text-[1.4rem] font-normal text-destructive', className)}
+        {...props}
+      >
+        {children}
+      </div>
     );
-  }, [children, errors]);
+  }
 
-  if (!content) {
+  if (!errors || errors.length === 0) {
+    return null;
+  }
+
+  const errorMessages = Array.from(
+    new Set(errors.map((err) => (typeof err === 'string' ? err : err?.message)).filter(Boolean))
+  );
+
+  if (errorMessages.length === 0) {
     return null;
   }
 
@@ -184,7 +183,15 @@ function FieldError({ className, children, errors, ...props }) {
       className={cn('text-[1.4rem] font-normal text-destructive', className)}
       {...props}
     >
-      {content}
+      {errorMessages.length === 1 ? (
+        <p>{errorMessages[0]}</p>
+      ) : (
+        <ul className="ml-4 flex list-disc flex-col gap-1">
+          {errorMessages.map((msg, index) => (
+            <li key={index}>{msg}</li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

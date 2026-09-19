@@ -15,7 +15,7 @@ import SocialMedia from '@/components/ui/socialmedia';
 
 export default function BaseInformationSide({ children }) {
   return (
-    <div className="p-48 flex flex-col gap-32">
+    <div className="p-48 max-md:p-32 max-sm:px-24 flex flex-col gap-32">
       {children}
 
       <InformationBlock title="Chat Instantly">
@@ -31,22 +31,30 @@ export default function BaseInformationSide({ children }) {
       </InformationBlock>
 
       <InformationBlock title="Direct">
-        <MailDirect target="_blank" mail="mouslem@scalezone.ae" className="text-[1.8rem] mb-18">
+        <MailDirect
+          target="_blank"
+          mail="mouslem@scalezone.ae"
+          className="text-[1.8rem] max-md:text-[1.6rem] mb-18"
+        >
           mouslem@scalezone.ae
         </MailDirect>
-        <PhoneDirect target="_blank" phone="971551504981" className="text-[1.8rem]">
+        <PhoneDirect
+          target="_blank"
+          phone="971551504981"
+          className="text-[1.8rem] max-md:text-[1.6rem]"
+        >
           +971551504981
         </PhoneDirect>
       </InformationBlock>
 
       <InformationBlock title="OFFICE">
-        <Location href="#" className="text-[1.8rem]">
+        <Location href="#" className="text-[1.8rem] max-md:text-[1.6rem]">
           Physical location details pending confirmation.
         </Location>
       </InformationBlock>
 
-      <InformationBlock title="FOLLOW US">
-        <div className="flex gap-24 text-[2.5rem] mt-32">
+      <InformationBlock title="FOLLOW US" sep={false}>
+        <div className="flex flex-wrap gap-24 text-[2.5rem] mt-32">
           <SocialMedia href="https://www.facebook.com/mouslem.chooseme" icon={<FaFacebookF />} />
 
           <SocialMedia
