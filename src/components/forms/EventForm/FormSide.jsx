@@ -25,6 +25,8 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
+import { Spinner } from '@/components/ui/spinner';
+import { sendConfirmationEmail } from '@/actions/send-email';
 
 const formSchema = z.object({
   firstName: z
@@ -48,6 +50,7 @@ export default function FormSide() {
     register,
     handleSubmit,
     control,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: zodResolver(formSchema),
@@ -57,6 +60,7 @@ export default function FormSide() {
       email: '',
       phone: '',
       message: '',
+      gender: '',
     },
   });
 
@@ -66,7 +70,17 @@ export default function FormSide() {
   ];
 
   const onSubmit = async (data) => {
-    console.log('Valid Form Data:', data);
+    try {
+      const send = await sendConfirmationEmail({ email: data.email, firstName: data.firstName });
+
+      if (!send.success) {
+        throw send.error;
+      }
+
+      reset();
+    } catch (error) {
+      console.error('Submission error:', error);
+    }
   };
 
   return (
@@ -74,7 +88,7 @@ export default function FormSide() {
       onSubmit={handleSubmit(onSubmit)}
       className="p-48 max-md:p-32 max-sm:px-24 bg-card [&_input]:bg-transparent! [&_div]:bg-transparent! "
     >
-      <FieldSet>
+      <FieldSet disabled={isSubmitting}>
         <FieldGroup className="grid grid-cols-2 max-lg:grid-cols-1 gap-32 grid-wrap">
           <Field>
             <FieldLabel htmlFor="first-name">First Name</FieldLabel>
@@ -126,7 +140,13 @@ export default function FormSide() {
               name="gender"
               control={control}
               render={({ field: { onChange, value } }) => (
-                <Select items={gender} onValueChange={onChange} value={value} id="gender">
+                <Select
+                  items={gender}
+                  onValueChange={onChange}
+                  value={value}
+                  key={value}
+                  id="gender"
+                >
                   <SelectTrigger className="bg-transparent! w-full">
                     <SelectValue placeholder="Select your gender" className="w-full" />
                   </SelectTrigger>
@@ -163,8 +183,9 @@ export default function FormSide() {
         </FieldGroup>
       </FieldSet>
 
-      <Button type="submit" className="py-16 px-32 w-full text-[1.6rem] h-fit my-36">
+      <Button type="submit" className="py-16 px-32 w-full text-[1.6rem] h-fit my-36 flex gap-8">
         Submit
+        {isSubmitting ? <Spinner className="text-foreground" /> : ''}
       </Button>
 
       <p className="text-[1.4rem] text-muted-foreground">
