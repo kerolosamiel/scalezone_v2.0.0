@@ -61,8 +61,8 @@ export default function FormSide() {
   });
 
   const gender = [
-    { label: 'Male', value: 'm' },
-    { label: 'Female', value: 'f' },
+    { label: 'Male', value: 'Male' },
+    { label: 'Female', value: 'Female' },
   ];
 
   const onSubmit = async (data) => {
