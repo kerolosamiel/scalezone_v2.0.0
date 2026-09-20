@@ -71,7 +71,11 @@ export default function FormSide() {
 
   const onSubmit = async (data) => {
     try {
-      const send = await sendConfirmationEmail({ email: data.email, firstName: data.firstName });
+      const send = await sendConfirmationEmail({
+        subject: 'Thank you for reaching out to Scalezone!',
+        email: data.email,
+        firstName: data.firstName,
+      });
 
       if (!send.success) {
         throw send.error;
