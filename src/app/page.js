@@ -1,3 +1,4 @@
+import HeroSection from '@/components/home/HeroSection';
 import { getHomePage } from '@/lib/wordpress/data-fetching/queries';
 import { notFound } from 'next/navigation';
 
@@ -32,9 +33,11 @@ export default async function Home() {
 
   if (!homeData) notFound();
 
+  console.log(homeData);
+
   return (
     <main>
-      <h1>Home</h1>
+      <HeroSection hero={homeData.hero} />
     </main>
   );
 }

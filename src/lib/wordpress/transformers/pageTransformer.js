@@ -76,11 +76,11 @@ export function homePageTransform(
   const home = {
     ...base,
     hero: {
-      heroTitle: homeData.hero_section?.hero_title || '',
-      heroDescription: homeData.hero_section?.hero_description || '',
+      title: homeData.hero_section?.hero_title || '',
+      description: homeData.hero_section?.hero_description || '',
       primaryButton: homeData.hero_section?.primary_button.text || '',
-      secondaryButton: homeData.hero_section?.primary_button.text || '',
-      heroImage: imageTransform(homeData.hero_section?.hero_image) || '',
+      secondaryButton: homeData.hero_section?.secondary_button.text || '',
+      image: imageTransform(homeData.hero_section?.hero_image) || '',
     },
     partners: partnersLogo?.map((l) => mediaImageTransform(l)),
     zones: {
