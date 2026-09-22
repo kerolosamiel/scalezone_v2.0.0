@@ -153,6 +153,7 @@ export function zoneCardTransform(zone) {
     slug: zone.slug || '',
     zoneIcon: acf.zone_icon || '',
     zoneName: acf.zone_name || 'Zone Name',
+    zoneDescription: acf.short_description || '',
     zoneServices: [],
   };
 

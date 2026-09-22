@@ -18,12 +18,11 @@ export default function ZoneCard({ zone }) {
     setOpenItem(value === 'item-1' ? true : false);
   };
 
-  const altTextValue =
-    typeof zone?.iconAlt === 'string' && zone.iconAlt.trim() !== '' ? altText : 'service Icon';
+  const altTextValue = `${zone?.zoneName || 'Zone'} Icon`;
 
   return (
     <FeatureCard
-      icon={zone.iconSrc}
+      icon={zone?.zoneIcon?.value}
       alt={altTextValue}
       name={zone.zoneName}
       description={zone.zoneDescription}
@@ -43,7 +42,7 @@ export default function ZoneCard({ zone }) {
               View Services
             </AccordionTrigger>
             <AccordionContent>
-              {zone.services.length > 0 ? (
+              {zone?.zoneServices?.length > 0 ? (
                 <ul>
                   {zone.services.map((service, index) => (
                     <li
@@ -69,8 +68,8 @@ export default function ZoneCard({ zone }) {
         </Accordion>
 
         <Link
-          href="/about"
-          className="inline-flex items-center gap-16 transition-all text-[1.6rem] font-bold hover:gap-[2.4rem]!"
+          href={`/zones/${zone?.slug}`}
+          className="inline-flex items-center gap-16 transition-all text-[1.6rem] font-bold hover:gap-[2.4rem]! max-[330px]:text-[1.4rem]!"
         >
           Explore Amazon Services
           <MoveRight />
