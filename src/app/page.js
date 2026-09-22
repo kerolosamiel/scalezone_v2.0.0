@@ -1,3 +1,4 @@
+import CompaniesSection from '@/components/home/CompaniesSection';
 import HeroSection from '@/components/home/HeroSection';
 import PartnersSection from '@/components/home/PartnersSection';
 import ZonesSection from '@/components/home/ZonesSection';
@@ -42,6 +43,7 @@ export default async function Home() {
       <HeroSection hero={homeData.hero} />
       <PartnersSection partners={homeData.partners} />
       <ZonesSection zoneData={homeData.zones} />
+      <CompaniesSection logos={homeData.companies} />
     </main>
   );
 }

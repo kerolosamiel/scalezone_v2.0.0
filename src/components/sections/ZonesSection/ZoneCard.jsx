@@ -9,7 +9,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { MoveRight } from 'lucide-react';
-import FeatureCard from '@/components/ui/FeatureCard';
+import FeatureCard from '@/components/shared/FeatureCard';
 
 export default function ZoneCard({ zone }) {
   const [openItem, setOpenItem] = useState(false);

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import FeatureCard from '@/components/ui/FeatureCard';
+import FeatureCard from '@/components/shared/FeatureCard';
 import { MoveRight } from 'lucide-react';
 
 export default function ServiceCard({ service }) {
