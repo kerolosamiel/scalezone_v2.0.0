@@ -1,0 +1,22 @@
+import Image from 'next/image';
+
+export default function PartnersSection({ partners }) {
+  if (!partners) return null;
+
+  return (
+    <section className="py-32 px-64 border border-x-0 flex gap-128 justify-center">
+      {partners.map((partner) => (
+        <div className="relative w-xs h-100" key={partner?.id}>
+          <Image
+            src={partner?.url}
+            alt={partner?.alt}
+            sizes="200px"
+            loading="eager"
+            fill
+            className="[clip-path:polygon(10%_0%,100%_0%,100%_30%,100%_80%,90%_100%,30%_100%,0%_100%,0%_20%)]"
+          />
+        </div>
+      ))}
+    </section>
+  );
+}

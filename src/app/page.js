@@ -1,4 +1,5 @@
 import HeroSection from '@/components/home/HeroSection';
+import PartnersSection from '@/components/home/PartnersSection';
 import { getHomePage } from '@/lib/wordpress/data-fetching/queries';
 import { notFound } from 'next/navigation';
 
@@ -38,6 +39,7 @@ export default async function Home() {
   return (
     <main>
       <HeroSection hero={homeData.hero} />
+      <PartnersSection partners={homeData.partners} />
     </main>
   );
 }
