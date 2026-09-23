@@ -10,7 +10,7 @@ export default function CompaniesSection({ logos }) {
   }));
 
   return (
-    <section className="relative overflow-hidden [&>div]:py-24 flex gap-128 flex-wrap border border-x-0 justify-center max-xl:gap-48 max-lg:px-32">
+    <section className="relative overflow-hidden [&>div]:py-24 border border-x-0 justify-center max-xl:[&_li]:mr-80 max-lg:[&_li]:mr-64 max-md:[&_img]:h-45! max-md:[&>div]:py-16">
       <LogoLoop
         logos={finalLogos}
         speed={150}
