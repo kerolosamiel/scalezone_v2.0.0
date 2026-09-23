@@ -7,6 +7,8 @@ export default function CompaniesSection({ logos }) {
   const finalLogos = logos?.map((l) => ({
     src: l?.url,
     alt: l?.alt,
+    width: 50,
+    height: 50,
   }));
 
   return (
