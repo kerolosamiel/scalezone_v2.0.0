@@ -4,7 +4,7 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 export default function TestimonialCard({ testimonial }) {
   return (
-    <article className="px-[2.4rem] py-32 border w-fit flex flex-col gap-32 max-w-366 bg-card-gradient">
+    <article className="px-[2.4rem] py-32 border w-full flex flex-col gap-32 bg-card-gradient justify-between">
       <div className="head flex items-center gap-[1.2rem]">
         <Avatar className="w-55 h-55 rounded-full overflow-hidden">
           <AvatarImage src={testimonial?.clientImage?.url} />

@@ -7,7 +7,7 @@ export default function ZonesSection({ zoneData }) {
   return (
     <section>
       <div className="py-64 px-80 max-w-1680 mx-auto max-xl:px-48 max-lg:px-32 max-md:px-16">
-        <h2 className="text-[4.4rem] tracking-[6%] max-w-550 leading-[115%] mb-48 max-sm:text-[3.6rem] max-[360px]:text-[3.2rem]!">
+        <h2 className="text-[4.4rem] tracking-[6%] max-w-550 leading-[115%] mb-48 max-sm:text-[3rem] max-[360px]:text-[2.4rem]!">
           {zoneData?.title || 'Every service lives in one of three zones.'}
         </h2>
 
