@@ -7,6 +7,7 @@ import { getHomePage } from '@/lib/wordpress/data-fetching/queries';
 import { notFound } from 'next/navigation';
 import HomeTestimonials from '@/components/home/HomeTestimonialsSec';
 import MissionSection from '@/components/home/MissionSection';
+import CtaSection from '@/components/sections/CTABand/CtaSection';
 
 export async function generateMetadata() {
   const homeData = await getHomePage();
@@ -50,6 +51,7 @@ export default async function Home() {
       <GrowthSection growth={homeData.calculator} />
       <HomeTestimonials testimonials={homeData.testimonials} />
       <MissionSection mission={homeData.mission} />
+      <CtaSection cta={homeData.cta} />
     </main>
   );
 }
