@@ -112,6 +112,7 @@ export function homePageTransform(
       subtitle: homeData.mission_section?.mission_subtitle || '',
       description: homeData.mission_section?.mission_description || '',
       button: homeData.mission_section?.mission_button?.button_text || '',
+      image: imageTransform(homeData.mission_section?.mission_image) || '',
     },
     cta: {
       title: homeData.cta_section?.cta_title || '',

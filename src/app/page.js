@@ -6,6 +6,7 @@ import ZonesSection from '@/components/home/ZonesSection';
 import { getHomePage } from '@/lib/wordpress/data-fetching/queries';
 import { notFound } from 'next/navigation';
 import HomeTestimonials from '@/components/home/HomeTestimonialsSec';
+import MissionSection from '@/components/home/MissionSection';
 
 export async function generateMetadata() {
   const homeData = await getHomePage();
@@ -48,6 +49,7 @@ export default async function Home() {
       <CompaniesSection logos={homeData.companies} />
       <GrowthSection growth={homeData.calculator} />
       <HomeTestimonials testimonials={homeData.testimonials} />
+      <MissionSection mission={homeData.mission} />
     </main>
   );
 }
