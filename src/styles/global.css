@@ -42,6 +42,10 @@ Font Size System (px)
   background-image: var(--color-button-gradient);
 }
 
+.bg-growth-gradient {
+  background-image: var(--color-growth-gradient);
+}
+
 .hover\:bg-button-hover-gradient:hover {
   background-image: var(--color-button-hover-gradient);
 }

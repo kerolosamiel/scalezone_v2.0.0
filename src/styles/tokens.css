@@ -10,6 +10,7 @@
   --color-card: var(--surface);
   --color-card-foreground: var(--text);
   --color-card-gradient: var(--card-gradient);
+  --color-growth-gradient: var(--growth-gradient);
   --color-button-gradient: var(--buttons);
   --color-button-hover-gradient: var(--buttons-hover);
   --color-button-foreground: var(--text);
@@ -71,6 +72,7 @@
   --buttons: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
   --buttons-hover: linear-gradient(to left, #ff1301, #ff600b);
   --card-gradient: linear-gradient(to right, #000000, #340808e3);
+  --growth-gradient: linear-gradient(to right, #1a0404 55%, #801414);
   --primary-hover: #e01000;
   --radius: 0;
 }

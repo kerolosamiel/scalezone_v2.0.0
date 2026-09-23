@@ -1,4 +1,5 @@
 import CompaniesSection from '@/components/home/CompaniesSection';
+import GrowthSection from '@/components/sections/GrowthCalcSection/GrowthSection';
 import HeroSection from '@/components/home/HeroSection';
 import PartnersSection from '@/components/home/PartnersSection';
 import ZonesSection from '@/components/home/ZonesSection';
@@ -44,6 +45,7 @@ export default async function Home() {
       <PartnersSection partners={homeData.partners} />
       <ZonesSection zoneData={homeData.zones} />
       <CompaniesSection logos={homeData.companies} />
+      <GrowthSection growth={homeData.calculator} />
     </main>
   );
 }
