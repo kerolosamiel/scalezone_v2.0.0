@@ -9,7 +9,7 @@ export default function HeroSection({ hero }) {
   const finalTitle = title.split(' ');
   return (
     <section className="bg-card-gradient">
-      <div className="py-64 px-80 max-w-1440 grid grid-cols-2 gap-128 mx-auto max-xl:gap-64 max-xl:px-48 max-lg:flex max-lg:flex-col-reverse max-lg:px-32 max-lg:gap-32 max-md:px-16">
+      <div className="py-64 px-80 max-w-1680 grid grid-cols-2 gap-128 mx-auto max-xl:gap-64 max-xl:px-48 max-lg:flex max-lg:flex-col-reverse max-lg:px-32 max-lg:gap-32 max-md:px-16">
         <div className="flex flex-col gap-32 justify-center">
           <h1 className="text-[6.2rem] tracking-[1%] leading-[115%] max-sm:text-[4.4rem]">
             {finalTitle.map((t, i) =>
