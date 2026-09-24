@@ -5,6 +5,9 @@ export default function Member({ member }) {
   if (!member) return null;
 
   const { memberName = 'Member Name', memberPosition = 'N/A', image } = member;
+
+  if (!image?.url) return null;
+
   return (
     <article className="relative brightness-50 hover:brightness-100! transition-all duration-600 after:transition-opacity after:duration-600 after:opacity-0 hover:after:opacity-30! after:absolute after:w-full after:h-full after:bg-[url(/images/patterns_gray.webp)] after:bg-center after:left-0 after:top-0 after:bg-contain after:z-10">
       <Image

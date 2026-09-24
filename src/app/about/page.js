@@ -1,4 +1,5 @@
 import Conference from '@/components/about/Conference';
+import EventsSection from '@/components/about/EventsSection';
 import OwnerPhilosophy from '@/components/about/OwnerPhilosophy';
 import TeamSection from '@/components/about/TeamSection';
 import CtaSection from '@/components/sections/CTABand/CtaSection';
@@ -52,6 +53,7 @@ export default async function page() {
       <TeamSection teamData={aboutData.team} />
       <OwnerPhilosophy data={aboutData.ownerPhilosophy} />
       <Conference conference={aboutData.conference} />
+      <EventsSection events={aboutData.events} />
       <CtaSection cta={aboutData.cta} />
     </main>
   );
