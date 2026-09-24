@@ -2,7 +2,7 @@ import GallaryImage from '../sections/Events/GallaryImage';
 import EmptyState from '../ui/EmptyState';
 
 export default function EventsSection({ events = {} }) {
-  const { title, subtitle, gallery } = events;
+  const { title = 'Scalezone, on the STAGE.', subtitle = 'SOME EVENTS', gallery = [] } = events;
   return (
     <section>
       <div className="py-64 px-80 max-w-1680 mx-auto max-xl:px-48 max-lg:px-32 max-md:px-16">

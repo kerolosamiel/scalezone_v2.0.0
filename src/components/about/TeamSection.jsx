@@ -2,7 +2,12 @@ import Member from '../sections/Team/Member';
 import EmptyState from '../ui/EmptyState';
 
 export default function TeamSection({ teamData = {} }) {
-  const { title = '', subtitle = '', description = '', team } = teamData;
+  const {
+    title = 'Meet The Experts',
+    subtitle = 'OUR TEAM',
+    description = 'Passionate professionals dedicated to bringing your vision to life.',
+    team = [],
+  } = teamData;
   return (
     <section>
       <div className="py-64 px-80 max-w-1680 mx-auto max-xl:px-48 max-lg:px-32 max-md:px-16">
