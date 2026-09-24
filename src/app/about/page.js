@@ -1,5 +1,6 @@
 import OwnerPhilosophy from '@/components/about/OwnerPhilosophy';
 import TeamSection from '@/components/about/TeamSection';
+import CtaSection from '@/components/sections/CTABand/CtaSection';
 import HeroSection from '@/components/sections/Hero/HeroSection';
 import StatesSection from '@/components/sections/States/StatesSection';
 import { getAboutPage } from '@/lib/wordpress/data-fetching/queries';
@@ -49,6 +50,7 @@ export default async function page() {
       <StatesSection states={aboutData.trust} />
       <TeamSection teamData={aboutData.team} />
       <OwnerPhilosophy data={aboutData.ownerPhilosophy} />
+      <CtaSection cta={aboutData.cta} />
     </main>
   );
 }

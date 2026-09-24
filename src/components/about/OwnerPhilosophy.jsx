@@ -1,7 +1,7 @@
 import BaseCard from '../sections/OwnerPhilosophy/BaseCard';
 
 export default function OwnerPhilosophy({ data = {} }) {
-  const { owenrSide, philosophySide } = data;
+  const { owenrSide = {}, philosophySide = {} } = data;
 
   const owner = {
     title: owenrSide?.title || 'Built to Scale, Driven by Results.',
