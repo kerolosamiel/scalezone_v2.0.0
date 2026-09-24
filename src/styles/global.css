@@ -54,6 +54,10 @@ Font Size System (px)
   background-image: var(--color-card-gradient);
 }
 
+.bg-card-gradient-l {
+  background-image: var(--color-card-gradient-l);
+}
+
 button.bg-background {
   background: var(--bg);
 }

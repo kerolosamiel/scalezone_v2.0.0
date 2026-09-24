@@ -1,3 +1,4 @@
+import OwnerPhilosophy from '@/components/about/OwnerPhilosophy';
 import TeamSection from '@/components/about/TeamSection';
 import HeroSection from '@/components/sections/Hero/HeroSection';
 import StatesSection from '@/components/sections/States/StatesSection';
@@ -47,6 +48,7 @@ export default async function page() {
       />
       <StatesSection states={aboutData.trust} />
       <TeamSection teamData={aboutData.team} />
+      <OwnerPhilosophy data={aboutData.ownerPhilosophy} />
     </main>
   );
 }
