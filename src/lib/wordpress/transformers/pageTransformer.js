@@ -162,9 +162,10 @@ export function aboutPageTransform(
     ...base,
     any: aboutData,
     hero: {
-      heroImage: imageTransform(aboutData.hero_section?.hero_image),
+      image: imageTransform(aboutData.hero_section?.hero_image),
       title: aboutData.hero_section?.title || '',
       subtitle: aboutData.hero_section?.subtitle || '',
+      description: aboutData.hero_section?.description || '',
       primaryButton: aboutData.hero_section?.primary_button?.button_text || '',
       secondaryButton: aboutData.hero_section?.secondary_button?.button_text || '',
     },

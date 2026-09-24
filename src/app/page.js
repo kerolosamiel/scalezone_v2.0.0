@@ -1,6 +1,6 @@
 import CompaniesSection from '@/components/home/CompaniesSection';
 import GrowthSection from '@/components/sections/GrowthCalcSection/GrowthSection';
-import HeroSection from '@/components/home/HeroSection';
+import HeroSection from '@/components/sections/Hero/HeroSection';
 import PartnersSection from '@/components/home/PartnersSection';
 import ZonesSection from '@/components/home/ZonesSection';
 import { getHomePage } from '@/lib/wordpress/data-fetching/queries';
@@ -40,12 +40,11 @@ export default async function Home() {
   const homeData = await getHomePage();
 
   if (!homeData) notFound();
-
   console.log(homeData);
 
   return (
     <main>
-      <HeroSection hero={homeData.hero} />
+      <HeroSection hero={homeData.hero} firstHref="/get-started" secondHref="/appointment" />
       <PartnersSection partners={homeData.partners} />
       <ZonesSection zoneData={homeData.zones} />
       <CompaniesSection logos={homeData.companies} />

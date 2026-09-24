@@ -1,3 +1,4 @@
+import HeroSection from '@/components/sections/Hero/HeroSection';
 import { getAboutPage } from '@/lib/wordpress/data-fetching/queries';
 import { notFound } from 'next/navigation';
 
@@ -32,5 +33,16 @@ export default async function page() {
 
   if (!aboutData) notFound();
 
-  return <h1>About</h1>;
+  console.log(aboutData);
+
+  return (
+    <main>
+      <HeroSection
+        hero={aboutData.hero}
+        firstHref="/appointment"
+        secondHref="/case-studies"
+        className="gap-64"
+      />
+    </main>
+  );
 }
