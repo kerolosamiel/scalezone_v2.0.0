@@ -1,4 +1,5 @@
 import HeroSection from '@/components/sections/Hero/HeroSection';
+import StatesSection from '@/components/sections/States/StatesSection';
 import { getAboutPage } from '@/lib/wordpress/data-fetching/queries';
 import { notFound } from 'next/navigation';
 
@@ -43,6 +44,7 @@ export default async function page() {
         secondHref="/case-studies"
         className="gap-64"
       />
+      <StatesSection states={aboutData.trust} />
     </main>
   );
 }
