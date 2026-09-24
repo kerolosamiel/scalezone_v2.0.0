@@ -8,6 +8,7 @@ import { notFound } from 'next/navigation';
 import HomeTestimonials from '@/components/home/HomeTestimonialsSec';
 import MissionSection from '@/components/home/MissionSection';
 import CtaSection from '@/components/sections/CTABand/CtaSection';
+import StatesSection from '@/components/sections/States/StatesSection';
 
 export async function generateMetadata() {
   const homeData = await getHomePage();
@@ -50,6 +51,7 @@ export default async function Home() {
       <CompaniesSection logos={homeData.companies} />
       <GrowthSection growth={homeData.calculator} />
       <HomeTestimonials testimonials={homeData.testimonials} />
+      <StatesSection states={homeData.trust} />
       <MissionSection mission={homeData.mission} />
       <CtaSection cta={homeData.cta} />
     </main>
