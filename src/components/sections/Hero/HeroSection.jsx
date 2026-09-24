@@ -4,10 +4,17 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { cn } from 'cn';
 
-export default function HeroSection({ hero, firstHref, secondHref, className }) {
-  const { title, description, image, primaryButton, secondaryButton, subtitle = '' } = hero;
+export default function HeroSection({ hero = {}, firstHref, secondHref, className }) {
+  const {
+    title = '',
+    description = '',
+    image,
+    primaryButton = '',
+    secondaryButton = '',
+    subtitle = '',
+  } = hero;
 
-  const finalTitle = title.split(' ');
+  const finalTitle = title?.split(' ');
   return (
     <section className="bg-card-gradient">
       <div

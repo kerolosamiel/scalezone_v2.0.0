@@ -1,3 +1,4 @@
+import TeamSection from '@/components/about/TeamSection';
 import HeroSection from '@/components/sections/Hero/HeroSection';
 import StatesSection from '@/components/sections/States/StatesSection';
 import { getAboutPage } from '@/lib/wordpress/data-fetching/queries';
@@ -45,6 +46,7 @@ export default async function page() {
         className="gap-64"
       />
       <StatesSection states={aboutData.trust} />
+      <TeamSection teamData={aboutData.team} />
     </main>
   );
 }

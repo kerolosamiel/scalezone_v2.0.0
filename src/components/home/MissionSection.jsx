@@ -3,7 +3,7 @@ import { Button } from '../ui/button';
 import Link from 'next/link';
 
 export default function MissionSection({ mission = {} }) {
-  const { title, subtitle, description, button, image } = mission;
+  const { title = '', subtitle = '', description = '', button = '', image } = mission;
   return (
     <section className="relative bg-card-gradient after:absolute after:w-full after:h-full after:bg-[url(/images/logo/logox02.webp)] after:bg-center after:left-0 after:top-0 after:bg-cover after:opacity-5 after:z-10">
       <div className="relative z-20 py-64 px-80 grid grid-cols-2 gap-24 items-center max-w-1680 mx-auto max-xl:px-48 max-lg:px-32 max-md:px-16">
