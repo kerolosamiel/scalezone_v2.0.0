@@ -27,6 +27,7 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import { Spinner } from '@/components/ui/spinner';
 import { sendConfirmationEmail } from '@/actions/send-email';
+import { sendData } from '@/actions/send-data';
 
 const formSchema = z.object({
   firstName: z
@@ -80,6 +81,8 @@ export default function FormSide() {
       if (!send.success) {
         throw send.error;
       }
+
+      const res = sendData(data);
 
       reset();
     } catch (error) {

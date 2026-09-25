@@ -1,6 +1,7 @@
 import Conference from '@/components/about/Conference';
 import EventsSection from '@/components/about/EventsSection';
 import OwnerPhilosophy from '@/components/about/OwnerPhilosophy';
+import ProcessSection from '@/components/about/ProcessSection';
 import TeamSection from '@/components/about/TeamSection';
 import CtaSection from '@/components/sections/CTABand/CtaSection';
 import HeroSection from '@/components/sections/Hero/HeroSection';
@@ -52,6 +53,7 @@ export default async function page() {
       <StatesSection states={aboutData.trust} />
       <TeamSection teamData={aboutData.team} />
       <OwnerPhilosophy data={aboutData.ownerPhilosophy} />
+      <ProcessSection process={aboutData.process} />
       <Conference conference={aboutData.conference} />
       <EventsSection events={aboutData.events} />
       <CtaSection cta={aboutData.cta} />
