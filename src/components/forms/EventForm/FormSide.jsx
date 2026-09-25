@@ -82,7 +82,7 @@ export default function FormSide() {
         throw send.error;
       }
 
-      const res = sendData(data);
+      sendData(data);
 
       reset();
     } catch (error) {
