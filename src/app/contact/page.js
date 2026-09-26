@@ -32,7 +32,5 @@ export default async function page() {
 
   if (!contact) notFound();
 
-  console.log(contact);
-
   return <h1>Contact</h1>;
 }
