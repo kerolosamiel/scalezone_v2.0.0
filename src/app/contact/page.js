@@ -1,5 +1,38 @@
-import React from 'react';
+import { getContactPage } from '@/lib/wordpress/data-fetching/queries';
+import { notFound } from 'next/navigation';
 
-export default function page() {
+export async function generateMetadata() {
+  const contact = await getContactPage();
+
+  if (!contact?.seo) {
+    return {
+      title: 'Contact | Scalezone',
+      description: 'Contact scalezone',
+    };
+  }
+
+  return {
+    title: contact.seo.title,
+    description: contact.seo.description,
+    keywords: contact.seo.keywords,
+    openGraph: {
+      title: contact.seo.ogTitle,
+      description: contact.seo.ogDescription,
+      images: contact.seo.ogImage ? [contact.seo.ogImage] : [],
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
+}
+
+export default async function page() {
+  const contact = await getContactPage();
+
+  if (!contact) notFound();
+
+  console.log(contact);
+
   return <h1>Contact</h1>;
 }

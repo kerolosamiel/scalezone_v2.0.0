@@ -268,19 +268,18 @@ export function contactTransform(rowData) {
   const contact = {
     ...base,
     hero: data.hero,
-    any: data,
     info: {
       whatsapp: {
         title: data.information_side?.whatsapp_part?.title || '',
         button: {
-          text: data.information_side?.whatsapp_part?.whatsapp_button?.button_text,
-          number: data.information_side?.whatsapp_part?.whatsapp_button?.whatsapp_number,
+          text: data.information_side?.whatsapp_part?.whatsapp_button?.button_text || '',
+          number: data.information_side?.whatsapp_part?.whatsapp_button?.whatsapp_number || '',
         },
       },
       contact: {
-        title: data.information_side?.contact_part?.title,
-        email: data.information_side?.contact_part?.email,
-        phone: data.information_side?.contact_part?.phone_number,
+        title: data.information_side?.contact_part?.title || '',
+        email: data.information_side?.contact_part?.email || '',
+        phone: data.information_side?.contact_part?.phone_number || '',
       },
       location: data.information_side?.location_part,
       socialMedia: data.information_side?.social_media_part,
