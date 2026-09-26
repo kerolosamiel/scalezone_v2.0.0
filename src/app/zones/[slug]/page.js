@@ -1,3 +1,5 @@
+import CtaSection from '@/components/sections/CTABand/CtaSection';
+import FaqsSection from '@/components/sections/FaqsSection/Faqs';
 import GrowthSection from '@/components/sections/GrowthCalcSection/GrowthSection';
 import ProofSection from '@/components/zone/ProofSection';
 import ServicesSection from '@/components/zone/ServicesSection';
@@ -48,6 +50,8 @@ export default async function page({ params }) {
       <WhyZoneSection data={targetZone.whyZone} />
       <GrowthSection growth={targetZone.calculator} />
       <ProofSection proof={targetZone.result} />
+      <FaqsSection faqs={targetZone.faqs} />
+      <CtaSection cta={targetZone.cta} />
     </>
   );
 }
