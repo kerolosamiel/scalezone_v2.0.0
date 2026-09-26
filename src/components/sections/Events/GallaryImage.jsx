@@ -11,6 +11,7 @@ export default function GallaryImage({ card = {} }) {
         alt={image.alt || 'Event Image'}
         width={390}
         height={400}
+        loading="lazy"
         className="transition-all duration-500 brightness-80 hover:brightness-100! hover:scale-[1.05]"
       />
 

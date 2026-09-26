@@ -1,6 +1,6 @@
 import { cn } from 'cn';
 
-export default function BaseAboutSections({ title, subtitle, children, className }) {
+export default function BaseSections({ title, subtitle, children, className }) {
   return (
     <section>
       <div
