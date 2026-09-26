@@ -1,3 +1,4 @@
+import BaseFormHero from '@/components/forms/shared/BaseFormHero';
 import { getContactPage } from '@/lib/wordpress/data-fetching/queries';
 import { notFound } from 'next/navigation';
 
@@ -32,5 +33,9 @@ export default async function page() {
 
   if (!contact) notFound();
 
-  return <h1>Contact</h1>;
+  return (
+    <main>
+      <BaseFormHero hero={contact.hero} />
+    </main>
+  );
 }
