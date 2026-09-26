@@ -13,7 +13,7 @@ export default function PartnersSection({ partners }) {
             sizes="200px"
             loading="eager"
             fill
-            className="[clip-path:polygon(10%_0%,100%_0%,100%_30%,100%_80%,90%_100%,30%_100%,0%_100%,0%_20%)]"
+            className="[clip-path:polygon(10%_0%,100%_0%,100%_30%,100%_80%,90%_100%,30%_100%,0%_100%,0%_20%)] brightness-50 hover:brightness-100 transition-all duration-500"
           />
         </div>
       ))}
