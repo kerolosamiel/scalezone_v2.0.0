@@ -14,23 +14,27 @@ export async function generateMetadata() {
 }
 
 export default function page() {
-  const faqs = [
-    {
-      question: 'Which platforms do you work with besides Amazon?',
-      answer:
-        'Amazon is where we started, but the Other Platforms Zone covers marketplaces like Noon and Shopify under the same managed approach — one team, one strategy, across every channel you sell on.',
-    },
-    {
-      question: 'Which platforms do you work with besides Amazon?',
-      answer:
-        'Amazon is where we started, but the Other Platforms Zone covers marketplaces like Noon and Shopify under the same managed approach — one team, one strategy, across every channel you sell on.',
-    },
-    {
-      question: 'Which platforms do you work with besides Amazon?',
-      answer:
-        'Amazon is where we started, but the Other Platforms Zone covers marketplaces like Noon and Shopify under the same managed approach — one team, one strategy, across every channel you sell on.',
-    },
-  ];
+  const faqs = {
+    title: 'Quick answers.',
+    subtitle: 'Before You Reach Out',
+    questions: [
+      {
+        question: 'Which platforms do you work with besides Amazon?',
+        answer:
+          'Amazon is where we started, but the Other Platforms Zone covers marketplaces like Noon and Shopify under the same managed approach — one team, one strategy, across every channel you sell on.',
+      },
+      {
+        question: 'Which platforms do you work with besides Amazon?',
+        answer:
+          'Amazon is where we started, but the Other Platforms Zone covers marketplaces like Noon and Shopify under the same managed approach — one team, one strategy, across every channel you sell on.',
+      },
+      {
+        question: 'Which platforms do you work with besides Amazon?',
+        answer:
+          'Amazon is where we started, but the Other Platforms Zone covers marketplaces like Noon and Shopify under the same managed approach — one team, one strategy, across every channel you sell on.',
+      },
+    ],
+  };
 
   return (
     <main>
@@ -38,7 +42,7 @@ export default function page() {
 
       <FormSection />
 
-      <FaqsSection title="Quick answers." subtitle="Before You Reach Out" faqs={faqs} />
+      <FaqsSection faqs={faqs} />
     </main>
   );
 }
