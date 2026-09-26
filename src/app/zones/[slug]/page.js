@@ -1,3 +1,4 @@
+import GrowthSection from '@/components/sections/GrowthCalcSection/GrowthSection';
 import ServicesSection from '@/components/zone/ServicesSection';
 import WhyZoneSection from '@/components/zone/WhyZoneSection';
 import ZoneHeroSection from '@/components/zone/ZoneHeroSection';
@@ -44,6 +45,7 @@ export default async function page({ params }) {
       <ZoneHeroSection slug={targetZone.slug} hero={targetZone.hero} />
       <ServicesSection services={targetZone.services} />
       <WhyZoneSection data={targetZone.whyZone} />
+      <GrowthSection growth={targetZone.calculator} />
     </>
   );
 }
