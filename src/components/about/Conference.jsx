@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaCirclePlay } from 'react-icons/fa6';
+import BaseAboutSection from '../sections/Common/BaseAboutSection';
+import EmptyState from '../ui/EmptyState';
 
 export default function Conference({ conference = {} }) {
   const {
@@ -10,15 +12,18 @@ export default function Conference({ conference = {} }) {
     posterImage = {},
   } = conference;
   return (
-    <section>
-      <div className=" flex flex-col justify-center items-center py-64 px-80 max-w-1680 mx-auto max-xl:px-48 max-lg:px-32 max-md:px-16">
-        <div className="mb-64 w-full">
-          <h3 className="text-[2rem] tracking-[1%] text-primary">{subtitle}</h3>
-          <h2 className="text-[4.4rem] tracking-[1%] max-w-700 leading-[115%] max-sm:text-[3rem] max-[360px]:text-[2.4rem]!">
-            {title}
-          </h2>
-        </div>
-
+    <BaseAboutSection
+      title={title}
+      subtitle={subtitle}
+      className="flex flex-col justify-center items-center"
+    >
+      {!posterImage?.url ? (
+        <EmptyState
+          className="py-64"
+          title="No Video Found"
+          description="Our conference coverage video is currently being updated. Check back soon!"
+        />
+      ) : (
         <Link
           href={videoURL}
           target="_blank"
@@ -35,7 +40,7 @@ export default function Conference({ conference = {} }) {
 
           <FaCirclePlay className="absolute size-90 text-accent left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2 max-[450px]:size-60" />
         </Link>
-      </div>
-    </section>
+      )}
+    </BaseAboutSection>
   );
 }
