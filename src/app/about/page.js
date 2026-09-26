@@ -40,8 +40,6 @@ export default async function page() {
 
   if (!aboutData) notFound();
 
-  console.log(aboutData);
-
   return (
     <main>
       <HeroSection
