@@ -1,11 +1,11 @@
-import BaseAboutSection from '../sections/Common/BaseAboutSection';
+import BaseAboutSections from '../sections/Common/BaseAboutSections';
 import GallaryImage from '../sections/Events/GallaryImage';
 import EmptyState from '../ui/EmptyState';
 
 export default function EventsSection({ events = {} }) {
   const { title = 'Scalezone, on the STAGE.', subtitle = 'SOME EVENTS', gallery = [] } = events;
   return (
-    <BaseAboutSection title={title} subtitle={subtitle}>
+    <BaseAboutSections title={title} subtitle={subtitle}>
       {!gallery || gallery?.length == 0 ? (
         <EmptyState
           className="py-64"
@@ -21,6 +21,6 @@ export default function EventsSection({ events = {} }) {
           ))}
         </ul>
       )}
-    </BaseAboutSection>
+    </BaseAboutSections>
   );
 }

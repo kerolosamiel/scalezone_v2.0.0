@@ -1,4 +1,4 @@
-import BaseAboutSection from '../sections/Common/BaseAboutSection';
+import BaseAboutSections from '../sections/Common/BaseAboutSections';
 import Step from '../sections/Process/Step';
 import EmptyState from '../ui/EmptyState';
 
@@ -15,7 +15,7 @@ export default function ProcessSection({ process = {} }) {
   const steps = [stepOne, stepTwo, stepThree, stepFour].filter(Boolean);
 
   return (
-    <BaseAboutSection
+    <BaseAboutSections
       title={title}
       subtitle={subtitle}
       className="flex flex-col justify-center items-center "
@@ -46,6 +46,6 @@ export default function ProcessSection({ process = {} }) {
           ))}
         </ul>
       )}
-    </BaseAboutSection>
+    </BaseAboutSections>
   );
 }

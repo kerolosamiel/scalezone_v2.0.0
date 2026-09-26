@@ -1,3 +1,4 @@
+import ZoneHeroSection from '@/components/zone/ZoneHeroSection';
 import { getZonePage } from '@/lib/wordpress/data-fetching/queries';
 import { notFound } from 'next/navigation';
 
@@ -34,5 +35,11 @@ export default async function page({ params }) {
 
   if (!targetZone) notFound();
 
-  return <div>page</div>;
+  console.log(targetZone);
+
+  return (
+    <>
+      <ZoneHeroSection slug={targetZone.slug} hero={targetZone.hero} />
+    </>
+  );
 }

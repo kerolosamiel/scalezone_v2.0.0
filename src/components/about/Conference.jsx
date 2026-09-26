@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaCirclePlay } from 'react-icons/fa6';
-import BaseAboutSection from '../sections/Common/BaseAboutSection';
+import BaseAboutSections from '../sections/Common/BaseAboutSections';
 import EmptyState from '../ui/EmptyState';
 
 export default function Conference({ conference = {} }) {
@@ -12,7 +12,7 @@ export default function Conference({ conference = {} }) {
     posterImage = {},
   } = conference;
   return (
-    <BaseAboutSection
+    <BaseAboutSections
       title={title}
       subtitle={subtitle}
       className="flex flex-col justify-center items-center"
@@ -41,6 +41,6 @@ export default function Conference({ conference = {} }) {
           <FaCirclePlay className="absolute size-90 text-accent left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2 max-[450px]:size-60" />
         </Link>
       )}
-    </BaseAboutSection>
+    </BaseAboutSections>
   );
 }
