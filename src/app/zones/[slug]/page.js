@@ -1,4 +1,5 @@
 import GrowthSection from '@/components/sections/GrowthCalcSection/GrowthSection';
+import ProofSection from '@/components/zone/ProofSection';
 import ServicesSection from '@/components/zone/ServicesSection';
 import WhyZoneSection from '@/components/zone/WhyZoneSection';
 import ZoneHeroSection from '@/components/zone/ZoneHeroSection';
@@ -46,6 +47,7 @@ export default async function page({ params }) {
       <ServicesSection services={targetZone.services} />
       <WhyZoneSection data={targetZone.whyZone} />
       <GrowthSection growth={targetZone.calculator} />
+      <ProofSection proof={targetZone.result} />
     </>
   );
 }
