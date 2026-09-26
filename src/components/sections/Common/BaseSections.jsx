@@ -11,7 +11,11 @@ export default function BaseSections({ title, subtitle, children, className }) {
       >
         {(title || subtitle) && (
           <div className="mb-64 w-full">
-            {subtitle && <h3 className="text-[2rem] tracking-[1%] text-primary">{subtitle}</h3>}
+            {subtitle && (
+              <h3 className="text-[2rem] tracking-[1%] text-primary max-[400]:text-[1.6rem]">
+                {subtitle}
+              </h3>
+            )}
             {title && (
               <h2 className="text-[4.4rem] tracking-[1%] max-w-700 leading-[115%] max-sm:text-[3rem] max-[360px]:text-[2.4rem]!">
                 {title}

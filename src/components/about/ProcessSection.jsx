@@ -27,7 +27,7 @@ export default function ProcessSection({ process = {} }) {
           description="Our process roadmap is currently being updated. Check back soon!"
         />
       ) : (
-        <ul className="grid grid-cols-4 gap-44 max-lg:grid-cols-2 max-[470px]:grid-cols-1!">
+        <ul className="grid grid-cols-4 gap-48 max-lg:grid-cols-2 max-[470px]:grid-cols-1!">
           {steps.map((s, i) => (
             <li
               key={`event-${i}`}
