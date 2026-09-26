@@ -1,6 +1,4 @@
 import { cn } from 'cn';
-import BaseInformationSide from '../shared/BaseInformationSide';
-import FormSide from './FormSide';
 
 export default function BaseFormSection({ children, className }) {
   return (
