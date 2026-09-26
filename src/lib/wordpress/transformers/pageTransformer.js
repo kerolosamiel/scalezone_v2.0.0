@@ -1,3 +1,4 @@
+import { any } from 'zod';
 import {
   eventGalleryTransform,
   imageTransform,
@@ -160,7 +161,6 @@ export function aboutPageTransform(
   // Build about page object with all sections
   const about = {
     ...base,
-    any: aboutData,
     hero: {
       image: imageTransform(aboutData.hero_section?.hero_image),
       title: aboutData.hero_section?.title || '',
@@ -230,10 +230,62 @@ export function aboutPageTransform(
   return about;
 }
 
+/**
+ * Transforms multiple zone records from WordPress into standardized zone objects
+ * @param {Array} rowData - Array of raw zone data from WordPress
+ * @param {Array} faqs - Array of FAQ data to associate with zones
+ * @param {Array} services - Array of services data to associate with zones
+ * @returns {Array|null} Array of transformed zone objects
+ */
 export function zonesTransform(rowData, faqs, services) {
   if (!rowData) return null;
 
+  // Transform each zone record using zoneTransform helper
   const zones = rowData.map((z) => zoneTransform(z, faqs, services));
 
   return zones;
+}
+
+/**
+ * Transforms WordPress contact page data into a standardized format
+ * @param {Object|Array} rowData - Raw contact page data from WordPress
+ * @returns {Object|null} Transformed contact page object with hero, contact info, and social media
+ */
+export function contactTransform(rowData) {
+  if (!rowData) return null;
+
+  // Reuse the shared page transformer to get the base page metadata.
+  const base = basePageTransform(rowData, 'contact');
+  if (!base) return null;
+
+  // Extract the contact-specific ACF fields.
+  const data = base.acf?.contact_page_v2;
+  if (!data) return null;
+
+  delete base.acf;
+
+  // Build the normalized contact object with all contact sections.
+  const contact = {
+    ...base,
+    hero: data.hero,
+    any: data,
+    info: {
+      whatsapp: {
+        title: data.information_side?.whatsapp_part?.title || '',
+        button: {
+          text: data.information_side?.whatsapp_part?.whatsapp_button?.button_text,
+          number: data.information_side?.whatsapp_part?.whatsapp_button?.whatsapp_number,
+        },
+      },
+      contact: {
+        title: data.information_side?.contact_part?.title,
+        email: data.information_side?.contact_part?.email,
+        phone: data.information_side?.contact_part?.phone_number,
+      },
+      location: data.information_side?.location_part,
+      socialMedia: data.information_side?.social_media_part,
+    },
+  };
+
+  return contact;
 }

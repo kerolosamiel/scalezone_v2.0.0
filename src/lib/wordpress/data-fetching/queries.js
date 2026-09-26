@@ -2,6 +2,7 @@ import { wpFetch } from '../client';
 import { endpoints } from '../endpoints/endpoints';
 import {
   aboutPageTransform,
+  contactTransform,
   homePageTransform,
   zonesTransform,
 } from '../transformers/pageTransformer';
@@ -289,4 +290,27 @@ export async function getZonePage() {
   const result = zonesTransform(zones, faqsMap, servicesMap);
 
   return result;
+}
+
+// Fetches and transforms the contact page data from WordPress
+export async function getContactPage() {
+  try {
+    // Fetch the contact page by slug with caching tags
+    const data = await wpFetch(endpoints.pageBySlug('contact'), {
+      next: { tags: ['wordpress-data'] },
+    });
+
+    if (!data) return null;
+
+    // Handle array response by extracting first element, otherwise use data directly
+    const pageData = Array.isArray(data) ? data[0] : data;
+    if (!pageData) return null;
+
+    // Transform the page data and return the result
+    const result = contactTransform(pageData);
+    return result;
+  } catch (error) {
+    // Log any errors that occur during fetching
+    console.error('Failed fetch contact data: ', error);
+  }
 }

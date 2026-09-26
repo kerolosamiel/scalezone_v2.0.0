@@ -41,8 +41,6 @@ export default async function page({ params }) {
 
   if (!targetZone) notFound();
 
-  console.log(targetZone);
-
   return (
     <>
       <ZoneHeroSection slug={targetZone.slug} hero={targetZone.hero} />
