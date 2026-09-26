@@ -1,3 +1,4 @@
+import ServicesSection from '@/components/zone/ServicesSection';
 import ZoneHeroSection from '@/components/zone/ZoneHeroSection';
 import { getZonePage } from '@/lib/wordpress/data-fetching/queries';
 import { notFound } from 'next/navigation';
@@ -40,6 +41,7 @@ export default async function page({ params }) {
   return (
     <>
       <ZoneHeroSection slug={targetZone.slug} hero={targetZone.hero} />
+      <ServicesSection services={targetZone.services} />
     </>
   );
 }
