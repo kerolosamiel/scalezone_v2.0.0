@@ -1,5 +1,6 @@
+import FormSection from '@/components/forms/ContactForm/FormSection';
 import BaseFormHero from '@/components/forms/shared/BaseFormHero';
-import { getContactPage } from '@/lib/wordpress/data-fetching/queries';
+import { getContactPage, getZonePage } from '@/lib/wordpress/data-fetching/queries';
 import { notFound } from 'next/navigation';
 
 export async function generateMetadata() {
@@ -29,13 +30,19 @@ export async function generateMetadata() {
 }
 
 export default async function page() {
-  const contact = await getContactPage();
+  const [contact, zones] = await Promise.all([getContactPage(), getZonePage()]);
+  const fZones = zones.map((z) => ({
+    id: z?.id,
+    slug: z?.slug,
+    services: z?.services?.items,
+  }));
 
   if (!contact) notFound();
 
   return (
     <main>
       <BaseFormHero hero={contact.hero} />
+      <FormSection info={contact.info} zones={fZones} />
     </main>
   );
 }
