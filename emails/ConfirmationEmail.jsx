@@ -85,7 +85,7 @@ export default function ConfirmationEmail({ companyName = 'Scalezone', clientNam
               as="h1"
               className="mobile:!max-w-full font-40 font-condensed mobile:font-32 text-fg m-0 mb-6 max-w-lg uppercase"
             >
-              Welcome To Scalezone, {clientName ?? 'Kerolos'}
+              Welcome To Scalezone, {clientName ?? 'Dear Client'}
             </Heading>
             <Section align="left" className="mobile:!max-w-full max-w-lg">
               <Text className="font-14 text-fg-2 m-0 font-sans text-text-muted">
