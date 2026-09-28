@@ -2,16 +2,34 @@
 
 import { Resend } from 'resend';
 import ConfirmationEmail from '../../emails/ConfirmationEmail';
+import NotificationEmail from '../../emails/NotificationEmail';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export async function sendConfirmationEmail({ subject, email, firstName }) {
+const EMAIL_TEMPLATES = {
+  confirmation: ConfirmationEmail,
+  notification: NotificationEmail,
+};
+
+export async function sendConfirmationEmail({
+  fromEmail = 'contact@scalezone.ae',
+  toEmail,
+  subject,
+  component,
+  props = {},
+}) {
   try {
+    const SelectedTemplate = EMAIL_TEMPLATES[component];
+
+    if (!SelectedTemplate) {
+      throw new Error(`Invalid email template: ${component}`);
+    }
+
     const res = await resend.emails.send({
-      from: 'Scalezone <contact@scalezone.ae>',
-      to: [email],
+      from: `Scalezone <${fromEmail}>`,
+      to: [toEmail],
       subject: subject,
-      react: <ConfirmationEmail clientName={firstName.trim()} />,
+      react: <SelectedTemplate {...props} />,
     });
 
     if (res.error) throw res.error;

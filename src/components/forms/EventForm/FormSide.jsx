@@ -28,6 +28,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Spinner } from '@/components/ui/spinner';
 import { sendConfirmationEmail } from '@/actions/send-email';
 import { sendData } from '@/actions/send-data';
+import ConfirmationEmail from '../../../../emails/ConfirmationEmail';
 
 const formSchema = z.object({
   firstName: z
@@ -60,7 +61,6 @@ export default function FormSide() {
       lastName: '',
       email: '',
       phone: '',
-      message: '',
       gender: '',
     },
   });
@@ -74,8 +74,9 @@ export default function FormSide() {
     try {
       const send = await sendConfirmationEmail({
         subject: 'Thank you for reaching out to Scalezone!',
-        email: data.email,
-        firstName: data.firstName,
+        toEmail: data.email,
+        component: 'confirmation',
+        props: { clientName: data?.firstName?.trim() },
       });
 
       if (!send.success) {
@@ -175,17 +176,6 @@ export default function FormSide() {
               )}
             />
             <FieldError errors={errors.gender ? [errors.gender] : []} />
-          </Field>
-          <Field className="row-start-4 col-start-1 col-end-3 max-lg:col-start-[unset] max-lg:col-end-[unset] max-lg:row-start-[unset]">
-            <FieldLabel htmlFor="message">
-              Message <FieldDescription>(Optional)</FieldDescription>
-            </FieldLabel>
-            <Textarea
-              id="message"
-              className="resize-y h-128 text-[1.4rem]! p-10"
-              placeholder="Tell us about your needs..."
-              {...register('message')}
-            />
           </Field>
         </FieldGroup>
       </FieldSet>
