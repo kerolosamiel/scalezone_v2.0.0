@@ -4,7 +4,7 @@ import FormSide from './FormSide';
 
 export default function FormSection() {
   return (
-    <BaseFormSection>
+    <BaseFormSection className="items-center">
       <FormSide />
       <BaseInformationSide />
     </BaseFormSection>
