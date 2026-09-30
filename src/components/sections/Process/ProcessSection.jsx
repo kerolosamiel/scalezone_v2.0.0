@@ -1,8 +1,9 @@
-import BaseSections from '../sections/Common/BaseSections';
-import Step from '../sections/Process/Step';
-import EmptyState from '../ui/EmptyState';
+import BaseSections from '../Common/BaseSections';
+import EmptyState from '../../ui/EmptyState';
+import Step from './Step';
+import { cn } from 'cn';
 
-export default function ProcessSection({ process = {} }) {
+export default function ProcessSection({ process = {}, className = '', children }) {
   const {
     title = 'A structured process, from first call to kickoff.',
     subtitle = 'How We Work',
@@ -18,8 +19,10 @@ export default function ProcessSection({ process = {} }) {
     <BaseSections
       title={title}
       subtitle={subtitle}
-      className="flex flex-col justify-center items-center "
+      className={cn('flex flex-col justify-center items-center ', className)}
     >
+      {children}
+
       {!steps || steps?.length == 0 ? (
         <EmptyState
           className="py-64"
