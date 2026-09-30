@@ -44,7 +44,6 @@ const formSchema = z.object({
     .string({ required_error: 'Phone number is required' })
     .min(7, 'Please enter a valid phone number'),
   gender: z.string().min(1, 'Gender is required'),
-  message: z.string(),
 });
 
 export default function FormSide() {
@@ -132,7 +131,7 @@ export default function FormSide() {
                 <PhoneInputWithCountry
                   id="phone"
                   international
-                  defaultCountry="AE"
+                  defaultCountry="DZ"
                   value={value ? value.toString() : ''}
                   onChange={onChange}
                   placeholder="Enter phone number"
