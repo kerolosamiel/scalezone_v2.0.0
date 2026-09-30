@@ -1,4 +1,6 @@
+import FaqsSection from '@/components/sections/FaqsSection/Faqs';
 import GrowthSection from '@/components/sections/GrowthCalcSection/GrowthSection';
+import ProofSection from '@/components/sections/ProofSection/ProofSection';
 import { getServicePage } from '@/lib/wordpress/data-fetching/queries';
 import { notFound } from 'next/navigation';
 
@@ -38,7 +40,9 @@ export default async function page({ params }) {
 
   return (
     <main>
+      <ProofSection proof={service.result} />
       <GrowthSection growth={service.calculator} />
+      <FaqsSection faqs={service.faqs} />
     </main>
   );
 }

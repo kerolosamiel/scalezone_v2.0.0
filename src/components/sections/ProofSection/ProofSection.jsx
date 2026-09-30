@@ -1,6 +1,6 @@
-import BaseSections from '../sections/Common/BaseSections';
-import ResultCard from '../sections/ProofSection/ResultCard';
-import EmptyState from '../ui/EmptyState';
+import EmptyState from '@/components/ui/EmptyState';
+import BaseSections from '../Common/BaseSections';
+import ResultCard from './ResultCard';
 
 export default function ProofSection({ proof = {} }) {
   const { title, subtitle, card } = proof;
