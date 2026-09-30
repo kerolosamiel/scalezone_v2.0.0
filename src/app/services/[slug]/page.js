@@ -1,9 +1,44 @@
+import GrowthSection from '@/components/sections/GrowthCalcSection/GrowthSection';
 import { getServicePage } from '@/lib/wordpress/data-fetching/queries';
+import { notFound } from 'next/navigation';
+
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const service = await getServicePage(slug);
+
+  if (!service?.seo) {
+    return {
+      title: 'Service | Scalezone',
+      description: 'Explore the Service',
+    };
+  }
+
+  return {
+    title: service.seo.title,
+    description: service.seo.description,
+    keywords: service.seo.keywords,
+    openGraph: {
+      title: service.seo.ogTitle,
+      description: service.seo.ogDescription,
+      images: service.seo.ogImage ? [service.seo.ogImage] : [],
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
+}
 
 export default async function page({ params }) {
   const { slug } = await params;
-  const page = await getServicePage(slug);
+  const service = await getServicePage(slug);
 
-  console.log(page);
-  return <div>{slug}</div>;
+  if (!service) notFound();
+  console.log(service);
+
+  return (
+    <main>
+      <GrowthSection growth={service.calculator} />
+    </main>
+  );
 }
