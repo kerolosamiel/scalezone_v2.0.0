@@ -1,9 +1,11 @@
 import { any } from 'zod';
 import {
   eventGalleryTransform,
+  faqTransform,
   imageTransform,
   mediaImageTransform,
   metaTransform,
+  serviceCardTransform,
   teamMemberTransform,
   testimonialTransform,
   trustStatsTransform,
@@ -288,4 +290,72 @@ export function contactTransform(rowData) {
   };
 
   return contact;
+}
+
+export function servicePageTransform(rowData, rawFaqs, rawServices) {
+  if (!rowData) return null;
+
+  const base = basePageTransform(rowData);
+  if (!base) return null;
+
+  const page = base.acf?.service_v2?.services_sections;
+  if (!page) return null;
+
+  const faqs = rawFaqs || [];
+  const services = rawServices || [];
+
+  delete base.acf;
+
+  const service = {
+    ...base,
+    hero: page.hero_section,
+    impact: {
+      firstPart: page.impact_section.first_part || '',
+      insight: page.impact_section.insight,
+      secondPart: page.impact_section.second_part || '',
+      thirdPart: page.impact_section.third_part || '',
+    },
+    process: {
+      title: page.process_section?.title || '',
+      subtitle: page.process_section?.subtitle || '',
+      chip: page.process_section?.chip || '',
+      stepOne: page.process_section?.step_one,
+      stepTwo: page.process_section?.step_two,
+      stepThree: page.process_section?.step_three,
+      stepFour: page.process_section?.step_four,
+    },
+    result: {
+      title: page?.result_section?.title ?? '',
+      subtitle: page?.result_section?.subtitle ?? '',
+      card: {
+        clientTag: page?.result_section?.result_card?.client_tag ?? '',
+        quote: page?.result_section?.result_card?.quote ?? '',
+        authorName: page?.result_section?.result_card?.author_name ?? '',
+        authorRole: page?.result_section?.result_card?.author_role ?? '',
+      },
+    },
+    recommendation: {
+      title: page.recommendation_section?.title || '',
+      subtitle: page.recommendation_section?.subtitle || '',
+      services: services?.map((s) => serviceCardTransform(s)) || [],
+    },
+    calculator: {
+      title: page?.growth_calc_section?.growth_title || '',
+      description: page?.growth_calc_section?.growth_description || '',
+      button: page?.growth_calc_section?.growth_button?.button_text || '',
+    },
+    faqs: {
+      title: page?.faqs_section?.title || '',
+      subtitle: page?.faqs_section?.subtitle || '',
+      questions: faqs?.map((f) => faqTransform(f)) || [],
+    },
+    cta: {
+      title: page?.cta_section?.cta_title || '',
+      description: page?.cta_section?.cta_description || '',
+      cardTitle: page?.cta_section?.cta_second_title || '',
+      button: page?.cta_section?.cta_button?.button_text || '',
+    },
+  };
+
+  return service;
 }

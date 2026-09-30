@@ -4,6 +4,7 @@ import {
   aboutPageTransform,
   contactTransform,
   homePageTransform,
+  servicePageTransform,
   zonesTransform,
 } from '../transformers/pageTransformer';
 
@@ -315,4 +316,41 @@ export async function getContactPage() {
     // Log any errors that occur during fetching
     console.error('Failed fetch contact data: ', error);
   }
+}
+
+export async function getServicePage(slug) {
+  const data = await wpFetch(endpoints.serviceBySlug(slug), {
+    next: { tags: ['wordpress-data'] },
+  });
+
+  if (!data) return null;
+
+  const pageData = Array.isArray(data) ? data[0] : data;
+
+  if (!pageData) return null;
+
+  const sections = pageData.acf_all_fields?.service_v2?.services_sections;
+  if (!sections) return null;
+
+  const allServicesIds = (sections.recommendation_section?.related_services || [])
+    .map((s) => s?.ID)
+    .flat(Infinity)
+    .filter(Boolean);
+
+  const allFaqsIds = (sections.faqs_section?.questions || [])
+    .map((f) => f?.ID)
+    .flat(Infinity)
+    .filter(Boolean);
+
+  const faqsObjects = allFaqsIds.map((id) => ({ ID: id }));
+  const servicesObjects = allServicesIds.map((id) => ({ ID: id }));
+
+  const [rawFaqs, rawServices] = await Promise.all([
+    getMultipleCPTs(faqsObjects, endpoints.faqById),
+    getMultipleCPTs(servicesObjects, endpoints.serviceById),
+  ]);
+
+  const result = servicePageTransform(data, rawFaqs, rawServices);
+
+  return result;
 }
