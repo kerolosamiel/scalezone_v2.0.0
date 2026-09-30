@@ -186,6 +186,7 @@ export async function getHomePage() {
 
   // Build a lookup map keyed by media ID for quick image access during transformation.
   const imagesMap = new Map(rawImages.map((img) => [img.id, img]));
+  const serviceMap = new Map(zoneServices.map((service) => [service.id, service]));
 
   // Transform the raw WordPress data into the final homepage payload.
   const result = homePageTransform(
@@ -196,6 +197,7 @@ export async function getHomePage() {
     arabicTestimonials,
     zones,
     imagesMap,
+    serviceMap,
     'home'
   );
 

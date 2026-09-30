@@ -9,7 +9,9 @@ export default function FeatureCard({ icon, alt, name, description, openItem = f
 
         <h3 className="text-[2rem] tracking-[1%] font-medium  max-sm:text-[1.8rem]">{name}</h3>
 
-        <p className="text-[1.6rem] text-muted-foreground">{description}</p>
+        <p className="text-[1.6rem] text-muted-foreground text-ellipsis line-clamp-3">
+          {description}
+        </p>
       </div>
       {children}
     </article>

@@ -140,7 +140,7 @@ export function trustStatsTransform(statsData) {
  * @param {Object} zone - The zone post object containing id, slug, and ACF fields
  * @returns {Object|null} Standardized zone card object with id, slug, zoneIcon, zoneName, and zoneServices properties, or null if invalid
  */
-export function zoneCardTransform(zone) {
+export function zoneCardTransform(zone, services) {
   if (Array.isArray(zone) || !zone) return null;
 
   const acf = zone.acf;
@@ -154,7 +154,9 @@ export function zoneCardTransform(zone) {
     zoneIcon: acf.zone_icon || '',
     zoneName: acf.zone_name || 'Zone Name',
     zoneDescription: acf.short_description || '',
-    zoneServices: [],
+    zoneServices: Array.isArray(acf.zone_services)
+      ? acf.zone_services?.map((s) => serviceCardTransform(services.get(s)))
+      : [],
   };
 
   return card;
@@ -200,6 +202,25 @@ export function testimonialTransform(testimonial, imageMap) {
   };
 
   return data;
+}
+
+export function serviceCardTransform(service) {
+  if (!service) return null;
+
+  const acf = service.acf_all_fields;
+
+  if (!acf) return null;
+
+  // Build standardized Service card object with fallback values
+  const card = {
+    id: service.id || 0,
+    slug: service.slug || '',
+    serviceIcon: acf.service_v2?.service_icon || '',
+    serviceName: acf.service_v2?.service_name || 'Service Name',
+    serviceDescription: acf.service_v2?.short_description || '',
+  };
+
+  return card;
 }
 
 /**

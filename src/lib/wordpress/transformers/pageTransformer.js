@@ -57,6 +57,7 @@ export function homePageTransform(
   aTestimonials,
   zoneCards,
   imageMap,
+  servicesMap,
   customSlug = ''
 ) {
   if (!rowData) return null;
@@ -86,7 +87,7 @@ export function homePageTransform(
     partners: partnersLogo?.map((l) => mediaImageTransform(l)),
     zones: {
       title: homeData.zones_section?.zones_title || '',
-      cards: zoneCards?.map((z) => zoneCardTransform(z)),
+      cards: zoneCards?.map((z) => zoneCardTransform(z, servicesMap)),
     },
     companies: companiesLogo?.map((c) => mediaImageTransform(c)),
     calculator: {

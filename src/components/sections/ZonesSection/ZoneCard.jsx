@@ -44,17 +44,20 @@ export default function ZoneCard({ zone }) {
             <AccordionContent>
               {zone?.zoneServices?.length > 0 ? (
                 <ul>
-                  {zone.services.map((service, index) => (
+                  {zone?.zoneServices?.map((service, index) => (
                     <li
-                      key={`${service.name}-${index}`}
-                      className={index !== zone.services.length - 1 ? 'mb-32' : ''}
+                      key={`${service?.serviceName}-${index}`}
+                      className={index !== zone?.zoneServices?.length - 1 ? 'mb-32' : ''}
                     >
-                      <Link href={service.href} className="no-underline!">
-                        <h3 className="mb-2 text-[1.6rem] text-foreground! tracking-[6%]">
-                          {service.name}
+                      <Link
+                        href={`/services/${service?.slug}`}
+                        className="no-underline! hover:[&>h3]:text-accent!"
+                      >
+                        <h3 className="mb-2 text-[1.6rem] text-foreground! tracking-[6%] transition-all duration-600">
+                          {service?.serviceName}
                         </h3>
-                        <p className=" text-[1.6rem] text-muted-foreground">
-                          {service.description}
+                        <p className=" text-[1.6rem] text-muted-foreground text-ellipsis line-clamp-2">
+                          {service?.serviceDescription}
                         </p>
                       </Link>
                     </li>
