@@ -40,7 +40,6 @@ export default async function Home() {
   const homeData = await getHomePage();
 
   if (!homeData) notFound();
-  console.log(homeData);
 
   return (
     <main>
