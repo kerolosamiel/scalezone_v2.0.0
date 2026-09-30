@@ -285,7 +285,9 @@ export function zoneTransform(zoneData, faqs, services) {
     services: {
       title: zoneSections?.services_section?.title ?? '',
       subtitle: zoneSections?.services_section?.subtitle ?? '',
-      items: [],
+      items: Array.isArray(zoneServices)
+        ? zoneServices?.map((s) => serviceCardTransform(services.get(s)))
+        : [],
     },
     whyZone: {
       title: zoneSections?.why_zone_section?.title ?? '',

@@ -8,6 +8,7 @@ export default function ServicesSection({ services = {} }) {
     subtitle = 'Services in This Zone',
     items = [],
   } = services;
+
   return (
     <BaseSections title={title} subtitle={subtitle}>
       {items.length === 0 ? (
@@ -19,8 +20,8 @@ export default function ServicesSection({ services = {} }) {
       ) : (
         <ul className="grid grid-cols-3 gap-32 max-md:grid-cols-2 max-[570px]:grid-cols-1!">
           {items?.map((service, i) => (
-            <li key={`service-${i}`} className="flex justify-center items-center w-full">
-              <ServiceCard card={service} />
+            <li key={`service-${i}`} className="flex items-stretch justify-between w-full">
+              <ServiceCard service={service} />
             </li>
           ))}
         </ul>

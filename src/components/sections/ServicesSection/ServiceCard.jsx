@@ -6,17 +6,18 @@ export default function ServiceCard({ service }) {
   const altTextValue =
     typeof service?.iconAlt === 'string' && service.iconAlt.trim() !== ''
       ? altText
-      : 'service Icon';
+      : `${service.serviceName || 'Service'} Icon`;
 
   return (
     <FeatureCard
-      icon={service.iconSrc}
+      icon={service.serviceIcon}
       alt={altTextValue}
-      name={service.zoneName}
-      description={service.zoneDescription}
+      name={service.serviceName}
+      description={service.serviceDescription}
+      className="justify-between"
     >
       <Link
-        href="/about"
+        href={`/services/${service.slug}`}
         className="inline-flex items-center text-primary gap-16 transition-all text-[1.6rem] font-bold hover:gap-[2.4rem]!"
       >
         Learn More
