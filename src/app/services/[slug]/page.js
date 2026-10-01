@@ -3,6 +3,7 @@ import GrowthSection from '@/components/sections/GrowthCalcSection/GrowthSection
 import ProofSection from '@/components/sections/ProofSection/ProofSection';
 import ImpactSection from '@/components/services/ImpactSection';
 import ServProcessSection from '@/components/services/ProcessSection';
+import RecommendationsSection from '@/components/services/RecommendationsSection';
 import ServiceHeroSection from '@/components/services/ServiceHeroSection';
 import { getServicePage } from '@/lib/wordpress/data-fetching/queries';
 import { notFound } from 'next/navigation';
@@ -47,6 +48,7 @@ export default async function page({ params }) {
       <ImpactSection impact={service.impact} />
       <ServProcessSection process={service.process} />
       <ProofSection proof={service.result} />
+      <RecommendationsSection recommendations={service.recommendation} />
       <GrowthSection growth={service.calculator} />
       <FaqsSection faqs={service.faqs} />
     </main>
