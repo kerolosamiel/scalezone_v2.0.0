@@ -1,12 +1,9 @@
 import { cn } from 'cn';
 import { Fragment } from 'react';
 
-export default function BaseFormHero({ hero, className, children }) {
+export default function CompactHero({ hero, className, children }) {
   if (!hero) return null;
-  const {
-    title = "Let's Talk.",
-    description = "Questions, ideas, or just not sure where to start? Reach out and we'll get back to you within.",
-  } = hero;
+  const { title = '', description = '' } = hero;
 
   const titleWords = title.split(' ');
 

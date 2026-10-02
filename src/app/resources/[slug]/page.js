@@ -29,10 +29,9 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function page({ params }) {
-  const [page, { slug }] = await Promise.all([getResourcePage(), params]);
+  const [{ slug }, page] = await Promise.all([params, getResourcePage()]);
   const media = page.mediaHub[`${slug}`];
 
-  if (!page || !media) return notFound();
-
-  return <div>page</div>;
+  if (!media) return notFound();
+  return <h1>{slug}</h1>;
 }

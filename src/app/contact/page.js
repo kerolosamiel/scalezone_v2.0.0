@@ -1,5 +1,5 @@
 import FormSection from '@/components/forms/ContactForm/FormSection';
-import BaseFormHero from '@/components/forms/shared/BaseFormHero';
+import CompactHero from '@/components/sections/Hero/CompactHero';
 import { getContactPage, getZonePage } from '@/lib/wordpress/data-fetching/queries';
 import { notFound } from 'next/navigation';
 
@@ -41,7 +41,7 @@ export default async function page() {
 
   return (
     <main>
-      <BaseFormHero hero={contact.hero} />
+      <CompactHero hero={contact.hero} />
       <FormSection info={contact.info} zones={fZones} />
     </main>
   );
