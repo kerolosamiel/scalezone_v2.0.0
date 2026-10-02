@@ -4,6 +4,7 @@ import {
   faqTransform,
   imageTransform,
   mediaImageTransform,
+  mediaTransform,
   metaTransform,
   serviceCardTransform,
   teamMemberTransform,
@@ -362,10 +363,48 @@ export function servicePageTransform(rowData, rawFaqs, rawServices) {
 
 export function resourcesPageTransfrom(
   rawData,
-  blogs,
-  videos,
-  podcasts,
+  rawBlogs,
+  rawVideos,
+  rawPodcasts,
   blogFeatured,
   videoFeatured,
-  podcastFeatured
-) {}
+  podcastFeatured,
+  images
+) {
+  if (!rawData) return null;
+
+  const base = basePageTransform(rawData);
+  if (!base) return null;
+
+  const page = base.acf;
+  if (!page) return null;
+
+  delete base.acf;
+
+  const recources = {
+    ...base,
+    hero: page.hero,
+    mediaHub: {
+      blogs: {
+        featured: {},
+        items: [],
+      },
+      videos: {
+        featured: mediaTransform(videoFeatured, images) || {},
+        items: rawVideos?.map((v) => mediaTransform(v, images)) || [],
+      },
+      podcasts: {
+        featured: mediaTransform(podcastFeatured, images) || {},
+        items: rawPodcasts?.map((p) => mediaTransform(p, images)) || [],
+      },
+    },
+    cta: {
+      title: page?.cta_section?.cta_title || '',
+      description: page?.cta_section?.cta_description || '',
+      cardTitle: page?.cta_section?.cta_second_title || '',
+      button: page?.cta_section?.cta_button?.button_text || '',
+    },
+  };
+
+  return recources;
+}

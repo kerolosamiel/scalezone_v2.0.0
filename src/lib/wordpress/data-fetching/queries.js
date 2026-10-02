@@ -370,27 +370,12 @@ export async function getResourcePage() {
   const media = pageData.acf_all_fields?.media_hub;
   if (!media) return null;
 
-  const allBlogsIds = (media?.blogs?.items || [])
-    .map((s) => s?.ID)
-    .flat(Infinity)
-    .filter(Boolean);
-
-  const allVideosIds = (media?.videos?.items || [])
-    .map((f) => f?.ID)
-    .flat(Infinity)
-    .filter(Boolean);
-
-  const allProdcastsIds = (media?.podcasts?.items || [])
-    .map((f) => f?.ID)
-    .flat(Infinity)
-    .filter(Boolean);
-
-  const blogsObjects = allBlogsIds.map((id) => ({ ID: id }));
-  const videosObjects = allVideosIds.map((id) => ({ ID: id }));
-  const podcastsObjects = allProdcastsIds.map((id) => ({ ID: id }));
-  const blogFeaturedId = media?.blogs?.featured[0]?.ID;
-  const videoFeaturedId = media?.videos?.featured[0]?.ID;
-  const podcastFeaturedId = media?.podcasts?.featured[0]?.ID;
+  const blogsObjects = mediaIds(media?.blogs?.items);
+  const videosObjects = mediaIds(media?.videos?.items);
+  const podcastsObjects = mediaIds(media?.podcasts?.items);
+  const blogFeaturedId = mediaId(media?.blogs?.featured[0]);
+  const videoFeaturedId = mediaId(media?.videos?.featured[0]);
+  const podcastFeaturedId = mediaId(media?.podcasts?.featured[0]);
 
   const [rawBlogs, rawVideos, rawPodcasts, rawBlogFeatured, rawVideoFeatured, rawPodcastFeatured] =
     await Promise.all([
@@ -402,6 +387,26 @@ export async function getResourcePage() {
       getCPTById(podcastFeaturedId, endpoints.podcastById(podcastFeaturedId)),
     ]);
 
+  const allMedia = [
+    ...rawBlogs,
+    ...rawVideos,
+    ...rawPodcasts,
+    rawBlogFeatured,
+    rawVideoFeatured,
+    rawPodcastFeatured,
+  ];
+
+  // Convert each testimonial's client image ID into a media lookup payload.
+  const imageObjects = allMedia
+    .map((m) => m?.acf?.image || m?.acf_all_fields?.image)
+    .map((id) => ({ ID: id }));
+
+  // Fetch all testimonial images and zone service entries needed by the page transformer.
+  const rawImages = await getMultipleCPTs(imageObjects, endpoints.mediaById);
+
+  // Build a lookup map keyed by media ID for quick image access during transformation.
+  const imagesMap = new Map(rawImages.map((img) => [img.id, img]));
+
   const result = resourcesPageTransfrom(
     data,
     rawBlogs,
@@ -409,8 +414,25 @@ export async function getResourcePage() {
     rawPodcasts,
     rawBlogFeatured,
     rawVideoFeatured,
-    rawPodcastFeatured
+    rawPodcastFeatured,
+    imagesMap
   );
 
   return result;
+}
+
+function mediaIds(items) {
+  if (!items) return null;
+  const ids = items
+    .map((f) => f?.ID)
+    .flat(Infinity)
+    .filter(Boolean);
+
+  return ids.map((id) => ({ ID: id }));
+}
+
+function mediaId(item) {
+  if (!item) return null;
+
+  return item.ID;
 }

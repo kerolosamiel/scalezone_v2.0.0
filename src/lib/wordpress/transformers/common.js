@@ -328,3 +328,17 @@ export function zoneTransform(zoneData, faqs, services) {
 
   return zone;
 }
+
+export function mediaTransform(video, images) {
+  if (!video) return null;
+
+  const result = {
+    id: video.id,
+    date: video.date,
+    image: mediaImageTransform(images.get(video.acf?.image)),
+    button: video.acf?.button_text || '',
+    link: video.acf?.youtube_link || '',
+  };
+
+  return result;
+}
