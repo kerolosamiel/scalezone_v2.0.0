@@ -1,3 +1,4 @@
+import CtaSection from '@/components/sections/CTABand/CtaSection';
 import CompactHero from '@/components/sections/Hero/CompactHero';
 import { getResourcePage } from '@/lib/wordpress/data-fetching/queries';
 
@@ -9,6 +10,7 @@ export default async function layout({ children }) {
     <main>
       <CompactHero hero={page.hero} />
       {children}
+      <CtaSection cta={page.cta} />
     </main>
   );
 }
