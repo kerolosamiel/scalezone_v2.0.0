@@ -359,3 +359,13 @@ export function servicePageTransform(rowData, rawFaqs, rawServices) {
 
   return service;
 }
+
+export function resourcesPageTransfrom(
+  rawData,
+  blogs,
+  videos,
+  podcasts,
+  blogFeatured,
+  videoFeatured,
+  podcastFeatured
+) {}

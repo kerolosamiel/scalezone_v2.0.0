@@ -4,6 +4,7 @@ import {
   aboutPageTransform,
   contactTransform,
   homePageTransform,
+  resourcesPageTransfrom,
   servicePageTransform,
   zonesTransform,
 } from '../transformers/pageTransformer';
@@ -351,6 +352,65 @@ export async function getServicePage(slug) {
   ]);
 
   const result = servicePageTransform(data, rawFaqs, rawServices);
+
+  return result;
+}
+
+export async function getResourcePage() {
+  const data = await wpFetch(endpoints.pageBySlug('resources'), {
+    next: { tags: ['wordpress-data'] },
+  });
+
+  if (!data) return null;
+
+  const pageData = Array.isArray(data) ? data[0] : data;
+
+  if (!pageData) return null;
+
+  const media = pageData.acf_all_fields?.media_hub;
+  if (!media) return null;
+
+  const allBlogsIds = (media?.blogs?.items || [])
+    .map((s) => s?.ID)
+    .flat(Infinity)
+    .filter(Boolean);
+
+  const allVideosIds = (media?.videos?.items || [])
+    .map((f) => f?.ID)
+    .flat(Infinity)
+    .filter(Boolean);
+
+  const allProdcastsIds = (media?.podcasts?.items || [])
+    .map((f) => f?.ID)
+    .flat(Infinity)
+    .filter(Boolean);
+
+  const blogsObjects = allBlogsIds.map((id) => ({ ID: id }));
+  const videosObjects = allVideosIds.map((id) => ({ ID: id }));
+  const podcastsObjects = allProdcastsIds.map((id) => ({ ID: id }));
+  const blogFeaturedId = media?.blogs?.featured[0]?.ID;
+  const videoFeaturedId = media?.videos?.featured[0]?.ID;
+  const podcastFeaturedId = media?.podcasts?.featured[0]?.ID;
+
+  const [rawBlogs, rawVideos, rawPodcasts, rawBlogFeatured, rawVideoFeatured, rawPodcastFeatured] =
+    await Promise.all([
+      getMultipleCPTs(blogsObjects, endpoints.blogById),
+      getMultipleCPTs(videosObjects, endpoints.videoById),
+      getMultipleCPTs(podcastsObjects, endpoints.podcastById),
+      getCPTById(blogFeaturedId, endpoints.blogById(blogFeaturedId)),
+      getCPTById(videoFeaturedId, endpoints.videoById(videoFeaturedId)),
+      getCPTById(podcastFeaturedId, endpoints.podcastById(podcastFeaturedId)),
+    ]);
+
+  const result = resourcesPageTransfrom(
+    data,
+    rawBlogs,
+    rawVideos,
+    rawPodcasts,
+    rawBlogFeatured,
+    rawVideoFeatured,
+    rawPodcastFeatured
+  );
 
   return result;
 }

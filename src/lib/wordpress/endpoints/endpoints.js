@@ -9,6 +9,7 @@ export const endpoints = {
   teamMembers: '/team-member',
   testimonials: '/testimonial',
   videos: '/video',
+  blogs: '/blog',
 
   pagesWithLimit: (limit) => `/pages?per_page=${limit}`,
   servicesWithLimit: (limit) => `/service?per_page=${limit}`,
@@ -20,6 +21,7 @@ export const endpoints = {
   teamMembersWithLimit: (limit) => `/team-member?per_page=${limit}`,
   testimonialsWithLimit: (limit) => `/testimonial?per_page=${limit}`,
   videosWithLimit: (limit) => `/video?per_page=${limit}`,
+  blogsWithLimit: (limit) => `/blog?per_page=${limit}`,
 
   pageBySlug: (slug) => `/pages?slug=${slug}`,
   serviceBySlug: (slug) => `/service?slug=${slug}`,
@@ -28,10 +30,11 @@ export const endpoints = {
   eventBySlug: (slug) => `/event?slug=${slug}`,
   faqBySlug: (slug) => `/faq?slug=${slug}`,
   partnerBySlug: (slug) => `/partner?slug=${slug}`,
-  podcatBySlug: (slug) => `/podcats?slug=${slug}`,
+  podcastBySlug: (slug) => `/podcats?slug=${slug}`,
   teamMemberBySlug: (slug) => `/team-member?slug=${slug}`,
   testimonialBySlug: (slug) => `/testimonial?slug=${slug}`,
   videoBySlug: (slug) => `/video?slug=${slug}`,
+  blogBySlug: (slug) => `/blog?slug=${slug}`,
 
   pageById: (id) => `/pages/${id}`,
   serviceById: (id) => `/service/${id}`,
@@ -40,10 +43,11 @@ export const endpoints = {
   eventById: (id) => `/event/${id}`,
   faqById: (id) => `/faq/${id}`,
   partnerById: (id) => `/partner/${id}`,
-  podcatById: (id) => `/podcats/${id}`,
+  podcastById: (id) => `/podcats/${id}`,
   testimonialById: (id) => `/testimonial/${id}`,
   teamMemberById: (id) => `/team-member/${id}`,
   videoById: (id) => `/video/${id}`,
+  blogById: (id) => `/blog/${id}`,
   mediaByParentId: (id) => `/media?parent=${id}`,
   mediaById: (id) => `/media/${id}`,
 
