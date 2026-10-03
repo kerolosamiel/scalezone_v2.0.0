@@ -334,6 +334,7 @@ export function mediaTransform(video, images) {
 
   const result = {
     id: video.id,
+    title: video.title?.rendered || '',
     date: video.date,
     image: mediaImageTransform(images.get(video.acf?.image)),
     button: video.acf?.button_text || '',

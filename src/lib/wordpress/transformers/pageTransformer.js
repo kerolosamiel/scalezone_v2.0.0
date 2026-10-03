@@ -386,15 +386,15 @@ export function resourcesPageTransfrom(
     hero: page.hero,
     mediaHub: {
       blogs: {
-        featured: {},
+        featured: undefined,
         items: [],
       },
       videos: {
-        featured: mediaTransform(videoFeatured, images) || {},
+        featured: mediaTransform(videoFeatured, images) || undefined,
         items: rawVideos?.map((v) => mediaTransform(v, images)) || [],
       },
       podcasts: {
-        featured: mediaTransform(podcastFeatured, images) || {},
+        featured: mediaTransform(podcastFeatured, images) || undefined,
         items: rawPodcasts?.map((p) => mediaTransform(p, images)) || [],
       },
     },

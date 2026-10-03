@@ -1,3 +1,7 @@
+import FeaturedItem from '@/components/resources/FeaturedItem';
+import MediaItems from '@/components/resources/MediaItems';
+import MediaSection from '@/components/resources/MediaSection';
+import EmptyState from '@/components/ui/EmptyState';
 import { getResourcePage } from '@/lib/wordpress/data-fetching/queries';
 import { notFound } from 'next/navigation';
 import React from 'react';
@@ -31,7 +35,26 @@ export async function generateMetadata({ params }) {
 export default async function page({ params }) {
   const [{ slug }, page] = await Promise.all([params, getResourcePage()]);
   const media = page.mediaHub[`${slug}`];
-
   if (!media) return notFound();
-  return <h1>{slug}</h1>;
+
+  const featured = media.featured
+    ? media.featured
+    : media?.items.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
+
+  return (
+    <div className="flex flex-col gap-64">
+      {!media.featured || !media.items || media.items?.length === 0 ? (
+        <EmptyState
+          className="py-64"
+          title={`No ${slug.charAt(0).toUpperCase()}${slug.slice(1)} Found`}
+          description={`Our ${slug} list is currently being updated. Check back soon!`}
+        />
+      ) : (
+        <>
+          <FeaturedItem item={featured} />
+          <MediaItems items={media.items} />
+        </>
+      )}
+    </div>
+  );
 }
