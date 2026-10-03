@@ -26,6 +26,10 @@ export function middleware(request) {
   const url = request.nextUrl.clone();
   const { pathname, searchParams } = url;
 
+  if (pathname.startsWith('/cms')) {
+    return NextResponse.next();
+  }
+
   if (pathname === '/services/service.html' && searchParams.has('slug')) {
     const slug = searchParams.get('slug');
     const destination = SERVICE_SLUG_MAP[slug];
@@ -37,7 +41,6 @@ export function middleware(request) {
     }
   }
 
-  // ب) معالجة الروابط الثابتة العادية
   if (STATIC_REDIRECTS[pathname]) {
     url.pathname = STATIC_REDIRECTS[pathname];
     return NextResponse.redirect(url, 301);
@@ -47,5 +50,5 @@ export function middleware(request) {
 }
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico|images|fonts).*)'],
+  matcher: ['/((?!_next/static|_next/image|favicon.ico|images|fonts|cms).*)'],
 };
