@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'scalezone.ae',
+        hostname: 'cms.scalezone.ae',
         pathname: '/**',
       },
     ],
