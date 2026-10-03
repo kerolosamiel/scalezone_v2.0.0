@@ -6,6 +6,7 @@ import { MoveRight } from 'lucide-react';
 export default function FeaturedItem({ item }) {
   if (!item) return null;
   const itemDate = new Date(item.date);
+  const currentDate = new Date();
   return (
     <article className="bg-card">
       <Link
@@ -28,7 +29,7 @@ export default function FeaturedItem({ item }) {
         <div className="flex flex-col items-start gap-32 py-32 px-24 justify-between">
           <div>
             <p className="text-[1.2rem] text-muted-foreground mb-32">
-              {itemDate.toDateString() || Date.now()}
+              {itemDate.toDateString() || currentDate.toDateString()}
             </p>
 
             <h2 className="text-[3rem]">{item.title}</h2>
