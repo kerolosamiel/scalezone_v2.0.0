@@ -77,9 +77,9 @@ export default function FormSide() {
   const onSubmit = async (data) => {
     try {
       const send = await sendConfirmationEmail({
-        subject: 'Thank you for reaching out to Scalezone!',
+        subject: 'شكرا لتسجيلك معنا في Scalezone',
         toEmail: data.email,
-        component: 'confirmation',
+        component: 'confirmationar',
         props: { clientName: data?.firstName?.trim() },
       });
 

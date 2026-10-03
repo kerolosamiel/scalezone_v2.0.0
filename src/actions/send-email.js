@@ -3,11 +3,13 @@
 import { Resend } from 'resend';
 import ConfirmationEmail from '../../emails/ConfirmationEmail';
 import NotificationEmail from '../../emails/NotificationEmail';
+import ArabicConfirmationEmail from '../../emails/ArabicConfirmationEmail';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const EMAIL_TEMPLATES = {
   confirmation: ConfirmationEmail,
+  confirmationar: ArabicConfirmationEmail,
   notification: NotificationEmail,
 };
 
