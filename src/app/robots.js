@@ -1,10 +1,14 @@
 export default function robots() {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://scalezone.ae';
+
   return {
     rules: [
       {
         userAgent: '*',
-        disallow: '/',
+        allow: '/',
+        disallow: ['/api/', '/admin/'],
       },
     ],
+    sitemap: `${baseUrl}/sitemap.xml`,
   };
 }
