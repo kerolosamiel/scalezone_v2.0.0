@@ -6,7 +6,7 @@ export default function FormSection() {
   return (
     <BaseFormSection className="items-center">
       <FormSide />
-      <BaseInformationSide />
+      <BaseInformationSide isLocation={false} />
     </BaseFormSection>
   );
 }

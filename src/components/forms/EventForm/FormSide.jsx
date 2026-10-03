@@ -29,6 +29,9 @@ import { Spinner } from '@/components/ui/spinner';
 import { sendConfirmationEmail } from '@/actions/send-email';
 import { sendData } from '@/actions/send-data';
 import ConfirmationEmail from '../../../../emails/ConfirmationEmail';
+import { Dialog, DialogTrigger } from '@/components/ui/dialog';
+import ArabicSuccessModal from '@/components/modals/ArabicSuccessModal';
+import { useState } from 'react';
 
 const formSchema = z.object({
   firstName: z
@@ -47,6 +50,8 @@ const formSchema = z.object({
 });
 
 export default function FormSide() {
+  const [open, setOpen] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -84,6 +89,7 @@ export default function FormSide() {
 
       sendData(data);
 
+      setOpen(true);
       reset();
     } catch (error) {
       console.error('Submission error:', error);
@@ -91,103 +97,111 @@ export default function FormSide() {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="p-48 max-md:p-32 max-sm:px-24 bg-card [&_input]:bg-transparent! [&_div]:bg-transparent! h-fit"
-    >
-      <FieldSet disabled={isSubmitting}>
-        <FieldGroup className="grid grid-cols-2 max-lg:grid-cols-1 gap-32 grid-wrap">
-          <Field>
-            <FieldLabel htmlFor="first-name">First Name</FieldLabel>
-            <Input
-              id="first-name"
-              type="text"
-              placeholder="Your first name"
-              {...register('firstName')}
-            />
-            <FieldError errors={errors.firstName ? [errors.firstName] : []} />
-          </Field>
-          <Field>
-            <FieldLabel htmlFor="last-name">Last Name</FieldLabel>
-            <Input
-              id="last-name"
-              type="text"
-              placeholder="Your last name"
-              {...register('lastName')}
-            />
-            <FieldError errors={errors.lastName ? [errors.lastName] : []} />
-          </Field>
-          <Field>
-            <FieldLabel htmlFor="email">Email</FieldLabel>
-            <Input id="email" type="text" placeholder="Your Email Address" {...register('email')} />
-            <FieldError errors={errors.email ? [errors.email] : []} />
-          </Field>
-          <Field>
-            <FieldLabel htmlFor="phone">WhatsApp Number</FieldLabel>
-            <Controller
-              name="phone"
-              control={control}
-              render={({ field: { onChange, value } }) => (
-                <PhoneInputWithCountry
-                  id="phone"
-                  international
-                  defaultCountry="DZ"
-                  value={value ? value.toString() : ''}
-                  onChange={onChange}
-                  placeholder="Enter phone number"
-                  className="h-fit px-16 py-12 w-full [&_select]:bg-card [&_.PhoneInputCountryIcon]:outline-0 [&_input]:outline-0 min-w-0 rounded-lg border border-input bg-transparent text-[1.4rem] transition-colors outline-none file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:border-accent disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-input/50 disabled:opacity-50 aria-invalid:border-accent aria-invalid:ring-3 aria-invalid:ring-accent/20  dark:bg-input/30 dark:disabled:bg-input/80 dark:aria-invalid:border-accent/50 dark:aria-invalid:ring-accent/40"
-                />
-              )}
-            />
-            <FieldError errors={errors.phone ? [errors.phone] : []} />
-          </Field>
-          <Field className="max-xl:col-start-1 max-xl:col-end-3 max-lg:col-end-[unset]">
-            <FieldLabel htmlFor="gender">Gender</FieldLabel>
-            <Controller
-              name="gender"
-              control={control}
-              render={({ field: { onChange, value } }) => (
-                <Select
-                  items={gender}
-                  onValueChange={onChange}
-                  value={value}
-                  key={value}
-                  id="gender"
-                >
-                  <SelectTrigger className="bg-transparent! w-full">
-                    <SelectValue placeholder="Select your gender" className="w-full" />
-                  </SelectTrigger>
+    <Dialog open={open} onOpenChange={setOpen}>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="p-48 max-md:p-32 max-sm:px-24 bg-card [&_input]:bg-transparent! [&_div]:bg-transparent! h-fit"
+      >
+        <ArabicSuccessModal />
 
-                  <SelectContent className="w-fit min-w-xs">
-                    <SelectGroup>
-                      {gender.map((g) => (
-                        <SelectItem
-                          key={g.value}
-                          value={g.value}
-                          className="[&_svg]:size-16  [&_svg]:text-accent [&_span]:right-5"
-                        >
-                          {g.label}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              )}
-            />
-            <FieldError errors={errors.gender ? [errors.gender] : []} />
-          </Field>
-        </FieldGroup>
-      </FieldSet>
+        <FieldSet disabled={isSubmitting}>
+          <FieldGroup className="grid grid-cols-2 max-lg:grid-cols-1 gap-32 grid-wrap">
+            <Field>
+              <FieldLabel htmlFor="first-name">First Name</FieldLabel>
+              <Input
+                id="first-name"
+                type="text"
+                placeholder="Your first name"
+                {...register('firstName')}
+              />
+              <FieldError errors={errors.firstName ? [errors.firstName] : []} />
+            </Field>
+            <Field>
+              <FieldLabel htmlFor="last-name">Last Name</FieldLabel>
+              <Input
+                id="last-name"
+                type="text"
+                placeholder="Your last name"
+                {...register('lastName')}
+              />
+              <FieldError errors={errors.lastName ? [errors.lastName] : []} />
+            </Field>
+            <Field>
+              <FieldLabel htmlFor="email">Email</FieldLabel>
+              <Input
+                id="email"
+                type="text"
+                placeholder="Your Email Address"
+                {...register('email')}
+              />
+              <FieldError errors={errors.email ? [errors.email] : []} />
+            </Field>
+            <Field>
+              <FieldLabel htmlFor="phone">WhatsApp Number</FieldLabel>
+              <Controller
+                name="phone"
+                control={control}
+                render={({ field: { onChange, value } }) => (
+                  <PhoneInputWithCountry
+                    id="phone"
+                    international
+                    defaultCountry="DZ"
+                    value={value ? value.toString() : ''}
+                    onChange={onChange}
+                    placeholder="Enter phone number"
+                    className="h-fit px-16 py-12 w-full [&_select]:bg-card [&_.PhoneInputCountryIcon]:outline-0 [&_input]:outline-0 min-w-0 rounded-lg border border-input bg-transparent text-[1.4rem] transition-colors outline-none file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:border-accent disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-input/50 disabled:opacity-50 aria-invalid:border-accent aria-invalid:ring-3 aria-invalid:ring-accent/20  dark:bg-input/30 dark:disabled:bg-input/80 dark:aria-invalid:border-accent/50 dark:aria-invalid:ring-accent/40"
+                  />
+                )}
+              />
+              <FieldError errors={errors.phone ? [errors.phone] : []} />
+            </Field>
+            <Field className="max-xl:col-start-1 max-xl:col-end-3 max-lg:col-end-[unset]">
+              <FieldLabel htmlFor="gender">Gender</FieldLabel>
+              <Controller
+                name="gender"
+                control={control}
+                render={({ field: { onChange, value } }) => (
+                  <Select
+                    items={gender}
+                    onValueChange={onChange}
+                    value={value}
+                    key={value}
+                    id="gender"
+                  >
+                    <SelectTrigger className="bg-transparent! w-full">
+                      <SelectValue placeholder="Select your gender" className="w-full" />
+                    </SelectTrigger>
 
-      <Button type="submit" className="py-16 px-32 w-full text-[1.6rem] h-fit my-36 flex gap-8">
-        Submit
-        {isSubmitting ? <Spinner className="text-foreground" /> : ''}
-      </Button>
+                    <SelectContent className="w-fit min-w-xs">
+                      <SelectGroup>
+                        {gender.map((g) => (
+                          <SelectItem
+                            key={g.value}
+                            value={g.value}
+                            className="[&_svg]:size-16  [&_svg]:text-accent [&_span]:right-5"
+                          >
+                            {g.label}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                )}
+              />
+              <FieldError errors={errors.gender ? [errors.gender] : []} />
+            </Field>
+          </FieldGroup>
+        </FieldSet>
 
-      <p className="text-[1.4rem] text-muted-foreground">
-        By submitting, you agree to be contacted by Scalezone about your inquiry. We don&#39;t share
-        your info with third parties.
-      </p>
-    </form>
+        <Button type="submit" className="py-16 px-32 w-full text-[1.6rem] h-fit my-36 flex gap-8">
+          Submit
+          {isSubmitting ? <Spinner className="text-foreground" /> : ''}
+        </Button>
+        <p className="text-[1.4rem] text-muted-foreground">
+          By submitting, you agree to be contacted by Scalezone about your inquiry. We don&#39;t
+          share your info with third parties.
+        </p>
+      </form>
+    </Dialog>
   );
 }

@@ -13,7 +13,7 @@ import { MailDirect, PhoneDirect, Location } from '@/components/ui/directs';
 import InformationBlock from './InformationBlock';
 import SocialMedia from '@/components/ui/socialmedia';
 
-export default function BaseInformationSide({ info = {}, children }) {
+export default function BaseInformationSide({ info = {}, isLocation = true, children }) {
   const { whatsapp, contact, location, socialMedia } = info;
 
   const social = [
@@ -96,11 +96,13 @@ export default function BaseInformationSide({ info = {}, children }) {
         </PhoneDirect>
       </InformationBlock>
 
-      <InformationBlock title={location?.title || 'OFFICE'}>
-        <Location href="#" className="text-[1.8rem] max-md:text-[1.6rem]">
-          {location?.location || 'Physical location details pending confirmation.'}
-        </Location>
-      </InformationBlock>
+      {isLocation && (
+        <InformationBlock title={location?.title || 'OFFICE'}>
+          <Location href="#" className="text-[1.8rem] max-md:text-[1.6rem]">
+            {location?.location || 'Physical location details pending confirmation.'}
+          </Location>
+        </InformationBlock>
+      )}
 
       <InformationBlock title={socialMedia?.title || 'FOLLOW US'} sep={false}>
         <div className="flex flex-wrap gap-24 text-[2.5rem] mt-32">
