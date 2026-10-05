@@ -48,9 +48,9 @@ export default async function Home() {
       <ZonesSection zoneData={homeData.zones} />
       <CompaniesSection logos={homeData.companies} />
       <GrowthSection growth={homeData.calculator} />
-      <HomeTestimonials testimonials={homeData.testimonials} />
-      <StatesSection states={homeData.trust} />
       <MissionSection mission={homeData.mission} />
+      <StatesSection states={homeData.trust} />
+      <HomeTestimonials testimonials={homeData.testimonials} />
       <CtaSection cta={homeData.cta} />
     </main>
   );
