@@ -318,7 +318,7 @@ export const LogoLoop = memo(
             )}
             src={item.src}
             srcSet={item.srcSet}
-            sizes={item.sizes}
+            sizes={700}
             width={item.width}
             height={item.height}
             alt={item.alt ?? ''}
