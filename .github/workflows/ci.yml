@@ -28,7 +28,7 @@ jobs:
       - name: Build Next.js app
         run: npm run build
         env:
-          NEXT_PUBLIC_WORDPRESS_API_URL: ${{ secrets.NEXT_PUBLIC_WORDPRESS_API_URL }}
+          NEXT_PUBLIC_WORDPRESS_API_URL: ${{ secrets.NEXT_PUBLIC_WORDPRESS_API_URL != '' && secrets.NEXT_PUBLIC_WORDPRESS_API_URL || 'https://cms.scalezone.ae/wp-json/wp/v2' }}
 
   performance-budget-gate:
     needs: lint-and-build
