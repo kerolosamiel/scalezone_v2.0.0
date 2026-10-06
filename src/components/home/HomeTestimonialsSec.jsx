@@ -43,7 +43,7 @@ export default function HomeTestimonials({ testimonials }) {
           )}
         </div>
 
-        <div className="mb-48">
+        {/* <div className="mb-48">
           <div className="p-12 border w-fit mb-48">
             <h3 className="text-[1.4rem] tracking-[6%] text-primary leading-20">
               {testimonials?.arabic?.market || 'ARABIC MARKET'}
@@ -69,7 +69,7 @@ export default function HomeTestimonials({ testimonials }) {
               </CarouselContent>
             </Carousel>
           )}
-        </div>
+        </div> */}
       </div>
     </section>
   );
