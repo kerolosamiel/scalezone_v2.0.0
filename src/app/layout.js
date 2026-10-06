@@ -4,6 +4,7 @@ import localFont from 'next/font/local';
 import '@/styles/tokens.css';
 import '@/styles/global.css';
 import QueryProvider from '@/providers/QueryProvider';
+import { getLayout } from '@/lib/wordpress/data-fetching/queries';
 
 // Font for text
 const poppins = Poppins({
@@ -28,7 +29,9 @@ export const metadata = {
   },
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const layout = await getLayout();
+
   return (
     <html
       lang="en"

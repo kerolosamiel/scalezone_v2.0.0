@@ -1,8 +1,9 @@
-import { any } from 'zod';
 import {
   eventGalleryTransform,
   faqTransform,
   imageTransform,
+  layoutServicesTransform,
+  layoutZonesTransform,
   mediaImageTransform,
   mediaTransform,
   metaTransform,
@@ -407,4 +408,40 @@ export function resourcesPageTransfrom(
   };
 
   return recources;
+}
+
+export function layoutTransform(rawData, rawZones) {
+  if (!rawData) return null;
+
+  const headerData = rawData.acf_all_fields?.header;
+  const footerData = rawData.acf_all_fields?.footer;
+
+  const layout = {
+    header: {
+      logo: imageTransform(headerData?.logo) || {},
+      links: {
+        services: layoutServicesTransform(headerData?.links_label?.services_label, rawZones) || {},
+        resources: headerData?.links_label?.resources_label || '',
+        about: headerData?.links_label?.about_label || '',
+        contact: headerData?.links_label?.contact_label || '',
+      },
+      button: headerData?.button || '',
+    },
+    footer: {
+      logo: imageTransform(footerData?.logo),
+      description: footerData?.description || '',
+      social: footerData?.social_media,
+      links: {
+        zones: layoutZonesTransform(rawZones),
+        company: {
+          about: headerData?.links_label?.about_label || '',
+          contact: headerData?.links_label?.contact_label || '',
+          resources: headerData?.links_label?.resources_label || '',
+          caseStudies: headerData?.links_label?.case_study_label || '',
+        },
+      },
+    },
+  };
+
+  return layout;
 }

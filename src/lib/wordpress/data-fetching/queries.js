@@ -4,6 +4,7 @@ import {
   aboutPageTransform,
   contactTransform,
   homePageTransform,
+  layoutTransform,
   resourcesPageTransfrom,
   servicePageTransform,
   zonesTransform,
@@ -417,6 +418,24 @@ export async function getResourcePage() {
     rawPodcastFeatured,
     imagesMap
   );
+
+  return result;
+}
+
+export async function getLayout() {
+  const data = await wpFetch(endpoints.pageBySlug('layout'), {
+    next: { tags: ['wordpress-data'] },
+  });
+
+  if (!data) return null;
+
+  const layoutData = Array.isArray(data) ? data[0] : data;
+
+  if (!data) return null;
+
+  const zones = (await getZonePage()) || [];
+
+  const result = layoutTransform(layoutData, zones);
 
   return result;
 }

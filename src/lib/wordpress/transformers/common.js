@@ -343,3 +343,26 @@ export function mediaTransform(video, images) {
 
   return result;
 }
+
+export function layoutServicesTransform(label, zones) {
+  const services = {
+    label: label || '',
+    zones: layoutZonesTransform(zones),
+  };
+
+  return services;
+}
+
+export function layoutZonesTransform(zones) {
+  if (!zones) return [];
+
+  const zonesData = zones.map((z) => ({
+    slug: z.slug || '',
+    services: z.services?.items?.map((s) => ({
+      slug: s.slug || '',
+      name: s.serviceName || '',
+    })),
+  }));
+
+  return zonesData;
+}
