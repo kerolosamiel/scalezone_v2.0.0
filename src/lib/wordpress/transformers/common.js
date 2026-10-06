@@ -359,6 +359,7 @@ export function layoutZonesTransform(zones) {
   const zonesData = zones.map((z) => ({
     slug: z.slug || '',
     services: z.services?.items?.map((s) => ({
+      id: s.id,
       slug: s.slug || '',
       name: s.serviceName || '',
     })),

@@ -5,6 +5,7 @@ import '@/styles/tokens.css';
 import '@/styles/global.css';
 import QueryProvider from '@/providers/QueryProvider';
 import { getLayout } from '@/lib/wordpress/data-fetching/queries';
+import Header from '@/components/layout/Header/Header';
 
 // Font for text
 const poppins = Poppins({
@@ -40,7 +41,10 @@ export default async function RootLayout({ children }) {
     >
       <body>
         <QueryProvider>
-          <ThemeProvider>{children}</ThemeProvider>
+          <ThemeProvider>
+            <Header header={layout?.header} />
+            {children}
+          </ThemeProvider>
         </QueryProvider>
       </body>
     </html>
