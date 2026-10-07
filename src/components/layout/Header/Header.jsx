@@ -11,7 +11,7 @@ export default function Header({ header = {} }) {
         <Image src={logo?.url || ''} alt={logo?.alt || ''} width={150} height={50} />
       </Link>
 
-      <div className="flex gap-32 justify-between max-[390px]:gap-16">
+      <div className="flex gap-32 justify-between lg:w-full max-[390px]:gap-16">
         <DesktopMenu menu={links} button={button} />
 
         <MobileMenu menu={links} button={button} />

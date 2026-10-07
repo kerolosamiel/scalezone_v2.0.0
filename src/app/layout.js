@@ -6,6 +6,7 @@ import '@/styles/global.css';
 import QueryProvider from '@/providers/QueryProvider';
 import { getLayout } from '@/lib/wordpress/data-fetching/queries';
 import Header from '@/components/layout/Header/Header';
+import Footer from '@/components/layout/Footer/Footer';
 
 // Font for text
 const poppins = Poppins({
@@ -44,6 +45,7 @@ export default async function RootLayout({ children }) {
           <ThemeProvider>
             <Header header={layout?.header} />
             {children}
+            <Footer footer={layout?.footer} />
           </ThemeProvider>
         </QueryProvider>
       </body>
