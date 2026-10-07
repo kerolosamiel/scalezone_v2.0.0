@@ -181,10 +181,15 @@ export async function getHomePage() {
     .filter(Boolean)
     .map((id) => ({ ID: id }));
 
+  const allServices = zones
+    ?.map((z) => z?.acf?.zone_services)
+    .flat(Infinity)
+    .filter(Boolean);
+
   // Fetch all testimonial images and zone service entries needed by the page transformer.
   const [rawImages, zoneServices] = await Promise.all([
     getMultipleCPTs(imageObjects, endpoints.mediaById),
-    getMultipleCPTs(zones[0]?.acf?.zone_services, endpoints.serviceById),
+    getMultipleCPTs(allServices, endpoints.serviceById),
   ]);
 
   // Build a lookup map keyed by media ID for quick image access during transformation.
