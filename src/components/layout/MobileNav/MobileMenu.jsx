@@ -20,7 +20,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
 export default function MobileMenu({ menu = {}, button }) {
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState(true);
   const [openItems, setOpenItems] = useState(['item-1']);
   const { about, resources, contact, services } = menu;
   return (
