@@ -17,6 +17,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export default function MobileMenu({ menu = {}, button }) {
   const [active, setActive] = useState(false);
@@ -90,8 +91,11 @@ export default function MobileMenu({ menu = {}, button }) {
 
         <Separator className="h-2" />
 
-        <Button className="h-[unset] py-16 px-32 text-[1.6rem] hover:scale-[1.05] text-center w-full mt-24">
-          {button || 'Book an Appoinment'}
+        <Button
+          asChild
+          className="h-[unset] py-16 px-32 text-[1.6rem] hover:scale-[1.05] text-center w-full mt-24"
+        >
+          <Link href="/contact">{button || 'Book an Appoinment'}</Link>
         </Button>
       </div>
     </>
