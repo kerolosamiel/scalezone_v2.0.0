@@ -45,7 +45,8 @@ export default function MissionSection({ mission = {} }) {
             aria-label="Video player"
             muted
             loop
-            autoplay
+            autoPlay
+            playsInline
             className="[clip-path:polygon(12%_0%,100%_0%,100%_30%,100%_88%,88%_100%,30%_100%,0%_100%,0%_12%)]"
           >
             <source
