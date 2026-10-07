@@ -8,14 +8,14 @@ import {
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu';
 import DropDown from './DropDown';
+import { Globe } from 'lucide-react';
 
 export default function DesktopMenu({ className = '', button, menu = {} }) {
   const { about, resources, contact, services } = menu;
-  console.log(services);
 
   return (
     <>
-      <NavigationMenu>
+      <NavigationMenu className="max-lg:hidden max-lg:invisible">
         <NavigationMenuList className="flex gap-32">
           <NavigationMenuItem>
             <NavigationMenuTrigger className="text-[1.4rem] hover:text-primary transition-all duration-600">
@@ -56,7 +56,11 @@ export default function DesktopMenu({ className = '', button, menu = {} }) {
         </NavigationMenuList>
       </NavigationMenu>
 
-      <Button className="h-[unset] py-16 px-32 text-[1.6rem] hover:scale-[1.05]">
+      <Button className="h-[unset] bg-transparent hover:bg-transparent">
+        <Globe className="size-25 max-[390px]:size-20" />
+      </Button>
+
+      <Button className="h-[unset] py-16 px-32 text-[1.6rem] hover:scale-[1.05] max-lg:hidden max-lg:invisible">
         {button || 'Book an Appoinment'}
       </Button>
     </>

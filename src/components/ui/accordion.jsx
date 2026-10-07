@@ -38,7 +38,7 @@ function AccordionTrigger({ className, children, ...props }) {
       >
         {children}
         <Plus
-          data-slot="accordion-trigger-icon "
+          data-slot="accordion-trigger-icon"
           className="group-aria-expanded/accordion-trigger:rotate-45 transition-all"
         />
       </AccordionPrimitive.Trigger>

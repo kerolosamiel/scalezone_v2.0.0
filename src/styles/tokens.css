@@ -29,6 +29,7 @@
   --color-border: var(--surface-border);
   --color-input: var(--surface-border);
   --color-ring: var(--primary);
+  --cikir-white: #ffffff;
 
   /* Scalezone 5-Color Palette Constants */
   --color-brand-scarlet: #ff1301;
