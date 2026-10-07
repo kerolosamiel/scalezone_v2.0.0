@@ -27,7 +27,7 @@ export default function MissionSection({ mission = {} }) {
           </Button>
         </div>
 
-        {image?.url ? (
+        {/* {image?.url ? (
           <div className="flex justify-end max-lg:justify-center max-lg:hidden">
             <Image
               src={image?.url}
@@ -38,7 +38,23 @@ export default function MissionSection({ mission = {} }) {
               className="relative! h-auto w-auto [clip-path:polygon(12%_0%,100%_0%,100%_30%,100%_88%,88%_100%,30%_100%,0%_100%,0%_12%)]"
             />
           </div>
-        ) : null}
+        ) : null} */}
+
+        <div className="flex justify-end max-lg:justify-center max-lg:hidden">
+          <video
+            aria-label="Video player"
+            muted
+            loop
+            autoplay
+            className="[clip-path:polygon(12%_0%,100%_0%,100%_30%,100%_88%,88%_100%,30%_100%,0%_100%,0%_12%)]"
+          >
+            <source
+              src="https://cms.scalezone.ae/wp-content/uploads/2025/08/mission.webm"
+              type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video>
+        </div>
       </div>
     </section>
   );
