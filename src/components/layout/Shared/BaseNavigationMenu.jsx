@@ -51,7 +51,7 @@ export default function BaseNavigationMenu({
       <BurgerIcon setActive={setActive} left={left} className={className} />
       <div
         className={cn(
-          `flex flex-col gap-32 justify-between fixed w-[40%] h-[calc(100dvh-75px)] min-h-450 ${!left ? '-right-full' : '-left-full'} transition-all duration-500 ease-in-out top-full max-sm:w-[60%] max-[390px]:w-[75%]! lg:hidden lg:invisible py-48 ${!active && (!left ? 'right-0!' : 'left-0!')} bg-background z-50 backdrop-blur-[30px]`,
+          `flex flex-col gap-32 justify-between fixed w-[40%] h-[calc(100dvh-75px)] ${!left ? '-right-full' : '-left-full'} transition-all duration-500 ease-in-out top-full max-sm:w-[60%] max-[390px]:w-[75%]! lg:hidden lg:invisible pb-48 pt-32 ${!active && (!left ? 'right-0!' : 'left-0!')} bg-background z-50 backdrop-blur-[30px]`,
           className
         )}
       >
@@ -75,12 +75,12 @@ export default function BaseNavigationMenu({
                   {services?.label || 'Services'}
                 </AccordionTrigger>
 
-                <AccordionContent className="mt-24">
+                <AccordionContent className="mt-16">
                   {services?.zones?.map((s, i) => (
                     <NavigationMenuLink
                       key={`zone-${s.id || i}`}
                       href={`/zones/${s.slug}`}
-                      className="text-[1.6rem] no-underline! mb-24"
+                      className="text-[1.6rem] no-underline! mb-16 last:mb-0"
                     >
                       {s?.slug
                         ?.split('-')
@@ -105,7 +105,7 @@ export default function BaseNavigationMenu({
 
         <Separator className="h-2" />
 
-        <div className="px-24">
+        <div className="px-24 flex flex-col gap-12">
           <Button className="h-[unset] py-16 px-32 text-[1.6rem] hover:scale-[1.05] text-center w-full mt-24">
             {button || 'Book an Appoinment'}
           </Button>

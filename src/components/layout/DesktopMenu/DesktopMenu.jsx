@@ -52,7 +52,7 @@ export default function DesktopMenu({ className = '', button, menu = {} }) {
         </NavigationMenuList>
       </NavigationMenu>
 
-      <Button className="h-[unset] bg-transparent hover:bg-transparent">
+      <Button className="h-[unset] bg-transparent hover:bg-transparent max-[450px]:hidden max-[450px]:invisible">
         <Globe className="size-25 max-[390px]:size-20" />
       </Button>
 

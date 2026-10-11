@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import DesktopMenu from '../DesktopMenu/DesktopMenu';
 import TabMenu from '../TabNav/TabMenu';
+import MobileMenu from '../MobileMenu/MobileMenu';
 
 export default function Header({ header = {} }) {
   const { logo, button, links } = header;
@@ -14,6 +15,7 @@ export default function Header({ header = {} }) {
 
       <div className="flex gap-32 justify-between lg:w-full max-[390px]:gap-16">
         <DesktopMenu menu={links} button={button} />
+        <MobileMenu menu={links} button={button} />
       </div>
     </header>
   );
