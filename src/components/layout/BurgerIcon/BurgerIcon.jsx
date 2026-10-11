@@ -1,7 +1,8 @@
 'use client';
+import { cn } from 'cn';
 import { useState } from 'react';
 
-export default function BurgerIcon({ setActive }) {
+export default function BurgerIcon({ setActive, left = false, className = '' }) {
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {
@@ -11,7 +12,10 @@ export default function BurgerIcon({ setActive }) {
   return (
     <div
       onClick={handleClick}
-      className={`relative size-40 cursor-pointer flex flex-col items-end justify-center gap-8 transition-all duration-500 lg:hidden lg:invisible ${open && 'rotate-180 duration-500'} max-[390px]:size-30!`}
+      className={cn(
+        `relative size-40 cursor-pointer flex flex-col ${!left ? 'items-end' : 'items-start'} justify-center gap-8 transition-all duration-500 lg:hidden lg:invisible ${open && 'rotate-180 duration-500'} max-[390px]:size-30!`,
+        className
+      )}
     >
       <div
         className={`w-[50%] h-4 bg-white duration-600 ${open && 'absolute w-full duration-500 rotate-45 '} `}

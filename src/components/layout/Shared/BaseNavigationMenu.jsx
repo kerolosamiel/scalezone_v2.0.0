@@ -1,34 +1,67 @@
 'use client';
-import { useState } from 'react';
 import BurgerIcon from '../BurgerIcon/BurgerIcon';
 import {
   NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu';
-import { Separator } from '@/components/ui/separator';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import NavigationLink from './NavigationLink';
+import { Separator } from '@/components/ui/separator';
+import { Fragment, useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { cn } from 'cn';
 
-export default function MobileMenu({ menu = {}, button }) {
-  const [active, setActive] = useState(false);
+export default function BaseNavigationMenu({
+  menu = {},
+  button,
+  left = false,
+  children,
+  className = '',
+}) {
+  const [active, setActive] = useState(true);
   const [openItems, setOpenItems] = useState(['item-1']);
   const { about, resources, contact, services } = menu;
+
+  const links = [
+    {
+      id: 101,
+      href: '/resources',
+      label: resources || 'Resrouces',
+    },
+    {
+      id: 102,
+      href: '/about',
+      label: about || 'About',
+    },
+    {
+      id: 103,
+      href: '/contact',
+      label: contact || 'Contact',
+    },
+  ];
+
   return (
     <>
-      <BurgerIcon setActive={setActive} />
+      <BurgerIcon setActive={setActive} left={left} className={className} />
       <div
-        className={`flex flex-col justify-between absolute w-[40%] h-fit min-h-450 bg-background -right-full z-40 transition-all duration-500 ease-in-out top-full max-sm:w-[60%] max-[390px]:w-[75%]! lg:hidden lg:invisible py-48 px-24 ${!active && 'right-0!'}`}
+        className={cn(
+          `flex flex-col gap-32 justify-between fixed w-[40%] h-[calc(100dvh-75px)] min-h-450 ${!left ? '-right-full' : '-left-full'} transition-all duration-500 ease-in-out top-full max-sm:w-[60%] max-[390px]:w-[75%]! lg:hidden lg:invisible py-48 ${!active && (!left ? 'right-0!' : 'left-0!')} bg-background z-50 backdrop-blur-[30px]`,
+          className
+        )}
       >
-        <NavigationMenu className="justify-start! items-start [&>div]:w-full!">
+        <div className="px-24">
+          <h3 className="text-[1.4rem] tracking-[6%]">Menu</h3>
+        </div>
+
+        <Separator className="h-2" />
+
+        <NavigationMenu className="justify-start! items-start [&>div]:w-full! px-24">
           <NavigationMenuList className="flex flex-col gap-32 items-start! [&_ul]:items-start justify-self-start! w-full">
             <Accordion
               type="single"
@@ -59,40 +92,26 @@ export default function MobileMenu({ menu = {}, button }) {
               </AccordionItem>
             </Accordion>
 
-            <NavigationMenuItem>
-              <NavigationMenuLink
-                href="/resources"
-                className="text-[1.4rem] hover:text-primary transition-all duration-600 uppercase font-bold"
-              >
-                {resources || 'Resrouces'}
-              </NavigationMenuLink>
-            </NavigationMenuItem>
+            <Separator className="h-2 w-full" />
 
-            <NavigationMenuItem>
-              <NavigationMenuLink
-                href="/about"
-                className="text-[1.4rem] hover:text-primary transition-all duration-600 uppercase font-bold"
-              >
-                {about || 'About'}
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-
-            <NavigationMenuItem>
-              <NavigationMenuLink
-                href="/contact"
-                className="text-[1.4rem] hover:text-primary transition-all duration-600 uppercase font-bold"
-              >
-                {contact || 'Contact'}
-              </NavigationMenuLink>
-            </NavigationMenuItem>
+            {links.map((l, i) => (
+              <Fragment key={`Link-${l.id || i}`}>
+                <NavigationLink href={l.href} label={l.label} />
+                {i < links.length - 1 && <Separator className="h-2 w-full" />}
+              </Fragment>
+            ))}
           </NavigationMenuList>
         </NavigationMenu>
 
         <Separator className="h-2" />
 
-        <Button className="h-[unset] py-16 px-32 text-[1.6rem] hover:scale-[1.05] text-center w-full mt-24">
-          {button || 'Book an Appoinment'}
-        </Button>
+        <div className="px-24">
+          <Button className="h-[unset] py-16 px-32 text-[1.6rem] hover:scale-[1.05] text-center w-full mt-24">
+            {button || 'Book an Appoinment'}
+          </Button>
+
+          {children}
+        </div>
       </div>
     </>
   );
