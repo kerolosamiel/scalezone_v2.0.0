@@ -90,7 +90,7 @@ export default function ConfirmationEmail({ companyName = 'Scalezone', clientNam
             <Section align="left" className="mobile:!max-w-full max-w-lg">
               <Text className="font-14 text-fg-2 m-0 font-sans text-text-muted">
                 Thank you for taking the first step toward scaling your Amazon and e-commerce
-                business with us. We’ve successfully received your request and our expert team is
+                business with us. We have successfully received your request and our expert team is
                 already reviewing your details.
               </Text>
               <Text className="font-14 text-fg-2 m-0 mt-10 font-sans text-text-muted">
