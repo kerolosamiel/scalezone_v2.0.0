@@ -89,19 +89,13 @@ export default function ConfirmationEmail({ companyName = 'Scalezone', clientNam
             </Heading>
             <Section align="left" className="mobile:!max-w-full max-w-lg">
               <Text className="font-14 text-fg-2 m-0 font-sans text-text-muted">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vero dolor id odit
-                corrupti quam tempora tempore qui doloribus nesciunt. Hic nemo ratione qui
-                necessitatibus ullam sed eius. Error, quasi possimus.
+                Thank you for taking the first step toward scaling your Amazon and e-commerce
+                business with us. We’ve successfully received your request and our expert team is
+                already reviewing your details.
               </Text>
               <Text className="font-14 text-fg-2 m-0 mt-10 font-sans text-text-muted">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem culpa ipsam tempore
-                placeat et cum ipsum exercitationem sunt rerum voluptate sed similique, blanditiis
-                aspernatur earum numquam nesciunt maxime molestiae deleniti.
-              </Text>
-              <Text className="font-14 text-fg-2 m-0 mt-10 font-sans text-text-muted">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam ea inventore magni
-                eum molestias eveniet sunt ex, quae sapiente nostrum perspiciatis sed a commodi
-                suscipit, quibusdam aspernatur! Repudiandae, officiis ipsum.
+                If you have any immediate questions or need to update your details, simply reply
+                directly to this email or visit our website.
               </Text>
               <Text className="font-14 text-fg-2 m-0 mt-10 font-sans text-text-muted">
                 — The {companyName} team
