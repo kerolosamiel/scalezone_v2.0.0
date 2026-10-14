@@ -21,6 +21,8 @@ import { Spinner } from '@/components/ui/spinner';
 import { useState } from 'react';
 import ZoneSelector from '../shared/ZoneSelector';
 import { sendConfirmationEmail } from '@/actions/send-email';
+import ServicesSelector from '../shared/ServicesSelector';
+import Loading from '@/app/loading';
 // import { sendConfirmationEmail } from '@/actions/send-email';
 // import { sendData } from '@/actions/send-data';
 
@@ -36,10 +38,12 @@ const formSchema = z.object({
     .min(7, 'Please enter a valid phone number'),
   message: z.string(),
   zone: z.string(),
+  service: z.string(),
 });
 
 export default function FormSide({ zones }) {
   const [zone, setZone] = useState('not-sure');
+  const [selectZone, setSelectZone] = useState(false);
   let specificZone = zones?.find((z) => z.slug === zone)?.services;
 
   const {
@@ -57,6 +61,7 @@ export default function FormSide({ zones }) {
       phone: '',
       message: '',
       zone: 'Not Sure Yet',
+      service: 'Not Sure Yet',
     },
   });
 
@@ -148,14 +153,30 @@ export default function FormSide({ zones }) {
             <FieldError errors={errors.phone ? [errors.phone] : []} />
           </Field>
 
-          <ZoneSelector zones={zones} register={register} setZone={setZone} />
+          <ZoneSelector
+            zones={zones}
+            register={register}
+            setZone={setZone}
+            setSelectZone={setSelectZone}
+          />
 
           <div
-            className={`col-start-1 col-end-3 transition-all duration-500 ${
-              zone === 'not-sure' ? 'h-0 invisible' : 'h-50 visible'
+            className={`col-start-1 col-end-3 transition-all duration-200  flex ${
+              zone === 'not-sure' || specificZone?.length === 0
+                ? 'h-0 invisible'
+                : !selectZone
+                  ? 'h-50 visible justify-center items-center'
+                  : 'h-auto visible'
             }`}
-          ></div>
-
+          >
+            {!selectZone && zone != 'not-sure' ? (
+              <Spinner />
+            ) : (
+              specificZone?.length > 0 && (
+                <ServicesSelector services={specificZone} register={register} />
+              )
+            )}
+          </div>
           <Field className="col-start-1 col-end-3 max-lg:col-start-[unset] max-lg:col-end-[unset]">
             <FieldLabel htmlFor="message">
               Message <FieldDescription>(Optional)</FieldDescription>
