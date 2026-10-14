@@ -1,3 +1,13 @@
+import PartnersSkeleton from '@/components/ui/skeletons/Home/PartnersSkeleton';
+import ServicesSkeleton from '@/components/ui/skeletons/ServicesSkeleton';
+import MainHeroSkeleton from '@/components/ui/skeletons/MainHeroSkeleton';
+
 export default function Loading() {
-  return '';
+  return (
+    <>
+      <MainHeroSkeleton />
+      <PartnersSkeleton />
+      <ServicesSkeleton />
+    </>
+  );
 }
