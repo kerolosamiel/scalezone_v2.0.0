@@ -16,6 +16,7 @@ import { Separator } from '@/components/ui/separator';
 import { Fragment, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { cn } from 'cn';
+import Link from 'next/link';
 
 export default function BaseNavigationMenu({
   menu = {},
@@ -106,8 +107,11 @@ export default function BaseNavigationMenu({
         <Separator className="h-2" />
 
         <div className="px-24 flex flex-col gap-12">
-          <Button className="h-[unset] py-16 px-32 text-[1.6rem] hover:scale-[1.05] text-center w-full mt-24">
-            {button || 'Book an Appoinment'}
+          <Button
+            className="h-[unset] py-16 px-32 text-[1.6rem] hover:scale-[1.05] text-center w-full mt-24"
+            asChild
+          >
+            <Link href="/appointment">{button || 'Book an Appoinment'}</Link>
           </Button>
 
           {children}
