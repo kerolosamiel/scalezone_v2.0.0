@@ -9,7 +9,7 @@ import React, { Fragment } from 'react';
 
 export default function SubPageHero({ breadcrumbList = [], title, children }) {
   return (
-    <section className="bg-card-gradient">
+    <section className="bg-card-gradient pt-75">
       <div className="py-64 px-80 max-w-1680 flex flex-col gap-32 mx-auto max-xl:px-48 max-lg:px-32 max-md:px-16">
         {breadcrumbList.length != 0 && (
           <Breadcrumb className="[&>ol]:gap-8">
