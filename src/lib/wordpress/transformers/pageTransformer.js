@@ -256,7 +256,7 @@ export function zonesTransform(rowData, faqs, services) {
  * @param {Object|Array} rowData - Raw contact page data from WordPress
  * @returns {Object|null} Transformed contact page object with hero, contact info, and social media
  */
-export function contactTransform(rowData) {
+export function contactTransform(rowData, faqsMap) {
   if (!rowData) return null;
 
   // Reuse the shared page transformer to get the base page metadata.
@@ -288,6 +288,11 @@ export function contactTransform(rowData) {
       },
       location: data.information_side?.location_part,
       socialMedia: data.information_side?.social_media_part,
+    },
+    faqs: {
+      title: data?.faqs_section?.title || '',
+      subtitle: data?.faqs_section?.subtitle || '',
+      questions: data?.faqs_section?.questions?.map((f) => faqTransform(faqsMap.get(f.ID))) || [],
     },
   };
 
