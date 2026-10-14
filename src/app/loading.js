@@ -3,6 +3,7 @@ import ServicesSkeleton from '@/components/ui/skeletons/ServicesSkeleton';
 import MainHeroSkeleton from '@/components/ui/skeletons/MainHeroSkeleton';
 import CompaniesSkeleton from '@/components/ui/skeletons/Home/CompaniesSkeleton';
 import GrowthSkeleton from '@/components/ui/skeletons/GrowthSkeleton';
+import MissionSkeleton from '@/components/ui/skeletons/Home/MissionSkeleton';
 
 export default function Loading() {
   return (
@@ -12,6 +13,7 @@ export default function Loading() {
       <ServicesSkeleton />
       <CompaniesSkeleton />
       <GrowthSkeleton />
+      <MissionSkeleton />
     </>
   );
 }
