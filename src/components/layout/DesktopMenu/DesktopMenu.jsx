@@ -10,6 +10,7 @@ import {
 import DropDown from './DropDown';
 import { Globe } from 'lucide-react';
 import NavigationLink from '../Shared/NavigationLink';
+import Link from 'next/link';
 
 export default function DesktopMenu({ className = '', button, menu = {} }) {
   const { about, resources, contact, services } = menu;
@@ -57,7 +58,7 @@ export default function DesktopMenu({ className = '', button, menu = {} }) {
       </Button>
 
       <Button className="h-[unset] py-16 px-32 text-[1.6rem] hover:scale-[1.05] max-lg:hidden max-lg:invisible">
-        {button || 'Book an Appoinment'}
+        <Link href="/contact">{button || 'Book an Appoinment'}</Link>
       </Button>
     </>
   );

@@ -43,7 +43,7 @@ export default async function Home() {
 
   return (
     <main>
-      <HeroSection hero={homeData.hero} firstHref="/get-started" secondHref="/appointment" />
+      <HeroSection hero={homeData.hero} firstHref="/get-started" secondHref="/contact" />
       <PartnersSection partners={homeData.partners} />
       <ZonesSection zoneData={homeData.zones} />
       <CompaniesSection logos={homeData.companies} />

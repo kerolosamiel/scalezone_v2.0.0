@@ -25,7 +25,7 @@ export default function DropDown({ services }) {
             ) : (
               s?.services?.map((s, i) => (
                 <NavigationMenuLink
-                  href={`/${s.slug}`}
+                  href={`/services/${s.slug}`}
                   className="text-[1.4rem] text-muted-foreground hover:text-foreground mb-16"
                   key={`service-${s.id || i}`}
                 >
