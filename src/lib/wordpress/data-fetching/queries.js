@@ -2,6 +2,7 @@ import { wpFetch } from '../client';
 import { endpoints } from '../endpoints/endpoints';
 import {
   aboutPageTransform,
+  appointmentTransform,
   contactTransform,
   homePageTransform,
   layoutTransform,
@@ -335,6 +336,41 @@ export async function getContactPage() {
   } catch (error) {
     // Log any errors that occur during fetching
     console.error('Failed fetch contact data: ', error);
+  }
+}
+
+export async function getAppointmentPage() {
+  try {
+    // Fetch the appointment page by slug with caching tags
+    const data = await wpFetch(endpoints.pageBySlug('appointment'), {
+      next: { tags: ['wordpress-data'] },
+    });
+
+    if (!data) return null;
+
+    // Handle array response by extracting first element, otherwise use data directly
+    const pageData = Array.isArray(data) ? data[0] : data;
+    if (!pageData) return null;
+
+    const questions = pageData.acf_all_fields?.appointment_page_v2?.faqs_section?.questions || [];
+
+    const allFaqsIds = questions
+      .map((faq) => faq.ID)
+      .flat(Infinity)
+      .filter(Boolean);
+
+    const faqsObjects = allFaqsIds.map((id) => ({ ID: id }));
+
+    const rawFaqs = await getMultipleCPTs(faqsObjects, endpoints.faqById);
+
+    const faqsMap = new Map((rawFaqs || []).map((faq) => [faq.id, faq]));
+
+    // Transform the page data and return the result
+    const result = appointmentTransform(pageData, faqsMap);
+    return result;
+  } catch (error) {
+    // Log any errors that occur during fetching
+    console.error('Failed fetch appointment data: ', error);
   }
 }
 

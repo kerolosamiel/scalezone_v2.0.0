@@ -299,6 +299,54 @@ export function contactTransform(rowData, faqsMap) {
   return contact;
 }
 
+export function appointmentTransform(rowData, faqsMap) {
+  if (!rowData) return null;
+
+  // Reuse the shared page transformer to get the base page metadata.
+  const base = basePageTransform(rowData, 'contact');
+  if (!base) return null;
+
+  // Extract the appointment-specific ACF fields.
+  const data = base.acf?.appointment_page_v2;
+  if (!data) return null;
+
+  delete base.acf;
+
+  // Build the normalized appointment object with all appointment sections.
+  const appointment = {
+    ...base,
+    hero: data.hero,
+    info: {
+      whatsapp: {
+        title: data.information_side?.whatsapp_part?.title || '',
+        button: {
+          text: data.information_side?.whatsapp_part?.whatsapp_button?.button_text || '',
+          number: data.information_side?.whatsapp_part?.whatsapp_button?.whatsapp_number || '',
+        },
+      },
+      contact: {
+        title: data.information_side?.contact_part?.title || '',
+        email: data.information_side?.contact_part?.email || '',
+        phone: data.information_side?.contact_part?.phone_number || '',
+      },
+      expert: data.information_side?.expect_part || {},
+      hourse: {
+        title: data.information_side?.office_hours?.title || '',
+        amTime: data.information_side?.office_hours?.am_time || '',
+        pmTime: data.information_side?.office_hours?.pm_time || '',
+      },
+      socialMedia: data.information_side?.social_media_part,
+    },
+    faqs: {
+      title: data?.faqs_section?.title || '',
+      subtitle: data?.faqs_section?.subtitle || '',
+      questions: data?.faqs_section?.questions?.map((f) => faqTransform(faqsMap.get(f.ID))) || [],
+    },
+  };
+
+  return appointment;
+}
+
 export function servicePageTransform(rowData, rawFaqs, rawServices) {
   if (!rowData) return null;
 
