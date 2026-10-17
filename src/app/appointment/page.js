@@ -27,7 +27,9 @@ export async function generateMetadata() {
   };
 }
 
-export default function page() {
-  notFound();
+export default async function page() {
+  const appointment = await getAppointmentPage();
+
+  if (!appointment) return notFound();
   return <h1>Appointment</h1>;
 }
