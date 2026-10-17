@@ -14,7 +14,10 @@ export default function TestimonialsSkeleton() {
           <Carousel>
             <CarouselContent className="gap-24 max-sm:gap-16">
               {Array.from({ length: 6 }, (_, i) => (
-                <CarouselItem className="basis-1/4 items-stretch flex max-xl:basis-1/3 max-lg:basis-1/2 max-sm:basis-[calc(100%-5rem)]">
+                <CarouselItem
+                  key={`item-${i}`}
+                  className="basis-1/4 items-stretch flex max-xl:basis-1/3 max-lg:basis-1/2 max-sm:basis-[calc(100%-5rem)]"
+                >
                   <TestimonialCardSkeleton />
                 </CarouselItem>
               ))}
