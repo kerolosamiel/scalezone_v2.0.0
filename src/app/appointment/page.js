@@ -1,3 +1,4 @@
+import HeroSection from '@/components/forms/AppointmentForm/HeroSection';
 import { getAppointmentPage } from '@/lib/wordpress/data-fetching/queries';
 import { notFound } from 'next/navigation';
 
@@ -31,5 +32,9 @@ export default async function page() {
   const appointment = await getAppointmentPage();
 
   if (!appointment) return notFound();
-  return <h1>Appointment</h1>;
+  return (
+    <main>
+      <HeroSection hero={appointment.hero} />
+    </main>
+  );
 }

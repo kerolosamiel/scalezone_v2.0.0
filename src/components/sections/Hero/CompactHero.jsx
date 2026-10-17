@@ -10,11 +10,11 @@ export default function CompactHero({ hero, className, children }) {
   return (
     <section
       className={cn(
-        'bg-card-gradient py-80 max-md:px-32 flex flex-col items-center justify-center gap-32 text-center',
+        'bg-card-gradient py-155 max-md:px-32 flex flex-col items-center justify-center gap-32 text-center',
         className
       )}
     >
-      <h1 className="text-[6.2rem] max-md:text-[4.4rem]">
+      <h1 className="text-[6.2rem] max-md:text-[4.4rem] max-w-650 leading-[115%]">
         {titleWords.map((word, index) =>
           index === titleWords.length - 1 ? (
             <span className="text-primary" key={index}>

@@ -315,7 +315,14 @@ export function appointmentTransform(rowData, faqsMap) {
   // Build the normalized appointment object with all appointment sections.
   const appointment = {
     ...base,
-    hero: data.hero,
+    hero: {
+      title: data.hero?.title || '',
+      description: data.hero?.description || '',
+      highlights: {
+        firstBadge: data.hero?.highlight?.first_badge || '',
+        secondBadge: data.hero?.highlight?.second_badge || '',
+      },
+    },
     info: {
       whatsapp: {
         title: data.information_side?.whatsapp_part?.title || '',
