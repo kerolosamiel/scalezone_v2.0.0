@@ -5,6 +5,7 @@ import CompaniesSkeleton from '@/components/ui/skeletons/Home/CompaniesSkeleton'
 import GrowthSkeleton from '@/components/ui/skeletons/GrowthSkeleton';
 import MissionSkeleton from '@/components/ui/skeletons/Home/MissionSkeleton';
 import TrustSkeleton from '@/components/ui/skeletons/TrustSkeleton';
+import TestimonialCard from '@/components/sections/Testimonials/TestimonialCard';
 
 export default function Loading() {
   return (
@@ -16,6 +17,7 @@ export default function Loading() {
       <GrowthSkeleton />
       <MissionSkeleton />
       <TrustSkeleton />
+      <TestimonialCard />
     </>
   );
 }
