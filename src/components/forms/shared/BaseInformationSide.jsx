@@ -41,7 +41,7 @@ export default function BaseInformationSide({ info = {}, isLocation = true, chil
     },
     {
       sid: 105,
-      href: `https://wa.me/${(socialMedia?.links?.whatsapp.startsWith('+') ? socialMedia?.links?.whatsapp.slice(1) : socialMedia?.links?.whatsapp) || '971551504981'}`,
+      href: `https://wa.me/${(socialMedia?.links?.whatsapp.startsWith('+') ? socialMedia?.links?.whatsapp.slice(1) : socialMedia?.links?.whatsapp) || '971585828626'}`,
       icon: <FaWhatsapp />,
     },
     {
@@ -84,7 +84,7 @@ export default function BaseInformationSide({ info = {}, isLocation = true, chil
           target="_blank"
           phone={
             (contact?.phone?.startsWith('+') ? contact?.phone?.slice(1) : contact?.phone) ||
-            '971551504981'
+            '971585828626'
           }
           className="text-[1.8rem] max-md:text-[1.6rem]"
         >
@@ -92,7 +92,7 @@ export default function BaseInformationSide({ info = {}, isLocation = true, chil
             ? contact?.phone?.startsWith('+')
               ? contact?.phone
               : `+${contact?.phone}`
-            : '+971551504981'}
+            : '+971585828626'}
         </PhoneDirect>
       </InformationBlock>
 
