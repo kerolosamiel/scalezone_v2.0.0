@@ -22,9 +22,6 @@ import { useState } from 'react';
 import ZoneSelector from '../shared/ZoneSelector';
 import { sendConfirmationEmail } from '@/actions/send-email';
 import ServicesSelector from '../shared/ServicesSelector';
-import Loading from '@/app/loading';
-// import { sendConfirmationEmail } from '@/actions/send-email';
-// import { sendData } from '@/actions/send-data';
 
 const formSchema = z.object({
   fullName: z

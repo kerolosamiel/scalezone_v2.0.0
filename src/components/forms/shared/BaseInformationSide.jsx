@@ -15,7 +15,6 @@ import SocialMedia from '@/components/ui/socialmedia';
 
 export default function BaseInformationSide({ info = {}, isLocation = true, children }) {
   const { whatsapp, contact, location, socialMedia } = info;
-  console.log(info);
 
   const social = [
     {

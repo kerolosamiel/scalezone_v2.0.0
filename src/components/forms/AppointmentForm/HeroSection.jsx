@@ -4,7 +4,6 @@ import { FileText } from 'lucide-react';
 export default function HeroSection({ hero }) {
   if (!hero) return null;
 
-  console.log(hero);
   return (
     <CompactHero hero={hero} className="max-[450px]:[&>h1]:text-[3.2rem] max-[450px]:px-16!">
       <div className="flex gap-48 flex-wrap max-md:justify-center max-md:gap-32">

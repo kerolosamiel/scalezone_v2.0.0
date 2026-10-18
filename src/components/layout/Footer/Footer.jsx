@@ -48,8 +48,6 @@ export default function Footer({ footer = {} }) {
     },
   ];
 
-  console.log(social?.tiktok);
-
   return (
     <footer>
       <div className="py-64 px-80 flex flex-col gap-32 max-w-1840 mx-auto max-xl:px-32 max-lg:px-24 max-md:px-16">

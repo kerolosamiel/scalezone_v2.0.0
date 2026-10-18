@@ -88,9 +88,23 @@ export default function NotificationEmail({ clientInfo }) {
                 Selected Service: {clientInfo?.service || 'N/A'}
               </Text>
 
-              <Text className="font-14 text-fg-2 m-0 mt-2 font-sans text-text-muted">
-                Message: {clientInfo?.message || 'N/A'}
-              </Text>
+              {clientInfo?.message && (
+                <Text className="font-14 text-fg-2 m-0 mt-2 font-sans text-text-muted">
+                  Message: {clientInfo?.message || 'N/A'}
+                </Text>
+              )}
+
+              {clientInfo?.date && (
+                <Text className="font-14 text-fg-2 m-0 mt-2 font-sans text-text-muted">
+                  Date: {clientInfo?.date.toDateString() || 'N/A'}
+                </Text>
+              )}
+
+              {clientInfo?.time && (
+                <Text className="font-14 text-fg-2 m-0 mt-2 font-sans text-text-muted">
+                  Date: {clientInfo?.time || 'N/A'}
+                </Text>
+              )}
             </Section>
           </Section>
         </Body>
