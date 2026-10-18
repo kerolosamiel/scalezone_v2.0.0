@@ -1,5 +1,6 @@
 import FormSection from '@/components/forms/AppointmentForm/FormSection';
 import HeroSection from '@/components/forms/AppointmentForm/HeroSection';
+import FaqsSection from '@/components/sections/FaqsSection/Faqs';
 import { getAppointmentPage } from '@/lib/wordpress/data-fetching/queries';
 import { Cossette_Texte } from 'next/font/google';
 import { notFound } from 'next/navigation';
@@ -39,6 +40,7 @@ export default async function page() {
     <main>
       <HeroSection hero={appointment.hero} />
       <FormSection info={appointment.info} />
+      <FaqsSection faqs={appointment.faqs} />
     </main>
   );
 }
