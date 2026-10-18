@@ -2,27 +2,17 @@
 
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import PhoneInputWithCountry from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import * as z from 'zod';
 
-import {
-  Field,
-  FieldDescription,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
-  FieldSet,
-} from '@/components/ui/field';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
+import { Field, FieldDescription, FieldLabel } from '@/components/ui/field';
 import { Textarea } from '@/components/ui/textarea';
-import { Spinner } from '@/components/ui/spinner';
 import { useState } from 'react';
-import ZoneSelector from '../shared/ZoneSelector';
 import { sendConfirmationEmail } from '@/actions/send-email';
-import ServicesSelector from '../shared/ServicesSelector';
 import BaseFormSide from '../shared/BaseFormSide';
+import ArabicSuccessModal from '@/components/modals/ArabicSuccessModal';
+import { Dialog } from '@/components/ui/dialog';
+import BaseSuccessModal from '@/components/modals/BaseSuccessModal';
 
 const formSchema = z.object({
   fullName: z
@@ -41,6 +31,7 @@ const formSchema = z.object({
 
 export default function FormSide({ zones }) {
   const [zone, setZone] = useState('not-sure');
+  const [open, setOpen] = useState(false);
 
   const {
     register,
@@ -86,6 +77,7 @@ export default function FormSide({ zones }) {
         throw new Error(sendNotification.error);
       }
 
+      setOpen(true);
       reset();
       setZone('not-sure');
     } catch (error) {
@@ -105,18 +97,26 @@ export default function FormSide({ zones }) {
   };
 
   return (
-    <BaseFormSide zones={zones} values={values}>
-      <Field className="col-start-1 col-end-3 max-lg:col-start-[unset] max-lg:col-end-[unset]">
-        <FieldLabel htmlFor="message">
-          Message <FieldDescription>(Optional)</FieldDescription>
-        </FieldLabel>
-        <Textarea
-          id="message"
-          className="resize-y h-128 text-[1.4rem]! p-10"
-          placeholder="Tell us about your needs..."
-          {...register('message')}
+    <Dialog open={open} onOpenChange={setOpen}>
+      <BaseFormSide zones={zones} values={values}>
+        <BaseSuccessModal
+          title="MESSAGE SENT"
+          description="We'll follow up by email shortly."
+          button={{ href: '/appointment', label: 'Book an Appoinment' }}
+          setOpen={setOpen}
         />
-      </Field>
-    </BaseFormSide>
+        <Field className="col-start-1 col-end-3 max-lg:col-start-[unset] max-lg:col-end-[unset]">
+          <FieldLabel htmlFor="message">
+            Message <FieldDescription>(Optional)</FieldDescription>
+          </FieldLabel>
+          <Textarea
+            id="message"
+            className="resize-y h-128 text-[1.4rem]! p-10"
+            placeholder="Tell us about your needs..."
+            {...register('message')}
+          />
+        </Field>
+      </BaseFormSide>
+    </Dialog>
   );
 }

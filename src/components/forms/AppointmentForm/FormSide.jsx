@@ -8,6 +8,8 @@ import { useState } from 'react';
 import { Field, FieldDescription, FieldLabel } from '@/components/ui/field';
 import { Calendar } from '@/components/ui/calendar';
 import TimeSelector from '../shared/TimeSelector';
+import AppointmentModal from '@/components/modals/AppointmentModal';
+import { Dialog } from '@/components/ui/dialog';
 
 const formSchema = z.object({
   fullName: z
@@ -27,7 +29,9 @@ const formSchema = z.object({
 
 export default function FormSide({ zones }) {
   const [zone, setZone] = useState('not-sure');
-
+  const [open, setOpen] = useState(false);
+  const [date, setDate] = useState(new Date());
+  const [time, setTime] = useState(null);
   const {
     register,
     handleSubmit,
@@ -73,6 +77,9 @@ export default function FormSide({ zones }) {
         throw new Error(sendNotification.error);
       }
 
+      setDate(data?.date);
+      setTime(data?.time);
+      setOpen(true);
       reset();
       setZone('not-sure');
     } catch (error) {
@@ -94,23 +101,36 @@ export default function FormSide({ zones }) {
   const times = ['8:00 AM', '11:00 AM', '01:00 PM', '2:00 PM', '03:00 PM', '04:00 PM'];
 
   return (
-    <BaseFormSide zones={zones} values={values}>
-      <Field>
-        <h3 className="text-[1.4rem] tracking-[6%] mb-16">Pick a date</h3>
-        <Controller
-          name="date"
-          control={control}
-          render={({ field: { onChange, value } }) => (
-            <Calendar mode="single" id="date" selected={value} onSelect={onChange} />
-          )}
+    <Dialog open={open} onOpenChange={setOpen}>
+      <BaseFormSide zones={zones} values={values}>
+        <AppointmentModal
+          title="YOU&#x2c;RE BOOKED"
+          description="A confirmation is on its way to your email."
+          button={{
+            href: 'https://wa.me/971585828626',
+            label: 'Chat with us',
+          }}
+          setOpen={setOpen}
+          date={date}
+          time={time}
         />
-      </Field>
+        <Field>
+          <h3 className="text-[1.4rem] tracking-[6%] mb-16">Pick a date</h3>
+          <Controller
+            name="date"
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <Calendar mode="single" id="date" selected={value} onSelect={onChange} />
+            )}
+          />
+        </Field>
 
-      <Field>
-        <h3 className="text-[1.4rem] tracking-[6%] mb-16">Available times</h3>
+        <Field>
+          <h3 className="text-[1.4rem] tracking-[6%] mb-16">Available times</h3>
 
-        <TimeSelector times={times} register={register} />
-      </Field>
-    </BaseFormSide>
+          <TimeSelector times={times} register={register} />
+        </Field>
+      </BaseFormSide>
+    </Dialog>
   );
 }
