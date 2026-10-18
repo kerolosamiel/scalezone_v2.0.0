@@ -336,12 +336,8 @@ export function appointmentTransform(rowData, faqsMap) {
         email: data.information_side?.contact_part?.email || '',
         phone: data.information_side?.contact_part?.phone_number || '',
       },
-      expert: data.information_side?.expect_part || {},
-      hourse: {
-        title: data.information_side?.office_hours?.title || '',
-        amTime: data.information_side?.office_hours?.am_time || '',
-        pmTime: data.information_side?.office_hours?.pm_time || '',
-      },
+      expect: data.information_side?.expect_part || {},
+      location: data.information_side?.location_part,
       socialMedia: data.information_side?.social_media_part,
     },
     faqs: {

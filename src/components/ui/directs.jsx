@@ -1,5 +1,19 @@
 import { cn } from 'cn';
-import { MapPin, Phone, Mail } from 'lucide-react';
+import { MapPin, Phone, Mail, Check } from 'lucide-react';
+
+export function Expect({ expect, className }) {
+  return (
+    <a
+      className={cn(
+        'flex gap-[1.2rem] items-center hover:text-accent transition-colors duration-300',
+        className
+      )}
+    >
+      <Check className="text-accent shrink-0" />
+      {expect}
+    </a>
+  );
+}
 
 export function Location({ location, className, children }) {
   return (
