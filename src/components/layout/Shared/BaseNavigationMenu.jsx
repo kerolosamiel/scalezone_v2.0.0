@@ -78,7 +78,7 @@ export default function BaseNavigationMenu({
 
                 <AccordionContent className="mt-16">
                   {services?.zones?.map((s, i) => (
-                    <NavigationMenuLink
+                    <Link
                       key={`zone-${s.id || i}`}
                       href={`/zones/${s.slug}`}
                       className="text-[1.6rem] no-underline! mb-16 last:mb-0"
@@ -87,7 +87,7 @@ export default function BaseNavigationMenu({
                         ?.split('-')
                         ?.map((w) => `${w?.charAt(0)?.toUpperCase()}${w?.slice(1)}`)
                         ?.join(' ') || 'Zone Services'}
-                    </NavigationMenuLink>
+                    </Link>
                   ))}
                 </AccordionContent>
               </AccordionItem>
