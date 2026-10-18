@@ -11,7 +11,7 @@ export default function ServicesSelector({ services = [], register, name = 'serv
         <Field key={`service-${s.id || i}`}>
           <FieldLabel
             htmlFor={s.slug}
-            className="cursor-pointer py-12 px-16 border w-fit! has-checked:border-accent"
+            className="cursor-pointer py-12 px-16 border w-fit! has-checked:border-accent max-[450px]:w-full!"
           >
             <Input
               id={s.slug}
@@ -29,7 +29,7 @@ export default function ServicesSelector({ services = [], register, name = 'serv
 
       <FieldLabel
         htmlFor="not-sure"
-        className="cursor-pointer py-12 px-16 border w-fit! has-checked:border-accent normal-case"
+        className="cursor-pointer py-12 px-16 border w-fit! has-checked:border-accent normal-case max-[450px]:w-full!"
       >
         <Input
           id="not-sure"

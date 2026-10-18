@@ -18,7 +18,7 @@ export default function ZoneSelector({
         <Field key={`zone-${z.id || i}`}>
           <FieldLabel
             htmlFor={z.slug}
-            className="cursor-pointer py-12 px-16 border w-fit! has-checked:border-accent"
+            className="cursor-pointer py-12 px-16 border w-fit! has-checked:border-accent max-[450px]:w-full!"
           >
             <Input
               id={z.slug}
@@ -49,7 +49,7 @@ export default function ZoneSelector({
       <Field>
         <FieldLabel
           htmlFor="not-sure"
-          className="cursor-pointer py-12 px-16 border w-fit! has-checked:border-accent normal-case"
+          className="cursor-pointer py-12 px-16 border w-fit has-checked:border-accent normal-case max-[450px]:w-full!"
         >
           <Input
             id="not-sure"
