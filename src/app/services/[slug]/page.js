@@ -40,7 +40,6 @@ export default async function page({ params }) {
   const service = await getServicePage(slug);
 
   if (!service) notFound();
-  console.log(service);
 
   return (
     <main>

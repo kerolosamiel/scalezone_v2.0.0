@@ -36,7 +36,6 @@ export default async function page() {
 
   if (!growthData) notFound();
 
-  console.log(growthData);
   return (
     <main className="mt-100">
       <WhyGrowthSection whyGrowth={growthData.whyGrowth} />
