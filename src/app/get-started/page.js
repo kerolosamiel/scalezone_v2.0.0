@@ -1,3 +1,4 @@
+import CtaSection from '@/components/sections/CTABand/CtaSection';
 import FaqsSection from '@/components/sections/FaqsSection/Faqs';
 import StatesSection from '@/components/sections/States/StatesSection';
 import { getGrowthPage } from '@/lib/wordpress/data-fetching/queries';
@@ -38,6 +39,7 @@ export default async function page() {
     <main>
       <StatesSection states={growthData.trust} />
       <FaqsSection faqs={growthData.faqs} />
+      <CtaSection cta={growthData.cta} />
     </main>
   );
 }
