@@ -501,3 +501,43 @@ export function layoutTransform(rawData, rawZones) {
 
   return layout;
 }
+
+export function growthTransform(rawData, trustStats, rawFaqs, rawTestimonials, imageMap) {
+  if (!rawData) return null;
+
+  const base = basePageTransform(rawData);
+  if (!base) return null;
+
+  const pageData = base.acf.get_started;
+  if (!pageData) return null;
+
+  delete base.acf;
+
+  const faqs = rawFaqs || [];
+
+  const growth = {
+    ...base,
+    any: pageData,
+    whyGrowth: pageData.why_calc_section,
+    trust: trustStatsTransform(trustStats),
+    testimonials: {
+      title: pageData.testimonials_section?.testimonials_title || '',
+      testimonialItems: rawTestimonials
+        ?.map((t) => testimonialTransform(t, imageMap))
+        .filter(Boolean),
+    },
+    faqs: {
+      title: pageData.faqs_section?.title || '',
+      subtitle: pageData.faqs_section?.subtitle || '',
+      questions: faqs?.map((f) => faqTransform(f)) || [],
+    },
+    cta: {
+      title: pageData.cta_section?.cta_title || '',
+      description: pageData.cta_section?.cta_description || '',
+      cardTitle: pageData.cta_section?.cta_second_title || '',
+      button: pageData.cta_section?.cta_button.button_text || '',
+    },
+  };
+
+  return growth;
+}

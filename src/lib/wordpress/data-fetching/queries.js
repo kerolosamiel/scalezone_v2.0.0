@@ -4,6 +4,7 @@ import {
   aboutPageTransform,
   appointmentTransform,
   contactTransform,
+  growthTransform,
   homePageTransform,
   layoutTransform,
   resourcesPageTransfrom,
@@ -406,7 +407,7 @@ export async function getServicePage(slug) {
     getMultipleCPTs(servicesObjects, endpoints.serviceById),
   ]);
 
-  const result = servicePageTransform(data, rawFaqs, rawServices);
+  const result = servicePageTransform(pageData, rawFaqs, rawServices);
 
   return result;
 }
@@ -491,6 +492,46 @@ export async function getLayout() {
 
   const result = layoutTransform(layoutData, zones);
 
+  return result;
+}
+
+export async function getGrowth() {
+  const data = await wpFetch(endpoints.pageBySlug('get-started'), {
+    next: { tags: ['wordpress-data'] },
+  });
+
+  if (!data) return null;
+
+  const pageData = Array.isArray(data) ? data[0] : data;
+  if (!pageData) return null;
+
+  // Convert each testimonial's client image ID into a media lookup payload.
+  const testimonialItems = pageData.acf?.get_started?.testimonials_section?.testimonial_items;
+
+  const allFaqsIds = (pageData.acf?.get_started?.faqs_section?.questions || [])
+    .flat(Infinity)
+    .filter(Boolean);
+
+  const faqsObjects = allFaqsIds.map((id) => ({ ID: id }));
+
+  const [trustStates, testimonials, rawFaqs] = await Promise.all([
+    getTrustStats(),
+    getMultipleCPTs(testimonialItems, endpoints.testimonialById),
+    getMultipleCPTs(faqsObjects, endpoints.faqById),
+  ]);
+
+  // Convert each testimonial's client image ID into a media lookup payload.
+  const imageObjects = testimonials
+    .map((t) => t?.acf?.client_image)
+    .filter(Boolean)
+    .map((id) => ({ ID: id }));
+
+  const rawImages = await getMultipleCPTs(imageObjects, endpoints.mediaById);
+
+  // Build a lookup map keyed by media ID for quick image access during transformation.
+  const imagesMap = new Map(rawImages.map((img) => [img.id, img]));
+
+  const result = growthTransform(pageData, trustStates, rawFaqs, testimonials, imagesMap);
   return result;
 }
 
