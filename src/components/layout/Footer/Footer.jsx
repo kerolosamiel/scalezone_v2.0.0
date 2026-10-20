@@ -85,7 +85,7 @@ export default function Footer({ footer = {} }) {
                 ) : (
                   l?.services?.map((s, i) => (
                     <Link
-                      href={`/${s.slug}`}
+                      href={`/services/${s.slug}`}
                       className="text-[1.4rem] text-muted-foreground hover:text-foreground mb-16"
                       key={`service-${s.id || i}`}
                     >
