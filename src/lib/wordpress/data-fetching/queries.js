@@ -495,7 +495,7 @@ export async function getLayout() {
   return result;
 }
 
-export async function getGrowth() {
+export async function getGrowthPage() {
   const data = await wpFetch(endpoints.pageBySlug('get-started'), {
     next: { tags: ['wordpress-data'] },
   });
