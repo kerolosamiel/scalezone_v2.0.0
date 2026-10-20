@@ -1,3 +1,4 @@
+import TestimonialsSection from '@/components/growth-calculator/TestimonialsSection';
 import CtaSection from '@/components/sections/CTABand/CtaSection';
 import FaqsSection from '@/components/sections/FaqsSection/Faqs';
 import StatesSection from '@/components/sections/States/StatesSection';
@@ -36,8 +37,9 @@ export default async function page() {
 
   console.log(growthData);
   return (
-    <main>
+    <main className="mt-100">
       <StatesSection states={growthData.trust} />
+      <TestimonialsSection testimonials={growthData.testimonials} />
       <FaqsSection faqs={growthData.faqs} />
       <CtaSection cta={growthData.cta} />
     </main>

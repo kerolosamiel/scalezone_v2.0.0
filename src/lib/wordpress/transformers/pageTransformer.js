@@ -522,6 +522,7 @@ export function growthTransform(rawData, trustStats, rawFaqs, rawTestimonials, i
     trust: trustStatsTransform(trustStats),
     testimonials: {
       title: pageData.testimonials_section?.testimonials_title || '',
+      subtitle: pageData.testimonials_section?.testimonials_subtitle || '',
       testimonialItems: rawTestimonials
         ?.map((t) => testimonialTransform(t, imageMap))
         .filter(Boolean),
