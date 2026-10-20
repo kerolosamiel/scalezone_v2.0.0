@@ -1,5 +1,7 @@
+'use client';
 import { Separator } from '@/components/ui/separator';
 import SocialMedia from '@/components/ui/socialmedia';
+import { useMenu } from '@/providers/MenuContext';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -12,39 +14,39 @@ import {
 } from 'react-icons/fa';
 
 export default function Footer({ footer = {} }) {
+  const { setIsMenuOpen } = useMenu();
   const { logo, description, links, social } = footer;
   const currentDate = new Date();
 
   const socialMedia = [
     {
       id: 101,
-      href: social?.links?.facebook || 'https://www.facebook.com/mouslem.chooseme',
+      href: social?.facebook || 'https://www.facebook.com/mouslem.chooseme',
       icon: <FaFacebookF />,
     },
     {
       id: 102,
-      href: social?.links?.youtube || 'https://www.youtube.com/channel/UC3HkjudvAZpC21O3RQWacnQ/',
+      href: social?.youtube || 'https://www.youtube.com/channel/UC3HkjudvAZpC21O3RQWacnQ/',
       icon: <FaYoutube />,
     },
     {
       id: 103,
-      href: social?.links?.instagram || 'https://www.instagram.com/mouslem_khirouni/',
+      href: social?.instagram || 'https://www.instagram.com/mouslem_khirouni/',
       icon: <FaInstagram />,
     },
     {
       id: 104,
-      href: social?.links?.linkedin || 'https://www.linkedin.com/in/mouslem-khirouni-b64a79164/',
+      href: social?.linkedin || 'https://www.linkedin.com/in/mouslem-khirouni-b64a79164/',
       icon: <FaLinkedinIn />,
     },
     {
       sid: 105,
-      href: `https://wa.me/${(social?.links?.whatsapp.startsWith('+') ? social?.links?.whatsapp.slice(1) : social?.links?.whatsapp) || '971551504981'}`,
+      href: `https://wa.me/${(social?.whatsapp.startsWith('+') ? social?.whatsapp.slice(1) : social?.whatsapp) || '971585828626'}`,
       icon: <FaWhatsapp />,
     },
     {
       id: 106,
-      href:
-        social?.links?.tiktok || 'https://www.tiktok.com/@mouslemkhirouni?_t=ZS-8xifB0OxYq0&_r=1',
+      href: social?.tiktok || 'https://www.tiktok.com/@mouslemkhirouni?_t=ZS-8xifB0OxYq0&_r=1',
       icon: <FaTiktok />,
     },
   ];
@@ -86,9 +88,10 @@ export default function Footer({ footer = {} }) {
                 ) : (
                   l?.services?.map((s, i) => (
                     <Link
-                      href={`/${s.slug}`}
+                      href={`/services/${s.slug}`}
                       className="text-[1.4rem] text-muted-foreground hover:text-foreground mb-16"
                       key={`service-${s.id || i}`}
+                      onClick={() => setIsMenuOpen(true)}
                     >
                       {s.name || 'Service Name'}
                     </Link>

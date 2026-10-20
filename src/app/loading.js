@@ -1,6 +1,12 @@
 import PartnersSkeleton from '@/components/ui/skeletons/Home/PartnersSkeleton';
 import ServicesSkeleton from '@/components/ui/skeletons/ServicesSkeleton';
 import MainHeroSkeleton from '@/components/ui/skeletons/MainHeroSkeleton';
+import CompaniesSkeleton from '@/components/ui/skeletons/Home/CompaniesSkeleton';
+import GrowthSkeleton from '@/components/ui/skeletons/GrowthSkeleton';
+import MissionSkeleton from '@/components/ui/skeletons/Home/MissionSkeleton';
+import TrustSkeleton from '@/components/ui/skeletons/TrustSkeleton';
+import TestimonialsSkeleton from '@/components/ui/skeletons/TestimonialsSkeleton';
+import CtaSkeleton from '@/components/ui/skeletons/CtaSkeleton';
 
 export default function Loading() {
   return (
@@ -8,6 +14,12 @@ export default function Loading() {
       <MainHeroSkeleton />
       <PartnersSkeleton />
       <ServicesSkeleton />
+      <CompaniesSkeleton />
+      <GrowthSkeleton />
+      <MissionSkeleton />
+      <TrustSkeleton />
+      <TestimonialsSkeleton />
+      <CtaSkeleton />
     </>
   );
 }

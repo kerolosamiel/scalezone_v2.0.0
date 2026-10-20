@@ -102,7 +102,7 @@ export default function FormSide() {
         onSubmit={handleSubmit(onSubmit)}
         className="p-48 max-md:p-32 max-sm:px-24 bg-card [&_input]:bg-transparent! [&_div]:bg-transparent! h-fit"
       >
-        <ArabicSuccessModal />
+        <ArabicSuccessModal setOpen={setOpen} />
 
         <FieldSet disabled={isSubmitting}>
           <FieldGroup className="grid grid-cols-2 max-lg:grid-cols-1 gap-32 grid-wrap">

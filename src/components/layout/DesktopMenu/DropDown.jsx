@@ -1,4 +1,5 @@
-import { NavigationMenuItem, NavigationMenuLink } from '@/components/ui/navigation-menu';
+import { NavigationMenuItem } from '@/components/ui/navigation-menu';
+import Link from 'next/link';
 
 export default function DropDown({ services }) {
   return (
@@ -7,16 +8,16 @@ export default function DropDown({ services }) {
         <p className="text-[1.6rem] text-primary text-center">No Services Found</p>
       ) : (
         services?.zones?.map((s, i) => (
-          <NavigationMenuItem key={`zone-${s.id || i}`}>
-            <NavigationMenuLink
+          <NavigationMenuItem key={`zone-${s.id || i}`} className="flex flex-col">
+            <Link
               href={`/zones/${s.slug}`}
-              className="text-[1.6rem] text-primary mb-48"
+              className="text-[1.6rem] text-primary mb-48 inline-flex"
             >
               {s?.slug
                 ?.split('-')
                 ?.map((w) => `${w?.charAt(0)?.toUpperCase()}${w?.slice(1)}`)
                 ?.join(' ') || 'Zone Services'}
-            </NavigationMenuLink>
+            </Link>
 
             {s?.services?.length === 0 ? (
               <p className="text-[1.4rem] text-muted-foreground hover:text-foreground ml-8">
@@ -24,13 +25,13 @@ export default function DropDown({ services }) {
               </p>
             ) : (
               s?.services?.map((s, i) => (
-                <NavigationMenuLink
+                <Link
                   href={`/services/${s.slug}`}
-                  className="text-[1.4rem] text-muted-foreground hover:text-foreground mb-16"
+                  className="text-[1.4rem] text-muted-foreground hover:text-foreground mb-16 inline-flex"
                   key={`service-${s.id || i}`}
                 >
                   {s.name || 'Service Name'}
-                </NavigationMenuLink>
+                </Link>
               ))
             )}
           </NavigationMenuItem>
