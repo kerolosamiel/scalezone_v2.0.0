@@ -1,5 +1,7 @@
+'use client';
 import { Separator } from '@/components/ui/separator';
 import SocialMedia from '@/components/ui/socialmedia';
+import { useMenu } from '@/providers/MenuContext';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -12,6 +14,7 @@ import {
 } from 'react-icons/fa';
 
 export default function Footer({ footer = {} }) {
+  const { setIsMenuOpen } = useMenu();
   const { logo, description, links, social } = footer;
   const currentDate = new Date();
 
@@ -88,6 +91,7 @@ export default function Footer({ footer = {} }) {
                       href={`/services/${s.slug}`}
                       className="text-[1.4rem] text-muted-foreground hover:text-foreground mb-16"
                       key={`service-${s.id || i}`}
+                      onClick={() => setIsMenuOpen(true)}
                     >
                       {s.name || 'Service Name'}
                     </Link>

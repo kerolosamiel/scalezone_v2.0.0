@@ -7,6 +7,7 @@ import QueryProvider from '@/providers/QueryProvider';
 import { getLayout } from '@/lib/wordpress/data-fetching/queries';
 import Header from '@/components/layout/Header/Header';
 import Footer from '@/components/layout/Footer/Footer';
+import { MenuProvider } from '@/providers/MenuContext';
 
 // Font for text
 const poppins = Poppins({
@@ -34,6 +35,7 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   const layout = await getLayout();
 
+  const handleClose = () => {};
   return (
     <html
       lang="en"
@@ -43,9 +45,11 @@ export default async function RootLayout({ children }) {
       <body>
         <QueryProvider>
           <ThemeProvider>
-            <Header header={layout?.header} />
-            {children}
-            <Footer footer={layout?.footer} />
+            <MenuProvider>
+              <Header header={layout?.header} />
+              {children}
+              <Footer footer={layout?.footer} />
+            </MenuProvider>
           </ThemeProvider>
         </QueryProvider>
       </body>

@@ -17,6 +17,7 @@ import { Fragment, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { cn } from 'cn';
 import Link from 'next/link';
+import { useMenu } from '@/providers/MenuContext';
 
 export default function BaseNavigationMenu({
   menu = {},
@@ -25,9 +26,9 @@ export default function BaseNavigationMenu({
   children,
   className = '',
 }) {
-  const [active, setActive] = useState(true);
   const [openItems, setOpenItems] = useState(['item-1']);
   const { about, resources, contact, services } = menu;
+  const { isMenuOpen, closeMenu } = useMenu();
 
   const links = [
     {
@@ -49,10 +50,10 @@ export default function BaseNavigationMenu({
 
   return (
     <>
-      <BurgerIcon setActive={setActive} left={left} className={className} />
+      <BurgerIcon active={isMenuOpen} closeMenu={closeMenu} left={left} className={className} />
       <div
         className={cn(
-          `flex flex-col gap-32 justify-between fixed w-[40%] h-[calc(100dvh-75px)] ${!left ? '-right-full' : '-left-full'} transition-all duration-500 ease-in-out top-full max-sm:w-[60%] max-[390px]:w-[75%]! lg:hidden lg:invisible pb-48 pt-32 ${!active && (!left ? 'right-0!' : 'left-0!')} bg-background z-50 backdrop-blur-[30px]`,
+          `flex flex-col gap-32 justify-between fixed w-[40%] h-[calc(100dvh-75px)] ${!left ? '-right-full' : '-left-full'} transition-all duration-500 ease-in-out top-full max-sm:w-[60%] max-[390px]:w-[75%]! lg:hidden lg:invisible pb-48 pt-32 ${!isMenuOpen && (!left ? 'right-0!' : 'left-0!')} bg-background z-50 backdrop-blur-[30px]`,
           className
         )}
       >
@@ -76,12 +77,13 @@ export default function BaseNavigationMenu({
                   {services?.label || 'Services'}
                 </AccordionTrigger>
 
-                <AccordionContent className="mt-16">
+                <AccordionContent className="mt-16 flex flex-col">
                   {services?.zones?.map((s, i) => (
                     <Link
                       key={`zone-${s.id || i}`}
                       href={`/zones/${s.slug}`}
                       className="text-[1.6rem] no-underline! mb-16 last:mb-0"
+                      onClick={closeMenu}
                     >
                       {s?.slug
                         ?.split('-')
