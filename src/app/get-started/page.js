@@ -1,3 +1,4 @@
+import FaqsSection from '@/components/sections/FaqsSection/Faqs';
 import StatesSection from '@/components/sections/States/StatesSection';
 import { getGrowthPage } from '@/lib/wordpress/data-fetching/queries';
 import { notFound } from 'next/navigation';
@@ -36,6 +37,7 @@ export default async function page() {
   return (
     <main>
       <StatesSection states={growthData.trust} />
+      <FaqsSection faqs={growthData.faqs} />
     </main>
   );
 }
