@@ -4,6 +4,7 @@ import FaqsSection from '@/components/sections/FaqsSection/Faqs';
 import StatesSection from '@/components/sections/States/StatesSection';
 import { getGrowthPage } from '@/lib/wordpress/data-fetching/queries';
 import { notFound } from 'next/navigation';
+import WhyGrowthSection from './WhyGrowthSection';
 export async function generateMetadata() {
   const growthData = await getGrowthPage();
 
@@ -38,6 +39,7 @@ export default async function page() {
   console.log(growthData);
   return (
     <main className="mt-100">
+      <WhyGrowthSection whyGrowth={growthData.whyGrowth} />
       <StatesSection states={growthData.trust} />
       <TestimonialsSection testimonials={growthData.testimonials} />
       <FaqsSection faqs={growthData.faqs} />
