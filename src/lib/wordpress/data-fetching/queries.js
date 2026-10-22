@@ -539,6 +539,41 @@ export async function getGrowthPage() {
   return result;
 }
 
+export async function getBlogPage(slug) {
+  const data = await wpFetch(endpoints.blogBySlug(slug), {
+    next: { tags: ['wordpress-data'] },
+  });
+
+  if (!data) return null;
+
+  const pageData = Array.isArray(data) ? data[0] : data;
+
+  const pageSections = pageData.acf?.blog_sections;
+  if (!pageSections) return null;
+
+  const allImages = [
+    pageSections.hero_section?.auther?.team_avatar,
+    pageSections.states_section?.blog_image,
+    pageSections.content_section?.auther_card?.avatar,
+  ];
+
+  const imageObjects = allImages.filter(Boolean).map((id) => ({ ID: id }));
+
+  const relatedBlogs = pageSections.related_section?.blogs;
+
+  const blogsObjects = relatedBlogs.filter(Boolean).map((id) => ({ ID: id }));
+
+  const [rawImages, rawBlogs] = await Promise.all([
+    getMultipleCPTs(imageObjects, endpoints.mediaById),
+    getMultipleCPTs(blogsObjects, endpoints.blogById),
+  ]);
+
+  // Build a lookup map keyed by media ID for quick image access during transformation.
+  const imagesMap = new Map(rawImages.map((img) => [img.id, img]));
+
+  return rawBlogs;
+}
+
 function mediaIds(items) {
   if (!items) return null;
   const ids = items
