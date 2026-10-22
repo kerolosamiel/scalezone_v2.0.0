@@ -39,11 +39,11 @@ export default async function page({ params }) {
 
   const featured = media.featured
     ? media.featured
-    : media?.items.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
+    : media?.items.sort((a, b) => Date.parse(b.date) - Date.parse(a.date))[0];
 
   return (
     <div className="flex flex-col gap-64">
-      {!media.featured || !media.items || media.items?.length === 0 ? (
+      {!featured || !media.items || media.items?.length === 0 ? (
         <EmptyState
           className="py-64"
           title={`No ${slug.charAt(0).toUpperCase()}${slug.slice(1)} Found`}

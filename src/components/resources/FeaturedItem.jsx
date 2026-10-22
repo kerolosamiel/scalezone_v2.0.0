@@ -37,7 +37,7 @@ export default function FeaturedItem({ item, slug }) {
             <h2 className="text-[3rem]">{item.title}</h2>
 
             {item.description && (
-              <p className="text-[1.8rem] text-muted-foreground mask-ellipse line-clamp-4">
+              <p className="text-[1.8rem] text-muted-foreground mask-ellipse line-clamp-2">
                 {item.description}
               </p>
             )}
