@@ -1,13 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function MediaCard({ card }) {
+export default function MediaCard({ card, slug }) {
   if (!card) return null;
   const itemDate = new Date(card.date);
   const currentDate = new Date();
+  const link = slug === 'blogs' ? `/blogs/${card.slug}` : card.link;
+
   return (
     <article className="bg-card">
-      <Link href={card.link || ''}>
+      <Link href={link || ''} target={slug != 'blogs' ? '_blank' : '_self'}>
         <div>
           <Image
             src={card.image?.url}
@@ -24,6 +26,12 @@ export default function MediaCard({ card }) {
           </p>
 
           <h2 className="text-[1.6rem] text-ellipsis line-clamp-2">{card.title}</h2>
+
+          {card.description && (
+            <p className="text-[1.4rem] text-muted-foreground mask-ellipse line-clamp-3">
+              {card.description}
+            </p>
+          )}
         </div>
       </Link>
     </article>

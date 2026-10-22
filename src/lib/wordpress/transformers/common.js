@@ -367,3 +367,21 @@ export function layoutZonesTransform(zones) {
 
   return zonesData;
 }
+
+export function blogCardTransform(blogObj, imageMap) {
+  if (!blogObj) return null;
+
+  const sections = blogObj.acf?.blog_sections;
+  if (!sections) return null;
+
+  const blog = {
+    image: mediaImageTransform(imageMap?.get(sections.states_section?.blog_image)),
+    title: sections.hero_section?.title,
+    description: sections.states_section?.description,
+    date: blogObj.date,
+    slug: blogObj.slug,
+    button: 'Read More',
+  };
+
+  return blog;
+}

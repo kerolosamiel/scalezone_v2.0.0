@@ -9,7 +9,7 @@ export const endpoints = {
   teamMembers: '/team-member',
   testimonials: '/testimonial',
   videos: '/video',
-  blogs: '/blog',
+  blogs: '/blog-post',
 
   pagesWithLimit: (limit) => `/pages?per_page=${limit}`,
   servicesWithLimit: (limit) => `/service?per_page=${limit}`,
@@ -21,7 +21,7 @@ export const endpoints = {
   teamMembersWithLimit: (limit) => `/team-member?per_page=${limit}`,
   testimonialsWithLimit: (limit) => `/testimonial?per_page=${limit}`,
   videosWithLimit: (limit) => `/video?per_page=${limit}`,
-  blogsWithLimit: (limit) => `/blog?per_page=${limit}`,
+  blogsWithLimit: (limit) => `/blog-post?per_page=${limit}`,
 
   pageBySlug: (slug) => `/pages?slug=${slug}`,
   serviceBySlug: (slug) => `/service?slug=${slug}`,
@@ -34,7 +34,7 @@ export const endpoints = {
   teamMemberBySlug: (slug) => `/team-member?slug=${slug}`,
   testimonialBySlug: (slug) => `/testimonial?slug=${slug}`,
   videoBySlug: (slug) => `/video?slug=${slug}`,
-  blogBySlug: (slug) => `/blog?slug=${slug}`,
+  blogBySlug: (slug) => `/blog-post?slug=${slug}`,
 
   pageById: (id) => `/pages/${id}`,
   serviceById: (id) => `/service/${id}`,
@@ -47,7 +47,7 @@ export const endpoints = {
   testimonialById: (id) => `/testimonial/${id}`,
   teamMemberById: (id) => `/team-member/${id}`,
   videoById: (id) => `/video/${id}`,
-  blogById: (id) => `/blog/${id}`,
+  blogById: (id) => `/blog-post/${id}`,
   mediaByParentId: (id) => `/media?parent=${id}`,
   mediaById: (id) => `/media/${id}`,
 

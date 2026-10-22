@@ -51,8 +51,8 @@ export default async function page({ params }) {
         />
       ) : (
         <>
-          <FeaturedItem item={featured} />
-          <MediaItems items={media.items} />
+          <FeaturedItem item={featured} slug={slug} />
+          <MediaItems items={media.items} slug={slug} />
         </>
       )}
     </div>

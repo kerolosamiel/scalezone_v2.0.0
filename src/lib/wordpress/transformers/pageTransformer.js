@@ -1,4 +1,5 @@
 import {
+  blogCardTransform,
   eventGalleryTransform,
   faqTransform,
   imageTransform,
@@ -443,8 +444,8 @@ export function resourcesPageTransfrom(
     hero: page.hero,
     mediaHub: {
       blogs: {
-        featured: undefined,
-        items: [],
+        featured: blogCardTransform(blogFeatured, images),
+        items: rawBlogs?.map((b) => blogCardTransform(b, images)) || [],
       },
       videos: {
         featured: mediaTransform(videoFeatured, images) || undefined,

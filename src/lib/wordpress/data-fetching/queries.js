@@ -443,19 +443,23 @@ export async function getResourcePage() {
       getCPTById(podcastFeaturedId, endpoints.podcastById(podcastFeaturedId)),
     ]);
 
-  const allMedia = [
-    ...rawBlogs,
-    ...rawVideos,
-    ...rawPodcasts,
-    rawBlogFeatured,
-    rawVideoFeatured,
-    rawPodcastFeatured,
-  ];
+  const allMedia = [...rawVideos, ...rawPodcasts, rawVideoFeatured, rawPodcastFeatured];
 
   // Convert each testimonial's client image ID into a media lookup payload.
   const imageObjects = allMedia
     .map((m) => m?.acf?.image || m?.acf_all_fields?.image)
-    .map((id) => ({ ID: id }));
+    .map((id) => ({ ID: id }))
+    .flat(Boolean);
+
+  const featuredBlog = Array.isArray(rawBlogFeatured) ? rawBlogFeatured : [];
+  const allBlogs = [...rawBlogs, ...featuredBlog];
+
+  const blogsImageObjects = allBlogs
+    .map((b) => b?.acf?.blog_sections?.states_section?.blog_image)
+    .map((id) => ({ ID: id }))
+    .flat(Boolean);
+
+  imageObjects.push(...blogsImageObjects);
 
   // Fetch all testimonial images and zone service entries needed by the page transformer.
   const rawImages = await getMultipleCPTs(imageObjects, endpoints.mediaById);
