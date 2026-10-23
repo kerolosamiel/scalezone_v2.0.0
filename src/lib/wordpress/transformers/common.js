@@ -385,3 +385,18 @@ export function blogCardTransform(blogObj, imageMap) {
 
   return blog;
 }
+
+export function relatedBlogTransform(blogItem, imagesMap) {
+  if (!blogItem) return null;
+
+  const blogData = blogItem.acf?.blog_sections;
+  if (!blogData) return null;
+
+  const blog = {
+    date: blogItem.date,
+    image: mediaImageTransform(imagesMap?.get(blogData.states_section?.blog_image)),
+    title: blogData.hero_section?.title,
+  };
+
+  return blog;
+}

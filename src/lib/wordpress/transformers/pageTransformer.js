@@ -8,6 +8,7 @@ import {
   mediaImageTransform,
   mediaTransform,
   metaTransform,
+  relatedBlogTransform,
   serviceCardTransform,
   teamMemberTransform,
   testimonialTransform,
@@ -542,4 +543,54 @@ export function growthTransform(rawData, trustStats, rawFaqs, rawTestimonials, i
   };
 
   return growth;
+}
+
+export function blogPageTransform(rawData, relatedBlogs, imagesMap) {
+  if (!rawData) return null;
+
+  const base = basePageTransform(rawData);
+  if (!base) return null;
+
+  const pageData = base.acf?.blog_sections;
+  if (!pageData) return null;
+
+  delete base.acf;
+
+  const blog = {
+    ...base,
+    hero: {
+      title: pageData.hero_section?.title || '',
+      description: pageData.hero_section?.description || '',
+      chip: pageData.hero_section?.chip || '',
+      auther: {
+        avatar: imageTransform(pageData.hero_section?.auther?.team_avatar),
+        name: pageData.hero_section?.auther?.team_name || '',
+      },
+    },
+    states: {
+      blogImage: imageTransform(pageData.states_section?.blog_image),
+      description: pageData.states_section?.description || '',
+      isStates: pageData.states_section?.is_states_grid,
+      statesGrid: pageData.states_section?.states_grid,
+    },
+    content: {
+      blogContent: pageData.content_section?.content || '',
+      autherCard: {
+        avatar: imageTransform(pageData.content_section?.auther_card?.avatar),
+        name: pageData.content_section?.auther_card?.team_name || '',
+        description: pageData.content_section?.auther_card?.description || '',
+      },
+    },
+    related: {
+      title: pageData.related_section?.title,
+      blogs: relatedBlogs?.map((b) => relatedBlogTransform(b, imagesMap)),
+    },
+    cta: {
+      title: pageData.cta_section?.cta_title || '',
+      description: pageData.cta_section?.cta_description || '',
+      cardTitle: pageData.cta_section?.cta_second_title || '',
+      button: pageData.cta_section?.cta_button.button_text || '',
+    },
+  };
+  return blog;
 }

@@ -3,6 +3,7 @@ import { endpoints } from '../endpoints/endpoints';
 import {
   aboutPageTransform,
   appointmentTransform,
+  blogPageTransform,
   contactTransform,
   growthTransform,
   homePageTransform,
@@ -548,30 +549,27 @@ export async function getBlogPage(slug) {
 
   const pageData = Array.isArray(data) ? data[0] : data;
 
-  const pageSections = pageData.acf?.blog_sections;
+  const pageSections = pageData.acf_all_fields?.blog_sections;
   if (!pageSections) return null;
-
-  const allImages = [
-    pageSections.hero_section?.auther?.team_avatar,
-    pageSections.states_section?.blog_image,
-    pageSections.content_section?.auther_card?.avatar,
-  ];
-
-  const imageObjects = allImages.filter(Boolean).map((id) => ({ ID: id }));
 
   const relatedBlogs = pageSections.related_section?.blogs;
 
-  const blogsObjects = relatedBlogs.filter(Boolean).map((id) => ({ ID: id }));
+  const blogsObjects = relatedBlogs.filter(Boolean).map((b) => ({ ID: b.ID }));
 
-  const [rawImages, rawBlogs] = await Promise.all([
-    getMultipleCPTs(imageObjects, endpoints.mediaById),
-    getMultipleCPTs(blogsObjects, endpoints.blogById),
-  ]);
+  const rawBlogs = await getMultipleCPTs(blogsObjects, endpoints.blogById);
 
-  // Build a lookup map keyed by media ID for quick image access during transformation.
-  const imagesMap = new Map(rawImages.map((img) => [img.id, img]));
+  const relatedImages = rawBlogs
+    ?.map((b) => b.acf?.blog_sections?.states_section?.blog_image)
+    ?.filter(Boolean)
+    ?.map((id) => ({ ID: id }));
 
-  return rawBlogs;
+  const rawRelated = await getMultipleCPTs(relatedImages, endpoints.mediaById);
+
+  const imagesMap = new Map(rawRelated?.map((b) => [b.id, b]));
+
+  const result = blogPageTransform(pageData, rawBlogs, imagesMap);
+
+  return result;
 }
 
 function mediaIds(items) {
