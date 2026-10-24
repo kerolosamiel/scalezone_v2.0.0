@@ -4,6 +4,33 @@ import StatsSection from '@/components/blog/StatsSection';
 import CtaSection from '@/components/sections/CTABand/CtaSection';
 import { getBlogPage } from '@/lib/wordpress/data-fetching/queries';
 
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const data = await getBlogPage(slug);
+
+  if (!data?.seo) {
+    return {
+      title: `${slug.charAt(0).toUpperCase()}${slug.slice(1)} | Scalezone`,
+      description: `Explore our ${slug.charAt(0).toUpperCase()}${slug.slice(1)}`,
+    };
+  }
+
+  return {
+    title: data.seo.title,
+    description: data.seo.description,
+    keywords: data.seo.keywords,
+    openGraph: {
+      title: data.seo.ogTitle,
+      description: data.seo.ogDescription,
+      images: data.seo.ogImage ? [data.seo.ogImage] : [],
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
+}
+
 export default async function page({ params }) {
   const { slug } = await params;
   const data = await getBlogPage(slug);
