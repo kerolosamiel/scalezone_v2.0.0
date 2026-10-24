@@ -565,6 +565,7 @@ export function blogPageTransform(rawData, relatedBlogs, imagesMap) {
       auther: {
         avatar: imageTransform(pageData.hero_section?.auther?.team_avatar),
         name: pageData.hero_section?.auther?.team_name || '',
+        date: rawData.publish_date,
       },
     },
     states: {

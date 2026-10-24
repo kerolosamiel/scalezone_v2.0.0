@@ -455,18 +455,11 @@ export async function getResourcePage() {
   const featuredBlog = Array.isArray(rawBlogFeatured) ? rawBlogFeatured : [];
   const allBlogs = [...rawBlogs, ...featuredBlog];
 
-  const blogsImageObjects = allBlogs
-    .map((b) => b?.acf?.blog_sections?.states_section?.blog_image)
-    .map((id) => ({ ID: id }))
-    .flat(Boolean);
-
-  imageObjects.push(...blogsImageObjects);
-
   // Fetch all testimonial images and zone service entries needed by the page transformer.
   const rawImages = await getMultipleCPTs(imageObjects, endpoints.mediaById);
 
   // Build a lookup map keyed by media ID for quick image access during transformation.
-  const imagesMap = new Map(rawImages.map((img) => [img.id, img]));
+  const imagesMap = new Map(rawImages?.map((img) => [img.id, img]));
 
   const result = resourcesPageTransfrom(
     data,

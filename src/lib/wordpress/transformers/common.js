@@ -371,14 +371,14 @@ export function layoutZonesTransform(zones) {
 export function blogCardTransform(blogObj, imageMap) {
   if (!blogObj) return null;
 
-  const sections = blogObj.acf?.blog_sections;
+  const sections = blogObj.acf_all_fields?.blog_sections;
   if (!sections) return null;
 
   const blog = {
-    image: mediaImageTransform(imageMap?.get(sections.states_section?.blog_image)),
+    image: imageTransform(sections.states_section?.blog_image),
     title: sections.hero_section?.title,
     description: sections.states_section?.description,
-    date: blogObj.date,
+    date: blogObj.publish_date,
     slug: blogObj.slug,
     button: 'Read More',
   };
