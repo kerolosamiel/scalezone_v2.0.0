@@ -2,6 +2,7 @@ import FeaturedItem from '@/components/resources/FeaturedItem';
 import MediaItems from '@/components/resources/MediaItems';
 import MediaSection from '@/components/resources/MediaSection';
 import EmptyState from '@/components/ui/EmptyState';
+import { Separator } from '@/components/ui/separator';
 import { getResourcePage } from '@/lib/wordpress/data-fetching/queries';
 import { notFound } from 'next/navigation';
 import React from 'react';
@@ -52,6 +53,7 @@ export default async function page({ params }) {
       ) : (
         <>
           <FeaturedItem item={featured} slug={slug} />
+          <Separator className="h-2 sm:hidden" />
           <MediaItems items={media.items} slug={slug} />
         </>
       )}
