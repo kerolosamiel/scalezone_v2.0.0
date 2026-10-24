@@ -11,8 +11,8 @@ export default function WhyGrowthSection({ whyGrowth }) {
   return (
     <BaseSections title={title} subtitle={subtitle}>
       <ul className="grid grid-cols-4 justify-center items-center gap-24 max-xl:grid-cols-3 max-lg:grid-cols-3 max-md:grid-cols-2 max-[560px]:grid-cols-1!">
-        {reasons.map((r) => (
-          <li className="w-fit mx-auto">
+        {reasons.map((r, i) => (
+          <li key={`reason-${i}`} className="w-fit mx-auto">
             <ReasonCard card={r} className="max-w-300 max-[560px]:max-w-[unset]" />
           </li>
         ))}

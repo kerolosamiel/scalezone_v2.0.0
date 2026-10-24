@@ -4,7 +4,8 @@ import FaqsSection from '@/components/sections/FaqsSection/Faqs';
 import StatesSection from '@/components/sections/States/StatesSection';
 import { getGrowthPage } from '@/lib/wordpress/data-fetching/queries';
 import { notFound } from 'next/navigation';
-import WhyGrowthSection from './WhyGrowthSection';
+import WhyGrowthSection from '../../components/growth-calculator/WhyGrowthSection';
+
 export async function generateMetadata() {
   const growthData = await getGrowthPage();
 
