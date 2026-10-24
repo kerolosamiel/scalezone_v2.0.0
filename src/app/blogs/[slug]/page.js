@@ -35,8 +35,6 @@ export default async function page({ params }) {
   const { slug } = await params;
   const data = await getBlogPage(slug);
 
-  console.log(data);
-
   const whatsappMessage = `${data.hero?.description}.. Read the full article`;
 
   return (
