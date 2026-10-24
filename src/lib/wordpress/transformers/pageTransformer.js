@@ -576,7 +576,7 @@ export function blogPageTransform(rawData, relatedBlogs, imagesMap) {
     },
     content: {
       blogContent: pageData.content_section?.content || '',
-      autherCard: {
+      authorCard: {
         avatar: imageTransform(pageData.content_section?.auther_card?.avatar),
         name: pageData.content_section?.auther_card?.team_name || '',
         description: pageData.content_section?.auther_card?.description || '',
