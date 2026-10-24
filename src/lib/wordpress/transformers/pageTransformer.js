@@ -568,11 +568,11 @@ export function blogPageTransform(rawData, relatedBlogs, imagesMap) {
         date: rawData.publish_date,
       },
     },
-    states: {
-      blogImage: imageTransform(pageData.states_section?.blog_image),
-      description: pageData.states_section?.description || '',
-      isStates: pageData.states_section?.is_states_grid,
-      statesGrid: pageData.states_section?.states_grid,
+    stats: {
+      blogImage: imageTransform(pageData.stats_section?.blog_image),
+      description: pageData.stats_section?.description || '',
+      isStats: pageData.stats_section?.is_stats_grid,
+      statsGrid: pageData.stats_section?.stats_grid,
     },
     content: {
       blogContent: pageData.content_section?.content || '',
