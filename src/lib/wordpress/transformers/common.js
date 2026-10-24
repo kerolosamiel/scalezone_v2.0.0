@@ -375,9 +375,9 @@ export function blogCardTransform(blogObj, imageMap) {
   if (!sections) return null;
 
   const blog = {
-    image: imageTransform(sections.states_section?.blog_image),
+    image: imageTransform(sections.stats_section?.blog_image),
     title: sections.hero_section?.title,
-    description: sections.states_section?.description,
+    description: sections.stats_section?.description,
     date: blogObj.publish_date,
     slug: blogObj.slug,
     button: 'Read More',
@@ -394,7 +394,7 @@ export function relatedBlogTransform(blogItem, imagesMap) {
 
   const blog = {
     date: blogItem.date,
-    image: mediaImageTransform(imagesMap?.get(blogData.states_section?.blog_image)),
+    image: mediaImageTransform(imagesMap?.get(blogData.stats_section?.blog_image)),
     title: blogData.hero_section?.title,
   };
 
