@@ -1,5 +1,6 @@
 import HeroSection from '@/components/legal/HeroSection';
 import { getLagalPages } from '@/lib/wordpress/data-fetching/queries';
+import { notFound } from 'next/navigation';
 
 export const metadata = {
   title: 'Terms and Conditions | Scalezone',
@@ -13,14 +14,11 @@ export const metadata = {
 export default async function page() {
   const data = await getLagalPages('terms-and-conditions');
 
-  console.log(data);
+  if (!data) return notFound();
+
   return (
     <main>
-      <HeroSection
-        slug="terms-and-conditions"
-        title="Terms & Conditions"
-        description="By accessing or using our website and services, you agree to be bound by these Terms and Conditions. Please read them carefully."
-      />
+      <HeroSection slug="terms-and-conditions" lastUpdate={data.lastUpdate} hero={data.hero} />
     </main>
   );
 }
