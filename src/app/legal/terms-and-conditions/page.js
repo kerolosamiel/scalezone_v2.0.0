@@ -1,3 +1,4 @@
+import ContentSection from '@/components/legal/ContentSection';
 import HeroSection from '@/components/legal/HeroSection';
 import { getLagalPages } from '@/lib/wordpress/data-fetching/queries';
 import { notFound } from 'next/navigation';
@@ -19,6 +20,7 @@ export default async function page() {
   return (
     <main>
       <HeroSection slug="terms-and-conditions" lastUpdate={data.lastUpdate} hero={data.hero} />
+      <ContentSection contentData={data.content} />
     </main>
   );
 }
