@@ -7,11 +7,15 @@ import { notFound } from 'next/navigation';
 
 export async function generateMetadata() {
   const appointment = await getAppointmentPage();
+  const url = process.env.NEXT_PUBLIC_SITE_URL;
 
   if (!appointment?.seo) {
     return {
       title: 'Book an Appointment | Scalezone',
       description: 'Appointment scalezone',
+      alternates: {
+        canonical: `${url}/appointment`,
+      },
     };
   }
 
@@ -27,6 +31,9 @@ export async function generateMetadata() {
     robots: {
       index: true,
       follow: true,
+    },
+    alternates: {
+      canonical: `${url}/appointment`,
     },
   };
 }

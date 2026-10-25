@@ -12,11 +12,15 @@ import StatesSection from '@/components/sections/States/StatesSection';
 
 export async function generateMetadata() {
   const homeData = await getHomePage();
+  const url = process.env.NEXT_PUBLIC_SITE_URL;
 
   if (!homeData?.seo) {
     return {
       title: 'Scalezone',
       description: 'Welcome to Scalezone',
+      alternates: {
+        canonical: url,
+      },
     };
   }
 
@@ -32,6 +36,9 @@ export async function generateMetadata() {
     robots: {
       index: true,
       follow: true,
+    },
+    alternates: {
+      canonical: url,
     },
   };
 }

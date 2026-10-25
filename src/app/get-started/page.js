@@ -8,11 +8,15 @@ import WhyGrowthSection from '../../components/growth-calculator/WhyGrowthSectio
 
 export async function generateMetadata() {
   const growthData = await getGrowthPage();
+  const url = process.env.NEXT_PUBLIC_SITE_URL;
 
   if (!growthData?.seo) {
     return {
       title: 'Scalezone',
       description: 'Welcome to Scalezone',
+      alternates: {
+        canonical: `${url}/get-started`,
+      },
     };
   }
 
@@ -28,6 +32,9 @@ export async function generateMetadata() {
     robots: {
       index: true,
       follow: true,
+    },
+    alternates: {
+      canonical: `${url}/get-started`,
     },
   };
 }

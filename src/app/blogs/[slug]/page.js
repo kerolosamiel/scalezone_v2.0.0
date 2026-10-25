@@ -7,11 +7,15 @@ import { getBlogPage } from '@/lib/wordpress/data-fetching/queries';
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const data = await getBlogPage(slug);
+  const url = process.env.NEXT_PUBLIC_SITE_URL;
 
   if (!data?.seo) {
     return {
       title: `${slug.charAt(0).toUpperCase()}${slug.slice(1)} | Scalezone`,
       description: `Explore our ${slug.charAt(0).toUpperCase()}${slug.slice(1)}`,
+      alternates: {
+        canonical: `${url}/blogs/${slug}`,
+      },
     };
   }
 
@@ -27,6 +31,9 @@ export async function generateMetadata({ params }) {
     robots: {
       index: true,
       follow: true,
+    },
+    alternates: {
+      canonical: `${url}/blogs/${slug}`,
     },
   };
 }

@@ -9,11 +9,15 @@ import React from 'react';
 
 export async function generateMetadata({ params }) {
   const [page, { slug }] = await Promise.all([getResourcePage(), params]);
+  const url = process.env.NEXT_PUBLIC_SITE_URL;
 
   if (!page?.seo) {
     return {
       title: `${slug.charAt(0).toUpperCase()}${slug.slice(1)} | Scalezone`,
       description: `Explore our ${slug.charAt(0).toUpperCase()}${slug.slice(1)}`,
+      alternates: {
+        canonical: `${url}/resources/${slug}`,
+      },
     };
   }
 
@@ -29,6 +33,9 @@ export async function generateMetadata({ params }) {
     robots: {
       index: true,
       follow: true,
+    },
+    alternates: {
+      canonical: `${url}/resources/${slug}`,
     },
   };
 }

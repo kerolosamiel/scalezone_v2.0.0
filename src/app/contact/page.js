@@ -6,11 +6,15 @@ import { notFound } from 'next/navigation';
 
 export async function generateMetadata() {
   const contact = await getContactPage();
+  const url = process.env.NEXT_PUBLIC_SITE_URL;
 
   if (!contact?.seo) {
     return {
       title: 'Contact | Scalezone',
       description: 'Contact scalezone',
+      alternates: {
+        canonical: `${url}/contact`,
+      },
     };
   }
 
@@ -26,6 +30,9 @@ export async function generateMetadata() {
     robots: {
       index: true,
       follow: true,
+    },
+    alternates: {
+      canonical: `${url}/contact`,
     },
   };
 }

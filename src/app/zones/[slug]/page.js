@@ -11,11 +11,15 @@ import { notFound } from 'next/navigation';
 export async function generateMetadata({ params }) {
   const [{ slug }, zonesData] = await Promise.all([params, getZonePage()]);
   const targetZone = zonesData?.find((z) => z?.slug === slug);
+  const url = process.env.NEXT_PUBLIC_SITE_URL;
 
   if (!targetZone?.seo) {
     return {
       title: 'Services Zone | Scalezone',
       description: 'Explore Services',
+      alternates: {
+        canonical: `${url}/zones/${slug}`,
+      },
     };
   }
 
@@ -31,6 +35,9 @@ export async function generateMetadata({ params }) {
     robots: {
       index: true,
       follow: true,
+    },
+    alternates: {
+      canonical: `${url}/zones/${slug}`,
     },
   };
 }

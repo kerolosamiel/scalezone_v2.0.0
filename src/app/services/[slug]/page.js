@@ -11,11 +11,15 @@ import { notFound } from 'next/navigation';
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const service = await getServicePage(slug);
+  const url = process.env.NEXT_PUBLIC_SITE_URL;
 
   if (!service?.seo) {
     return {
       title: 'Service | Scalezone',
       description: 'Explore the Service',
+      alternates: {
+        canonical: `${url}/services/${slug}`,
+      },
     };
   }
 
@@ -31,6 +35,9 @@ export async function generateMetadata({ params }) {
     robots: {
       index: true,
       follow: true,
+    },
+    alternates: {
+      canonical: `${url}/services/${slug}`,
     },
   };
 }
