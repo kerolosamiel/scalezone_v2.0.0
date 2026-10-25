@@ -24,7 +24,7 @@ export default function HeroSection({ hero, lastUpdate, slug }) {
 
   return (
     <SubPageHero breadcrumbList={breadcrumbs} title={title}>
-      <div className="flex gap-32 items-center my-32">
+      <div className="flex gap-32 items-center my-32 flex-wrap">
         <p className="text-[1.6rem] text-primary">
           Last updated:{' '}
           {new Date(lastUpdate)?.toDateString() || new Date('7/18/2025').toDateString()}
