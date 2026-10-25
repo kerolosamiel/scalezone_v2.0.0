@@ -3,6 +3,7 @@ import HeroSection from '@/components/blog/HeroSection';
 import StatsSection from '@/components/blog/StatsSection';
 import CtaSection from '@/components/sections/CTABand/CtaSection';
 import { getBlogPage } from '@/lib/wordpress/data-fetching/queries';
+import { notFound } from 'next/navigation';
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
@@ -41,6 +42,8 @@ export async function generateMetadata({ params }) {
 export default async function page({ params }) {
   const { slug } = await params;
   const data = await getBlogPage(slug);
+
+  if (!data) return notFound();
 
   const whatsappMessage = `${data.hero?.description}.. Read the full article`;
 

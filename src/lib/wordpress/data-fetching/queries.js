@@ -542,6 +542,7 @@ export async function getBlogPage(slug) {
   if (!data) return null;
 
   const pageData = Array.isArray(data) ? data[0] : data;
+  if (!pageData) return null;
 
   const pageSections = pageData.acf_all_fields?.blog_sections;
   if (!pageSections) return null;

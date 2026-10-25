@@ -10,6 +10,10 @@ const STATIC_REDIRECTS = {
   '/about.html': '/about',
   '/contact.html': '/contact',
   '/appointment.html': '/appointment',
+  '/disclaimer.html': '/legal/disclaimer',
+  '/cookies-policy.html': '/legal/cookies-policy',
+  '/privacy-policy.html': '/legal/privacy-policy',
+  '/termsandconditions.html': '/legal/terms-and-conditions',
 };
 
 const SERVICE_SLUG_MAP = {
@@ -20,6 +24,12 @@ const SERVICE_SLUG_MAP = {
   advertising: '/services/amazon-ppc-and-advertising-management',
   'amazon-training': '/services/training-and-consultancy',
   'gated-category': '/services/account-health-ungating-and-reinstatement',
+};
+
+const BLOG_SLUG_MAP = {
+  'fba-and-fbm': '/blogs/difference-between-amazon-fba-and-fbm',
+  'open-amazon-seller-account': '/blogs/how-to-open-an-amazon-seller-account',
+  'top-amazon-seller-tools': '/blogs/top-amazon-seller-tools',
 };
 
 export function middleware(request) {
@@ -33,6 +43,17 @@ export function middleware(request) {
   if (pathname === '/services/service.html' && searchParams.has('slug')) {
     const slug = searchParams.get('slug');
     const destination = SERVICE_SLUG_MAP[slug];
+
+    if (destination) {
+      url.pathname = destination;
+      url.searchParams.delete('slug');
+      return NextResponse.redirect(url, 301);
+    }
+  }
+
+  if (pathname === '/blogs/blog.html' && searchParams.has('slug')) {
+    const slug = searchParams.get('slug');
+    const destination = BLOG_SLUG_MAP[slug];
 
     if (destination) {
       url.pathname = destination;
