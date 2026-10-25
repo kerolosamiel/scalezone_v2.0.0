@@ -595,3 +595,19 @@ export function blogPageTransform(rawData, relatedBlogs, imagesMap) {
   };
   return blog;
 }
+
+export function legalPagesTransform(rawdata) {
+  if (!rawdata) return null;
+
+  const sections = rawdata.acf_all_fields?.terms_sections;
+  if (!sections) return null;
+
+  const legal = {
+    lastUpdate: rawdata.modified,
+    slug: rawdata.slug,
+    hero: sections.hero_section,
+    content: sections.content_section,
+  };
+
+  return legal;
+}

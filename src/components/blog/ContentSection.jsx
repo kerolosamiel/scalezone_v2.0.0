@@ -1,5 +1,5 @@
 import AuthorCard from '../sections/BlogContent/AuthorCard';
-import Content from '../sections/BlogContent/Content';
+import Content from '../shared/Content';
 import SocialMediaShare from '../shared/SocialMediaShare';
 import { Separator } from '../ui/separator';
 

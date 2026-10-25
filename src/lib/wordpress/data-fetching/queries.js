@@ -8,6 +8,7 @@ import {
   growthTransform,
   homePageTransform,
   layoutTransform,
+  legalPagesTransform,
   resourcesPageTransfrom,
   servicePageTransform,
   zonesTransform,
@@ -579,4 +580,18 @@ function mediaId(item) {
   if (!item) return null;
 
   return item.ID;
+}
+
+export async function getLagalPages(slug) {
+  const data = await wpFetch(endpoints.pageBySlug(slug), {
+    next: { tags: ['wordpress-data'] },
+  });
+
+  if (!data) return null;
+
+  const pageData = Array.isArray(data) ? data[0] : data;
+  if (!pageData) return null;
+
+  const result = legalPagesTransform(pageData);
+  return result;
 }
