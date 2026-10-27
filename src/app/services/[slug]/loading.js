@@ -3,6 +3,7 @@ import GrowthSkeleton from '@/components/ui/skeletons/GrowthSkeleton';
 import ProcessSkeleton from '@/components/ui/skeletons/ProcessSkeleton';
 import ProofSkeleton from '@/components/ui/skeletons/ProofSkeleton';
 import SubHeroSkeleton from '@/components/ui/skeletons/SubHeroSkeleton';
+import RelatedSkeleton from '@/components/ui/skeletons/RelatedSkeleton';
 
 export default function loading() {
   return (
@@ -10,6 +11,7 @@ export default function loading() {
       <SubHeroSkeleton />
       <ProcessSkeleton />
       <ProofSkeleton />
+      <RelatedSkeleton />
       <GrowthSkeleton />
       <FaqsSkeleton />
     </>
