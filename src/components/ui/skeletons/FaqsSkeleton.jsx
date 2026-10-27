@@ -6,7 +6,10 @@ export default function FaqsSkeleton() {
   return (
     <BaseSkeleton>
       {Array.from({ length: 3 }, (_, i) => (
-        <div className="flex items-center gap-32 max-w-600 justify-between mb-16">
+        <div
+          key={`faqs-Skeleton-${i}`}
+          className="flex items-center gap-32 max-w-600 justify-between mb-16"
+        >
           <Skeleton className="h-10 w-[70%]" />
           <Plus className="animate-pulse transition-all size-20! text-accent/30" />
         </div>
