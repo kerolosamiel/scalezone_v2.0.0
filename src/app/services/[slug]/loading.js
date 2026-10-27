@@ -4,11 +4,13 @@ import ProcessSkeleton from '@/components/ui/skeletons/ProcessSkeleton';
 import ProofSkeleton from '@/components/ui/skeletons/ProofSkeleton';
 import SubHeroSkeleton from '@/components/ui/skeletons/SubHeroSkeleton';
 import RelatedSkeleton from '@/components/ui/skeletons/RelatedSkeleton';
+import ImpactSkeleton from '@/components/ui/skeletons/Services/ImpactSkeleton';
 
 export default function loading() {
   return (
     <>
       <SubHeroSkeleton />
+      <ImpactSkeleton />
       <ProcessSkeleton />
       <ProofSkeleton />
       <RelatedSkeleton />
