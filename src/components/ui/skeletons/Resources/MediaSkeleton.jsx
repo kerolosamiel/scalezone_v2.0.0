@@ -1,5 +1,6 @@
 import { Skeleton } from '../../skeleton';
 import FeaturedSkeleton from './FeaturedSkeleton';
+import MediaItemsSkeleton from './MediaItemsSkeleton';
 
 export default function MediaSkeleton() {
   return (
@@ -13,6 +14,7 @@ export default function MediaSkeleton() {
 
         <div className="flex flex-col gap-64">
           <FeaturedSkeleton />
+          <MediaItemsSkeleton />
         </div>
       </div>
     </section>
