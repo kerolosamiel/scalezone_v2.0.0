@@ -1,4 +1,5 @@
 import { Skeleton } from '../../skeleton';
+import FeaturedSkeleton from './FeaturedSkeleton';
 
 export default function MediaSkeleton() {
   return (
@@ -8,6 +9,10 @@ export default function MediaSkeleton() {
           {Array.from({ length: 3 }, (_, i) => (
             <Skeleton key={`media-${i}`} className="mb-8 h-50 w-110" />
           ))}
+        </div>
+
+        <div className="flex flex-col gap-64">
+          <FeaturedSkeleton />
         </div>
       </div>
     </section>
