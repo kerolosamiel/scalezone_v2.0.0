@@ -4,7 +4,7 @@ export default function RelatedCard({ service }) {
   if (!service) return null;
 
   return (
-    <article className="bg-card border border-border hover:border-accent transition-all duration-300">
+    <article className="bg-card border border-border hover:border-accent transition-all duration-300 items-stretch">
       <Link
         href={`/services/${service.slug}`}
         className="px-[4.8rem] py-32 inline-flex flex-col gap-16 max-xl:px-24 max-[390px]:px-16!"

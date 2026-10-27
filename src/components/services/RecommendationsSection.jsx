@@ -18,7 +18,7 @@ export default function RecommendationsSection({ recommendations }) {
       ) : (
         <ul className="grid grid-cols-3 gap-32 max-lg:grid-cols-2 max-md:grid-cols-1! max-md:[&_article]:w-full">
           {services.map((service, i) => (
-            <li key={`service-${service.id || i}`}>
+            <li key={`service-${service.id || i}`} className="flex">
               <RelatedCard service={service} />
             </li>
           ))}
