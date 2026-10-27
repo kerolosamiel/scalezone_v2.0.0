@@ -4,6 +4,7 @@ import MainHeroSkeleton from '@/components/ui/skeletons/MainHeroSkeleton';
 import TrustSkeleton from '@/components/ui/skeletons/TrustSkeleton';
 import OwnerPhilosophySkeleton from '@/components/ui/skeletons/About/OwnerPhilosophySkeleton';
 import ProcessSkeleton from '@/components/ui/skeletons/ProcessSkeleton';
+import ConferenceSkeleton from '@/components/ui/skeletons/About/ConferenceSkeleton';
 
 export default function loading() {
   return (
@@ -13,7 +14,7 @@ export default function loading() {
       <TeamSkeleton />
       <OwnerPhilosophySkeleton />
       <ProcessSkeleton />
-
+      <ConferenceSkeleton />
       <CtaSkeleton />
     </>
   );
