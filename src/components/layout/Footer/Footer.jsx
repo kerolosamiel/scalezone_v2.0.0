@@ -136,22 +136,53 @@ export default function Footer({ footer = {} }) {
 
         <Separator className="h-2" />
 
-        <div className="flex gap-8">
-          <p className="text-[1.4rem] text-muted-foreground">
-            © {currentDate.getFullYear()} Scalezone. All rights reserved.
-          </p>
+        <div className="flex gap-32 justify-between flex-wrap">
+          <div className="flex gap-8 flex-wrap">
+            <p className="text-[1.4rem] text-muted-foreground">
+              © {currentDate.getFullYear()} Scalezone. All rights reserved.
+            </p>
+            <p className="text-[1.4rem] text-muted-foreground">
+              Developed by{' '}
+              <Link
+                href="https://kerolosamiel.vercel.app/"
+                target="_blank"
+                className="text-foreground hover:underline transition-all duration-300"
+              >
+                Kerolos Amiel
+              </Link>
+              .
+            </p>
+          </div>
 
-          <p className="text-[1.4rem] text-muted-foreground">
-            Developed by{' '}
+          <div className="flex gap-16 max-[500px]:flex-col max-[500px]:gap-12">
             <Link
-              href="https://kerolosamiel.vercel.app/"
-              target="_blank"
-              className="text-foreground hover:underline transition-all duration-300"
+              href={`/legal/terms-and-conditions`}
+              className="text-[1.4rem] text-muted-foreground hover:text-foreground"
             >
-              Kerolos Amiel
+              Terms & Conditions
             </Link>
-            .
-          </p>
+
+            <Link
+              href={`/legal/privacy-policy`}
+              className="text-[1.4rem] text-muted-foreground hover:text-foreground"
+            >
+              Privacy Policy
+            </Link>
+
+            <Link
+              href={`/legal/cookies-policy`}
+              className="text-[1.4rem] text-muted-foreground hover:text-foreground"
+            >
+              Cookies Policy
+            </Link>
+
+            <Link
+              href={`/legal/disclaimer`}
+              className="text-[1.4rem] text-muted-foreground hover:text-foreground"
+            >
+              Disclaimer
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
