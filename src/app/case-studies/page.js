@@ -1,3 +1,5 @@
+import CtaSection from '@/components/sections/CTABand/CtaSection';
+import FaqsSection from '@/components/sections/FaqsSection/Faqs';
 import CompactHero from '@/components/sections/Hero/CompactHero';
 import { getCaseStudies } from '@/lib/wordpress/data-fetching/queries';
 import { notFound } from 'next/navigation';
@@ -42,6 +44,8 @@ export default async function page() {
   return (
     <main>
       <CompactHero hero={data.hero} className="[&>h1]:max-w-[unset]" />
+      <FaqsSection faqs={data.faqs} />
+      <CtaSection cta={data.cta} />
     </main>
   );
 }
