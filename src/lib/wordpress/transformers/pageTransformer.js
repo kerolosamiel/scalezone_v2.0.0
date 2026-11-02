@@ -10,6 +10,7 @@ import {
   metaTransform,
   relatedBlogTransform,
   serviceCardTransform,
+  storyTransform,
   teamMemberTransform,
   testimonialTransform,
   trustStatsTransform,
@@ -610,4 +611,44 @@ export function legalPagesTransform(rawdata) {
   };
 
   return legal;
+}
+
+export function caseStudyPageTransform(rawData, faqs, storiesMap, usedServicesMap) {
+  if (!rawData) return null;
+
+  const base = basePageTransform(rawData);
+  if (!base) return null;
+
+  const pageData = base.acf?.case_section;
+  if (!pageData) return null;
+
+  delete base.acf;
+  const caseStudies = {
+    ...base,
+    hero: pageData.hero_section,
+    stories: {
+      title: pageData.stories_section?.title,
+      subtitle: pageData.stories_section?.subtitle,
+      featured: storyTransform(
+        storiesMap.get(pageData.stories_section?.featured[0].ID),
+        usedServicesMap
+      ),
+      stories: pageData.stories_section?.stories?.map((s) =>
+        storyTransform(storiesMap.get(s.ID), usedServicesMap)
+      ),
+    },
+    cta: {
+      title: pageData.cta_section?.cta_title || '',
+      description: pageData.cta_section?.cta_description || '',
+      cardTitle: pageData.cta_section?.cta_second_title || '',
+      button: pageData.cta_section?.cta_button.button_text || '',
+    },
+    faqs: {
+      title: pageData.faqs_section?.title || '',
+      subtitle: pageData.faqs_section?.subtitle || '',
+      questions: faqs?.map((f) => faqTransform(f)) || [],
+    },
+  };
+
+  return caseStudies;
 }

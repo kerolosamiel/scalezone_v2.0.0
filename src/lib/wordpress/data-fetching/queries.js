@@ -4,6 +4,7 @@ import {
   aboutPageTransform,
   appointmentTransform,
   blogPageTransform,
+  caseStudyPageTransform,
   contactTransform,
   growthTransform,
   homePageTransform,
@@ -594,5 +595,58 @@ export async function getLagalPages(slug) {
   if (!pageData) return null;
 
   const result = legalPagesTransform(pageData);
+  return result;
+}
+
+export async function getCaseStudies() {
+  const data = await wpFetch(endpoints.pageBySlug('case-studies'), {
+    next: { tags: ['wordpress-data'] },
+  });
+
+  if (!data) return null;
+
+  const pageData = Array.isArray(data) ? data[0] : data;
+
+  if (!pageData) return null;
+
+  const questions = pageData.acf_all_fields?.case_section?.faqs_section?.questions || [];
+  const stories = pageData.acf_all_fields?.case_section?.stories_section?.stories;
+
+  stories.push(pageData.acf_all_fields?.case_section?.stories_section?.featured[0]);
+
+  const allStoriesIds = stories
+    .map((s) => s.ID)
+    .flat(Infinity)
+    .filter(Boolean);
+
+  const allFaqsIds = questions
+    .map((faq) => faq.ID)
+    .flat(Infinity)
+    .filter(Boolean);
+
+  const faqsObjects = allFaqsIds.map((id) => ({ ID: id }));
+  const storiesObjects = allStoriesIds.map((id) => ({ ID: id }));
+
+  const [rawFaqs, rawStories] = await Promise.all([
+    getMultipleCPTs(faqsObjects, endpoints.faqById),
+    getMultipleCPTs(storiesObjects, endpoints.caseStudyById),
+  ]);
+
+  const usedServices = rawStories?.map((s) => s.acf_all_fields?.fields?.used_services);
+
+  const allUsedServicesIDs = usedServices
+    ?.flat(Infinity)
+    ?.map((s) => s.ID)
+    ?.filter(Boolean);
+
+  const usedServicesObjects = allUsedServicesIDs.map((id) => ({ ID: id }));
+
+  const rawUsedServices = await getMultipleCPTs(usedServicesObjects, endpoints.serviceById);
+
+  const storiesMap = new Map((rawStories || []).map((story) => [story.id, story]));
+  const usedServicesMap = new Map((rawUsedServices || []).map((service) => [service.id, service]));
+
+  const result = caseStudyPageTransform(pageData, rawFaqs, storiesMap, usedServicesMap);
+
   return result;
 }

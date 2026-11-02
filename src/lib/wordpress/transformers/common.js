@@ -400,3 +400,27 @@ export function relatedBlogTransform(blogItem, imagesMap) {
 
   return blog;
 }
+
+export function storyTransform(storyData, usedServicesMap) {
+  if (!storyData) return null;
+
+  const fields = storyData.acf_all_fields?.fields;
+
+  if (!fields) return null;
+
+  const story = {
+    zoneName: fields.zone_name,
+    stat: fields.state,
+    title: fields.title,
+    description: fields.description,
+    challenge: fields.challenge,
+    solve: fields.solve,
+    duration: fields.duration,
+    usedServices: fields.used_services?.map((s) => ({
+      name: usedServicesMap?.get(s.ID)?.acf_all_fields?.service_v2?.service_name,
+      slug: usedServicesMap?.get(s.ID)?.slug,
+    })),
+  };
+
+  return story;
+}
