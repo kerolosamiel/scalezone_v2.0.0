@@ -11,6 +11,7 @@ import DropDown from './DropDown';
 import { Globe } from 'lucide-react';
 import NavigationLink from '../Shared/NavigationLink';
 import Link from 'next/link';
+import { Switch } from '@/components/ui/switch';
 
 export default function DesktopMenu({ className = '', button, menu = {} }) {
   const { about, resources, contact, services } = menu;
@@ -56,6 +57,8 @@ export default function DesktopMenu({ className = '', button, menu = {} }) {
       <Button className="h-[unset] bg-transparent hover:bg-transparent max-[450px]:hidden max-[450px]:invisible">
         <Globe className="size-25 max-[390px]:size-20" />
       </Button>
+
+      <Switch className="my-auto" />
 
       <Button className="h-[unset] py-16 px-32 text-[1.6rem] hover:scale-[1.05] max-lg:hidden max-lg:invisible">
         <Link href="/contact">{button || 'Book an Appoinment'}</Link>

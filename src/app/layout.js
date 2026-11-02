@@ -40,9 +40,9 @@ export default async function RootLayout({ children }) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${poppins.variable} ${ardelaEdge.variable}`}
+      className={`${poppins.variable} ${ardelaEdge.variable} transition-all duration-50`}
     >
-      <body>
+      <body className="transition-all duration-50">
         <QueryProvider>
           <ThemeProvider>
             <MenuProvider>
