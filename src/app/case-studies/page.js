@@ -1,4 +1,5 @@
 import FeaturedSection from '@/components/case-studies/FeaturedSection';
+import StoriesSection from '@/components/case-studies/StoriesSection';
 import CtaSection from '@/components/sections/CTABand/CtaSection';
 import FaqsSection from '@/components/sections/FaqsSection/Faqs';
 import CompactHero from '@/components/sections/Hero/CompactHero';
@@ -46,6 +47,7 @@ export default async function page() {
     <main>
       <CompactHero hero={data.hero} className="[&>h1]:max-w-[unset]" />
       <FeaturedSection story={data.stories?.featured} />
+      <StoriesSection stories={data.stories} />
       <FaqsSection faqs={data.faqs} />
       <CtaSection cta={data.cta} />
     </main>
