@@ -1,3 +1,4 @@
+import CompactHero from '@/components/sections/Hero/CompactHero';
 import { getCaseStudies } from '@/lib/wordpress/data-fetching/queries';
 import { notFound } from 'next/navigation';
 
@@ -38,5 +39,9 @@ export default async function page() {
   const data = await getCaseStudies();
 
   if (!data) notFound();
-  return <h1>Case Studies</h1>;
+  return (
+    <main>
+      <CompactHero hero={data.hero} className="[&>h1]:max-w-[unset]" />
+    </main>
+  );
 }
