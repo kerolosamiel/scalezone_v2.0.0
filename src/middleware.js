@@ -24,6 +24,11 @@ const SERVICE_SLUG_MAP = {
   advertising: '/services/amazon-ppc-and-advertising-management',
   'amazon-training': '/services/training-and-consultancy',
   'gated-category': '/services/account-health-ungating-and-reinstatement',
+  'policy-guidance': '/zones/amazon-services-zone',
+  localization: '/zones/amazon-services-zone',
+  'customer-support': '/zones/amazon-services-zone',
+  'amazon-compliance': '/zones/amazon-services-zone',
+  'enhanced-brand': '/zones/amazon-services-zone',
 };
 
 const BLOG_SLUG_MAP = {
