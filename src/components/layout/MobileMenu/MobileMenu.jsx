@@ -11,7 +11,9 @@ export default function MobileMenu({ menu = {}, button }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    queueMicrotask(() => {
+      setMounted(true);
+    });
   }, []);
 
   const handleThemeChange = () => {
