@@ -58,7 +58,7 @@ export default function DesktopMenu({ className = '', button, menu = {} }) {
         <Globe className="size-25 max-[390px]:size-20" />
       </Button>
 
-      <Switch className="my-auto" />
+      <Switch className="my-auto max-[450px]:hidden max-[450px]:invisible" />
 
       <Button className="h-[unset] py-16 px-32 text-[1.6rem] hover:scale-[1.05] max-lg:hidden max-lg:invisible">
         <Link href="/contact">{button || 'Book an Appoinment'}</Link>
