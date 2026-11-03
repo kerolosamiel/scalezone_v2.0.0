@@ -44,7 +44,7 @@ export default async function page() {
     <main>
       <HeroSection
         hero={aboutData.hero}
-        firstHref="/contact"
+        firstHref="/appointment"
         secondHref="/case-studies"
         className="gap-64"
       />
