@@ -90,4 +90,7 @@
   --surface: #f3f3f3;
   --surface-border: #ddd3d3;
   --primary-hover: #d90f00;
+  --card-gradient: linear-gradient(to right, #ddd3d3, #f3f3f3);
+  --card-gradient-reverse: linear-gradient(to left, #ddd3d3, #f3f3f3);
+  --growth-gradient: linear-gradient(to right, #cac1c1 55%, #f3f3f3);
 }
