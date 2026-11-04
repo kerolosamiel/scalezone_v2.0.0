@@ -39,6 +39,7 @@ export default async function RootLayout({ children }) {
   return (
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       suppressHydrationWarning
       className={`${poppins.variable} ${ardelaEdge.variable} transition-all duration-50`}
     >

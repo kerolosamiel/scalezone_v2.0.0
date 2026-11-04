@@ -23,7 +23,8 @@ export default function FeaturedItem({ item, slug }) {
             alt={item.image?.alt + 'Image'}
             width={620}
             height={460}
-            className="w-auto h-full max-lg:w-full max-lg:h-auto"
+            loading="eager"
+            className="w-full h-auto"
           />
           <p className="absolute left-12 top-12 text-[1.6rem] text-primary font-bold">Featured</p>
         </div>

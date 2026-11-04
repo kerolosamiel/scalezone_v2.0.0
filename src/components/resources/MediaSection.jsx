@@ -4,12 +4,11 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { usePathname } from 'next/navigation';
+import { set } from 'zod';
 
 export default function MediaSection({ children }) {
   const path = usePathname();
-  // const [previousIndex, setPreviousIndex] = useState(null);
-  // const [move, setMove] = useState('right');
-  // const [previousMove, setPreviousMove] = useState(null);
+  const [firstActive, setFirstActive] = useState(true);
 
   const chips = [
     {
@@ -37,6 +36,7 @@ export default function MediaSection({ children }) {
   const handleClick = (index) => {
     if (index === activeIndex) return;
     setActiveIndex(index);
+    setFirstActive(false);
   };
 
   return (
@@ -46,7 +46,8 @@ export default function MediaSection({ children }) {
           {chips.map((chip, index) => {
             const isActive = index === activeIndex;
 
-            let afterClass = isActive ? 'after:opacity-100' : 'after:opacity-0';
+            let afterClass =
+              isActive || (firstActive && index == 0) ? 'after:opacity-100' : 'after:opacity-0';
 
             return (
               <Button
