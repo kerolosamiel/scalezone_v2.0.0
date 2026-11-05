@@ -2,6 +2,7 @@ import FaqsSection from '@/components/sections/FaqsSection/Faqs';
 import GrowthSection from '@/components/sections/GrowthCalcSection/GrowthSection';
 import ProofSection from '@/components/sections/ProofSection/ProofSection';
 import ImpactSection from '@/components/services/ImpactSection';
+import IncludedSection from '@/components/services/IncludedSection';
 import ServProcessSection from '@/components/services/ProcessSection';
 import RecommendationsSection from '@/components/services/RecommendationsSection';
 import ServiceHeroSection from '@/components/services/ServiceHeroSection';
@@ -48,10 +49,13 @@ export default async function page({ params }) {
 
   if (!service) notFound();
 
+  console.log(service);
+
   return (
     <main>
       <ServiceHeroSection slug={slug} hero={service.hero} />
       <ImpactSection impact={service.impact} />
+      {service.isIncluded && <IncludedSection included={service.included} />}
       <ServProcessSection process={service.process} />
       <ProofSection proof={service.result} />
       <RecommendationsSection recommendations={service.recommendation} />

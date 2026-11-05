@@ -376,6 +376,8 @@ export function servicePageTransform(rowData, rawFaqs, rawServices) {
       secondPart: page.impact_section.second_part || '',
       thirdPart: page.impact_section.third_part || '',
     },
+    isIncluded: page.is_inluded,
+    included: page.included_section,
     process: {
       title: page.process_section?.title || '',
       subtitle: page.process_section?.subtitle || '',
