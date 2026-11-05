@@ -37,7 +37,7 @@ const BLOG_SLUG_MAP = {
   'top-amazon-seller-tools': '/blogs/top-amazon-seller-tools',
 };
 
-export function middleware(request) {
+export function proxy(request) {
   const url = request.nextUrl.clone();
   const { pathname, searchParams } = url;
 
