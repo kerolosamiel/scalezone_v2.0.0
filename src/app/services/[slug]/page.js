@@ -4,6 +4,7 @@ import ProofSection from '@/components/sections/ProofSection/ProofSection';
 import ImpactSection from '@/components/services/ImpactSection';
 import IncludedSection from '@/components/services/IncludedSection';
 import ServProcessSection from '@/components/services/ProcessSection';
+import ProjectsSection from '@/components/services/ProjectsSection';
 import RecommendationsSection from '@/components/services/RecommendationsSection';
 import ServiceHeroSection from '@/components/services/ServiceHeroSection';
 import { getServicePage } from '@/lib/wordpress/data-fetching/queries';
@@ -56,6 +57,7 @@ export default async function page({ params }) {
       <ServiceHeroSection slug={slug} hero={service.hero} />
       <ImpactSection impact={service.impact} />
       {service.isIncluded && <IncludedSection included={service.included} />}
+      {service.isGallery && <ProjectsSection gallery={service.gallery} />}
       <ServProcessSection process={service.process} />
       <ProofSection proof={service.result} />
       <RecommendationsSection recommendations={service.recommendation} />

@@ -16,7 +16,7 @@ export default function EventsSection({ events = {} }) {
         <ul className="grid grid-cols-3 gap-32 max-md:grid-cols-2 max-[570px]:grid-cols-1!">
           {gallery.map((g, i) => (
             <li key={`event-${i}`} className="flex justify-center items-center w-full">
-              <GallaryImage card={g} />
+              <GallaryImage badge={g?.location} image={g?.image} />
             </li>
           ))}
         </ul>
