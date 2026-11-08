@@ -386,6 +386,8 @@ export function servicePageTransform(rowData, rawFaqs, rawServices, rawProjects 
       subtitle: page.gallery_section.subtitle || '',
       projects: rawProjects.length > 0 ? rawProjects.map((p) => projectTransform(p)) : null,
     },
+    isPricing: page.is_pricing,
+    pricing: page.pricing_section,
     process: {
       title: page.process_section?.title || '',
       subtitle: page.process_section?.subtitle || '',
