@@ -8,6 +8,7 @@ import {
   mediaImageTransform,
   mediaTransform,
   metaTransform,
+  projectTransform,
   relatedBlogTransform,
   serviceCardTransform,
   storyTransform,
@@ -353,7 +354,7 @@ export function appointmentTransform(rowData, faqsMap) {
   return appointment;
 }
 
-export function servicePageTransform(rowData, rawFaqs, rawServices) {
+export function servicePageTransform(rowData, rawFaqs, rawServices, rawProjects = []) {
   if (!rowData) return null;
 
   const base = basePageTransform(rowData);
@@ -369,6 +370,7 @@ export function servicePageTransform(rowData, rawFaqs, rawServices) {
 
   const service = {
     ...base,
+    any: page,
     hero: page.hero_section,
     impact: {
       firstPart: page.impact_section.first_part || '',
@@ -378,6 +380,12 @@ export function servicePageTransform(rowData, rawFaqs, rawServices) {
     },
     isIncluded: page.is_inluded,
     included: page.included_section,
+    isGallery: page.is_gallery,
+    gallery: {
+      title: page.gallery_section.title || '',
+      subtitle: page.gallery_section.subtitle || '',
+      projects: rawProjects.length > 0 ? rawProjects.map((p) => projectTransform(p)) : null,
+    },
     process: {
       title: page.process_section?.title || '',
       subtitle: page.process_section?.subtitle || '',

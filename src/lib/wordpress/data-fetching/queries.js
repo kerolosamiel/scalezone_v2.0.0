@@ -402,6 +402,21 @@ export async function getServicePage(slug) {
     .flat(Infinity)
     .filter(Boolean);
 
+  let allProjectsIds;
+  let projectsObjects;
+  let rawProjects = [];
+
+  if (sections.is_gallery) {
+    allProjectsIds = (sections.gallery_section.gallery || [])
+      ?.map((g) => g.ID)
+      ?.flat(Infinity)
+      ?.filter(Boolean);
+
+    projectsObjects = allProjectsIds?.map((id) => ({ ID: id }));
+
+    rawProjects = await getMultipleCPTs(projectsObjects, endpoints.projectById);
+  }
+
   const faqsObjects = allFaqsIds.map((id) => ({ ID: id }));
   const servicesObjects = allServicesIds.map((id) => ({ ID: id }));
 
@@ -410,7 +425,7 @@ export async function getServicePage(slug) {
     getMultipleCPTs(servicesObjects, endpoints.serviceById),
   ]);
 
-  const result = servicePageTransform(pageData, rawFaqs, rawServices);
+  const result = servicePageTransform(pageData, rawFaqs, rawServices, rawProjects);
 
   return result;
 }

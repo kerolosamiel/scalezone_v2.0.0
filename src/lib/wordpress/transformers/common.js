@@ -424,3 +424,17 @@ export function storyTransform(storyData, usedServicesMap) {
 
   return story;
 }
+
+export function projectTransform(projectData) {
+  if (!projectData) return null;
+
+  const project = {
+    id: projectData.id || 0,
+    slug: projectData.slug || '',
+    date: projectData.publish_date || new Date(),
+    title: projectData.acf_all_fields?.project_title || '',
+    image: imageTransform(projectData.acf_all_fields?.project_image),
+  };
+
+  return project;
+}

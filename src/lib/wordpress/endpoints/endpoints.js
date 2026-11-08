@@ -11,6 +11,7 @@ export const endpoints = {
   videos: '/video',
   blogs: '/blog-post',
   caseStudies: '/case-study',
+  projects: '/services-project',
 
   pagesWithLimit: (limit) => `/pages?per_page=${limit}`,
   servicesWithLimit: (limit) => `/service?per_page=${limit}`,
@@ -24,6 +25,7 @@ export const endpoints = {
   videosWithLimit: (limit) => `/video?per_page=${limit}`,
   blogsWithLimit: (limit) => `/blog-post?per_page=${limit}`,
   caseStudiesWithLimit: (limit) => `/case-study?per_page=${limit}`,
+  projectsWithLimit: (limit) => `/services-project?per_page=${limit}`,
 
   pageBySlug: (slug) => `/pages?slug=${slug}`,
   serviceBySlug: (slug) => `/service?slug=${slug}`,
@@ -38,6 +40,7 @@ export const endpoints = {
   videoBySlug: (slug) => `/video?slug=${slug}`,
   blogBySlug: (slug) => `/blog-post?slug=${slug}`,
   caseStudiesBySlug: (slug) => `/case-study?slug=${slug}`,
+  projectBySlug: (slug) => `/services-project?slug=${slug}`,
 
   pageById: (id) => `/pages/${id}`,
   serviceById: (id) => `/service/${id}`,
@@ -54,6 +57,7 @@ export const endpoints = {
   mediaByParentId: (id) => `/media?parent=${id}`,
   mediaById: (id) => `/media/${id}`,
   caseStudyById: (id) => `/case-study/${id}`,
+  projectById: (id) => `/services-project/${id}`,
 
   // Global Site Data
   headerFooterBySlug: '/pages?slug=header-and-footer',
